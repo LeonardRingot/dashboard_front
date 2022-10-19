@@ -22,12 +22,32 @@
   background-color:#EFF6FF;
   width:25%;
 }
-.td{
-  font-family:sans-serif;
-  font-size:80%;
-  border:1px solid #6495ed;
-  padding:5px;
-  text-align:center;
+
+
+.navbar {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #333;
+  padding: 2rem;
+  box-shadow: 0 0 5px #333;
+}
+
+.navbar_list {
+  display: flex;
+  gap: 2rem;
+  list-style-type: none;
+}
+
+.navbar_link {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-size: 1.3em;
+  text-decoration: none;
 }
 .headerdash
 {
@@ -245,4 +265,107 @@
       display: flex;
   }
 
+}
+
+
+
+.nav {
+  display: flex;
+    justify-content: space-between;
+    width: 25%;
+    background-color: #333;
+    padding: 2rem;
+    box-shadow: 0 0 5px #333;
+}
+
+.navlink {
+  color: rgba(24, 224, 124, 0.8);
+    font-weight: 500;
+    font-size: 1.3em;
+    text-decoration: none;
+}
+.navlink:hover,
+.navlink:focus {
+  color: #dee2e6;
+}
+
+.navlink.disabled {
+  color: var(--bs-nav-link-disabled-color);
+  pointer-events: none;
+  cursor: default;
+}
+.navlink.active{
+  background-color: #6495ed;
+}
+.monsvg{
+    
+    align-items:center;
+   
+    color: #35ad10;
+    justify-content:center;
+}
+
+.nom{
+  text-align: center;
+color: #222;
+  margin-bottom: 0;
+  font-size:15px;
+  font-family:sans-serif ;
+  
+}
+
+.edit{
+  font-size: 20px;
+  background-color: #5a6068;
+}
+
+.td,
+.th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 10px;
+}
+
+.td {
+    text-align: center;
+}
+.table {
+  text-align: center;
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: .8rem;
+}
+
+.buttonModif{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.buttonSuppr{
+  background-color: #ee150e; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.buttonCreate{
+  background-color: #5168ec; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  float: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

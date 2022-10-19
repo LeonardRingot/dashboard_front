@@ -1,39 +1,118 @@
 import styles from '../../styles/Home.module.css'
+import Navbar from '../../components/Navbar'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
+import * as  ServiceAPI  from '../../services/ServiceAPI'
+import Link from 'next/link';
+
 export default function consultcandidat()
 {
-
-    /* 
-    CODE ( on va recuperer tous les candidats pour les affichers dans ce tableau)
-
+    const router = useRouter()
+    const {id} = router.query
+    let [data, setData] = useState(null)
     
-    */
+    useEffect(() => {
+        if(!id) {
+            return;
+          }
+    const deleteData =ServiceAPI.deleteCandidate().then(response => {
+        console.log(response)
+      if(response.status == 200)
+      {
+        if(response.data.length > 0)
+        {
+            setData(response.data)
+            setLoading(false)
+        }
+        }
+      })
+    }, [])
+    let [isLoading, setLoading] = useState(false)
+
+    useEffect(() => {
+        
+        setLoading(true)
+
+        ServiceAPI.requeteGetAllCandidats()
+        
+        .then(response => {
+            console.log(response)
+          if(response.status == 200){
+            if(response.data.length > 0)
+            {
+                setData(response.data)
+                setLoading(false)
+            }
+          }
+        })
+        
+    }, [])
+
+    if (isLoading) return <p>Loading...</p>
+    if (!data) return <p>No candidates</p>
     return (
-        <>
-        <h1>Listes des candidats</h1>
-        <div className={styles.mytable}>
-        <table>
+       <><Navbar></Navbar>
+       <div className={styles.montab} > 
+        <Link href="./candidate/createcandidat"><a className={styles.buttonCreate}>Crer un candidat</a></Link>
+    <table className={styles.table}>
+        <thead className={styles.thead} >
             <tr className={styles.tr}>
-                <td className={styles.td}>Nom</td>
-                <td className={styles.td}>Prenom</td>
-                <td className={styles.td}>Date de naissance</td>
-                <td className={styles.td}>Adresse</td>
-                <td className={styles.td}>Code postal</td>
-                <td className={styles.td}>Ville</td>
-                <td className={styles.td}>Email</td>
+                <th className={styles.th}>lastname</th>
+                <th className={styles.th}>firstname</th>
+                <th className={styles.th}>birthday</th>
+                <th className={styles.th}>userId</th>
+                <th className={styles.th}>Code postal</th>
+                <th className={styles.th}>Ville</th>
+                <th className={styles.th}>EMail</th>
+                <th className={styles.th}>IsActive?</th>
+                <th className={styles.th}>Modifier Profile</th>
+                <th className={styles.th}>Supprimer</th>
             </tr>
-            <tr className={styles.tr}>
-                <td className={styles.td}>*Nom*</td>
-                <td className={styles.td}>*Prenom*</td>
-                <td className={styles.td}>*Date de naissance*</td>
-                <td className={styles.td}>*Adresse*</td>
-                <td className={styles.td}>*Code postal*</td>
-                <td className={styles.td}>*Ville*</td>
-                <td className={styles.td}>*Email*</td>
-            </tr>
-        </table>
-        </div>
-        
-        </>
-        
+        </thead>
+        <tbody>
+            
+        {data.map((element) => {
+      return (
+            <tr>
+                <td  className={styles.td}>
+                    <h6 className={styles.nom}> {element.lastname}</h6>
+                </td>
+                <td className={styles.td}>  
+                    <h6 className={styles.nom}>{element.firstname}</h6>
+                </td>
+                <td className={styles.td} >
+                      <h6 className={styles.nom} >{element.birthday}</h6>
+                </td>
+                <td className={styles.td}>  
+                    <h6 className={styles.nom}>{element.userId}</h6>
+                </td>
+                <td className={styles.td}>
+                     <h6 className={styles.nom}>  {element.address}</h6>
+                </td>
+                <td className={styles.td}>
+                     <h6 className={styles.nom}> Ville</h6>
+                </td>
+                <td className={styles.td}>
+                    <h6 className={styles.nom}>  EMail</h6>
+                </td>
+                <td className={styles.td}>
+                    <h6 className={styles.nom}>  IsActive?</h6>
+                </td>
+                <td className={styles.td}>
+                    <h6 className={styles.nom}> <a className={styles.buttonModif}href='./candidate/updatecandidat'>Modifier Profile</a></h6>
+                </td>
+                <td className={styles.td}>
+                <h6 className={styles.nom}>  <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} href='./#'>Supprimer</a></h6>
+                </td>
+            </tr>)  
+    })}
+    
+    
+    
+        </tbody>
+    </table>
+
+    </div>
+       </>
     )
 }
