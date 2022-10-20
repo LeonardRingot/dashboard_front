@@ -43,7 +43,7 @@ export function requetePostConnexion(email, password){
   export function requeteGetCandidatById(id){
     var configGetCandidatsById = {
       method: 'get',
-      url: 'http://localhost:5000/api/candidates'+id,
+      url: 'http://localhost:5000/api/candidates/'+id,
       headers: { 
         'Content-Type': 'application/json'
       }
@@ -123,8 +123,55 @@ export function requetePostConnexion(email, password){
       };
     return axios(config);
 }
+export function requetePostEmployers(siret, structurename, password, email, phone, address, zipCode, city, periods){
+  console.log(periods);
+  var data = JSON.stringify({
+      // "UserId":UserId,
+      // "firstname":firstname,
+      // "lastname":lastname,
+      // "birthday":birthday,
+      // "password":password,
+      // "email": email,
+      // "phone": phone,
+      // "address": address,
+      // "zipCode":zipCode,
+      // "city":city,
+      // "periods:":periods,
+      // "degrees": degrees
+      "employer": {
+        "siret": siret,
+        "structurename": structurename
+      },
+      "users": {
+        "password": password,
+        "email": email,
+        "phone": phone,
+        "isActif": true
+      },
+      "localisation": {
+        "address": address,
+        "zipCode": zipCode,
+        "city": city
+      },
+      "periods": [periods?.map((period) => {
+      
+        return {"id": period}
+      })
+      ]
+    });
+  var confiPostEmployers = {
+      method: 'post',
+      url: 'http://localhost:5000/api/employers',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+  return axios(confiPostEmployers);
+}
+
 //requete mis a jour candidats
-export function requeteUpdateProfil(firstname,lastname,birthday, password, email, phone, address, zipCode, city, periods, degrees){
+export function requeteUpdateProfil(id, firstname,lastname,birthday, email, phone, address, zipCode, city, periods, degrees){
   
   var data = JSON.stringify({
     "candidate": {
@@ -133,7 +180,6 @@ export function requeteUpdateProfil(firstname,lastname,birthday, password, email
       "birthday": birthday
     },
     "users": {
-      "password": password,
       "email": email,
       "phone": phone,
       "isActif": true
@@ -233,4 +279,21 @@ export function deleteEmployer (id)
   return axios(configDeleteEmployerById);
 }
 
+export function requeteGetAllDegree ()
+{
+  var data = JSON.stringify({
+    
+  });
+    
+  
+  var configGetAllUsersDegree = {
+    method: 'get',
+    url: 'http://localhost:5000/api/degrees',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  return axios(configGetAllUsersDegree);
+}
 

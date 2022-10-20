@@ -4,51 +4,47 @@ import React, { useState , useEffect } from 'react'
 import * as ServiceAPI from '../../../services/ServiceAPI'
 import styles from '../../../styles/Home.module.css'
 
-export default function Register({  }) {
+export default function Register() {
     const [erreur, setErreur] = useState('');
     const[IsOk, setIsOk] = useState('');
     const router = useRouter()
     const {id} = router.query
-    const [GetDataProfile, setGetDataProfile] = useState()
     const[p, setP] = useState([]);
+
+    function periodExits(period) {
+      if(updateProfile.User.Periods != null){
+        return updateProfile.User.Periods.some(function(el) {
+          return el.periodname === period;
+        }); 
+      }
+      return false;
+    }
+
+    function degreeExits(degree) {
+      if(updateProfile.User.Periods != null){
+        return updateProfile.User.degrees.some(function(el) {
+          return el.degreename === degree;
+        }); 
+      }
+      return false;
+    }
+
     const [updateProfile, setUpdateProfile] = useState({
-        firstname: '',
-        lastname: '',
-        birthday: '',
-        password:'',
-        email:'',
-        phone:'',
-        address:'',
-        zipCode:'',
-        city:'',
-        periods:p,
+      birthday: '',
+      firstname: '',
+      lastname: '',
+      User:{
+        Localisation: {
+          address: '',
+          city: '',
+          zipCode: ''
+        },
+        email: '',
+        phone: '',
         degrees:[]
+      },
+      periods:p
     })
-
-    useEffect(() => {
-      console.log(id);
-        const fetchSomethingById = async () => {
-          ServiceAPI.requeteGetCandidatById(id)
-          .then(response => {
-            if(response.status == 201){
-              console.log(response.data)
-                setGetDataProfile(response.data);
-            }
-          })
-          .catch(error => console.log(error))
-        }
-        fetchSomethingById()
-      }, [id])
-    useEffect(() => { 
-        setUpdateProfile({
-            userId: GetDataProfile ? GetDataProfile.userId : '',
-            firstname: GetDataProfile ? GetDataProfile.firstname : '',
-            lastname: GetDataProfile ? GetDataProfile.lastname : '',
-            birthday: GetDataProfile ? GetDataProfile.birthday : ''
-             
-        })
-    }, [GetDataProfile]);
-
     const handleChange = (e) => {
       const value = e.target.value;
       if (e.target.name == "periods"){
@@ -61,21 +57,34 @@ export default function Register({  }) {
             p != value? tab.push(p): ''
           })
           setP(tab)
-          console.log(tab)
          }
       }
-        
-        
         setUpdateProfile({
           ...updateProfile,
           [e.target.name]: value
         });
+       console.log(updateProfile)
     }
 
+    useEffect(() => {
+        const fetchSomethingById = async () => {
+          ServiceAPI.requeteGetCandidatById(id)
+          .then(response => {
+            if(response.status == 200){
+              setUpdateProfile(response.data);
+              setP(response.data.User.Periods)
+              console.log(response.data)
+            }
+          })
+          .catch(error => console.log(error))
+        }
+        fetchSomethingById()
+      }, [id])
+
     const ModifierProfileSubmit = (e) => {
-        
         e.preventDefault()
-        ServiceAPI.requeteUpdateProfil(updateProfile.userId, updateProfile.firstname, updateProfile.lastname, updateProfile.birthday,updateProfile.password,updateProfile.email,updateProfile.phone,updateProfile.zipCode,updateProfile.city,updateProfile.periods,updateProfile.degrees  ).then(response => {
+        ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname, updateProfile.birthday,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.Localisation.zipCode,
+          updateProfile.User.Localisation.city,updateProfile.periods,updateProfile.User.degrees).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
               setIsOk('User mis a jour');
@@ -85,9 +94,6 @@ export default function Register({  }) {
           }).catch(function(error){
           console.log(error);
         });
-
-            
-        
     }
 
     return (
@@ -96,40 +102,38 @@ export default function Register({  }) {
      <div>
         <form className={styles.myform} onSubmit={ModifierProfileSubmit} action='' method="post">
         <label htmlFor='firstname'>firstname:</label>
-          <input onChange={handleChange} type="text" className={styles.inputconnect} name="firstname" /><br></br>
+          <input value={updateProfile.firstname} onChange={handleChange} type="text" className={styles.inputconnect} name="firstname" /><br></br>
           <label htmlFor='lastname'>lastname:</label>
-          <input onChange={handleChange} type="text" className={styles.inputconnect} name="lastname" /><br></br>
+          <input value={updateProfile.lastname} onChange={handleChange} type="text" className={styles.inputconnect} name="lastname" /><br></br>
           <label htmlFor='birthday'>birthday:</label>
-          <input onChange={handleChange} type="date"  className={styles.inputconnect} name="birthday" /><br></br>
-          <label htmlFor='password'>password:</label>
-          <input onChange={handleChange} type="password"  className={styles.inputconnect} name="password" /><br></br>
+          <input value={updateProfile.birthday} onChange={handleChange} type="date"  className={styles.inputconnect} name="birthday" /><br></br>
           <label htmlFor='email'>email:</label>
-          <input onChange={handleChange} type="email"  className={styles.inputconnect} name="email" /><br></br>
+          <input value={updateProfile.User.email} onChange={handleChange} type="email"  className={styles.inputconnect} name="email" /><br></br>
           <label htmlFor='phone'>phone:</label>
-          <input onChange={handleChange} type="tel"  className={styles.inputconnect} name="phone" /><br></br>
+          <input value={updateProfile.User.phone} onChange={handleChange} type="tel"  className={styles.inputconnect} name="phone" /><br></br>
           <label htmlFor='address'>address:</label>
-          <input onChange={handleChange} type="text"  className={styles.inputconnect} name="address" /><br></br>
+          <input value={updateProfile.User.Localisation.address} onChange={handleChange} type="text"  className={styles.inputconnect} name="address" /><br></br>
           <label htmlFor='zipCode'>zipCode:</label>
-          <input onChange={handleChange} type="text"  className={styles.inputconnect} name="zipCode" /><br></br>
+          <input value={updateProfile.User.Localisation.zipCode} onChange={handleChange} type="text"  className={styles.inputconnect} name="zipCode" /><br></br>
           <label htmlFor='city'>city:</label>
-          <input onChange={handleChange} type="text"  className={styles.inputconnect} name="city" /><br></br>
+          <input value={updateProfile.User.Localisation.city} onChange={handleChange} type="text"  className={styles.inputconnect} name="city" /><br></br>
           
           <fieldset name="periods"id='periods'>
           <legend >periods</legend>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="1" name="periods" value="1"/>
+            {periodExits('Vacances de février') ? <input checked onChange={handleChange} type="checkbox" id="1" name="periods"/> : <input onChange={handleChange} type="checkbox" id="1" name="periods"/>}
             <label htmlFor="Vacances de février">Vacances de février</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="2" name="periods" value="2"/>
+          {periodExits('Vacances d’avril') ? <input checked onChange={handleChange} type="checkbox" id="2" name="periods"/> : <input onChange={handleChange} type="checkbox" id="2" name="periods"/>}
             <label htmlFor="Vacances d’avril">Vacances d’avril</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="3" name="periods" value="3"/>
+          <input onChange={handleChange} checked={periodExits('Vacances juillet')} type="checkbox" id="3" name="periods"/>
             <label htmlFor="Vacances juillet">Vacances juillet</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="4" name="periods" value="4"/>
+          {periodExits('Vacances Août') ? <input checked onChange={handleChange} type="checkbox" id="4" name="periods"/> : <input onChange={handleChange} type="checkbox" id="4" name="periods"/>}
             <label htmlFor="Vacances Août">Vacances Août</label>
           </div>
           <div>
@@ -152,7 +156,7 @@ export default function Register({  }) {
       <fieldset name="degrees" id='degrees'>
           <legend >Diplomes</legend>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="3" name="BAFA" />
+            <input onChange={handleChange} type="checkbox" id="3" name="BAFA" />
             <label htmlFor="BAFA">BAFA</label>
           </div>
           <div>

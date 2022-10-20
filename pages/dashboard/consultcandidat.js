@@ -26,13 +26,13 @@ export default function consultcandidat()
             }
           })
     }
-
+    
     function modifData(id){
         console.log(id);
         ServiceAPI.requeteGetCandidatById(id).then(response =>{
             console.log(response)
             if(response.status == 200)
-            {
+            {   console.log('aaaaa')
                 response.push('./candidate/updatecandidat/' +id)
                 if(response.data.length > 0)
             {
@@ -57,9 +57,13 @@ export default function consultcandidat()
                 setLoading(false)
             }
           }
-        })
-        
+        }
+        )
     }, [])
+
+
+
+
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
@@ -73,9 +77,11 @@ export default function consultcandidat()
                 <th className={styles.th}>firstname</th>
                 <th className={styles.th}>birthday</th>
                 <th className={styles.th}>userId</th>
+                <th className={styles.th}>Email</th>
+                <th className={styles.th}>Phone</th>
+                <th className={styles.th}>Adresse</th>
                 <th className={styles.th}>Code postal</th>
                 <th className={styles.th}>Ville</th>
-                <th className={styles.th}>EMail</th>
                 <th className={styles.th}>IsActive?</th>
                 <th className={styles.th}>Modifier Profile</th>
                 <th className={styles.th}>Supprimer</th>
@@ -97,6 +103,15 @@ export default function consultcandidat()
                 <td className={styles.td}>  
                     <h6 className={styles.nom}>{element.UserId}</h6>
                 </td>
+                <td className={styles.td}>  
+                    <h6 className={styles.nom}>{element.User.email}</h6>
+                </td>
+                <td className={styles.td}>  
+                    <h6 className={styles.nom}>{element.User.phone}</h6>
+                </td>
+                <td className={styles.td}>
+                     <h6 className={styles.nom}>  {element.User.Localisation.address}</h6>
+                </td>
                 <td className={styles.td}>
                      <h6 className={styles.nom}>  {element.User.Localisation.zipCode}</h6>
                 </td>
@@ -104,13 +119,12 @@ export default function consultcandidat()
                      <h6 className={styles.nom}> {element.User.Localisation.city}</h6>
                 </td>
                 <td className={styles.td}>
-                    <h6 className={styles.nom}>  {element.User.email}</h6>
-                </td>
-                <td className={styles.td}>
                     <h6 className={styles.nom}>  {element.User.isActif? "✅": "❌"}</h6>
                 </td>
                 <td className={styles.td}>
-                    <h6 className={styles.nom}> <a  onClick = {() =>modifData(element.id)}className={styles.buttonModif}href='./candidate/updatecandidat/'> Modifier Profile</a></h6>
+                    <h6 className={styles.nom}> <a  onClick = {() =>modifData(element.UserId)}className={styles.buttonModif}
+                    href={`/dashboard/candidate/updatecandidat?id=${element.id}`}
+                    > Modifier Profile</a></h6>
                 </td>
                 <td className={styles.td}>
                 <h6 className={styles.nom}>  <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} >Supprimer</a></h6>
