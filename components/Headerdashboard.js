@@ -8,7 +8,6 @@ export default function Headerdashboard()
     
 return (
     <div className={styles.headerdash}>
-        
         <h1>Bienvenue sur votre dashboard </h1>
         
     </div>

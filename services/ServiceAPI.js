@@ -1,4 +1,5 @@
 import axios from "axios"; 
+// requete connexion admin
 export function requetePostConnexion(email, password){
     var data = JSON.stringify({
       "email": email,
@@ -6,7 +7,7 @@ export function requetePostConnexion(email, password){
     });
     var configConnexion = {
       method: 'post',
-      url: 'http://localhost:5000/api/auths/login',
+      url: 'http://localhost:5000/api/auth/login',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -15,27 +16,16 @@ export function requetePostConnexion(email, password){
   return axios(configConnexion);
   }
 
+// requete affichage candidats page consultcandidat.js
 
   export function requeteGetAllCandidats (firstname, lastname, address,zipCode,city )
   {
-    var data = JSON.stringify({
-      "firstname": firstname,
-      "lastname":lastname
-    });
-    var dataLocalisations = JSON.stringify({
-      "address": address,
-      "zipCode":zipCode,
-      "city" : city
-    });
-      
-    
     var configGetAllUsersCandidats = {
       method: 'get',
-      url: 'http://localhost:5000/api/candidate',
+      url: 'http://localhost:5000/api/candidates',
       headers: { 
         'Content-Type': 'application/json'
-      },
-      data : data,
+      }
       
     };
     // var configGetAllCandidatsLocalisations = {
@@ -50,6 +40,18 @@ export function requetePostConnexion(email, password){
     return axios(configGetAllUsersCandidats);
   }
 
+  export function requeteGetCandidatById(id){
+    var configGetCandidatsById = {
+      method: 'get',
+      url: 'http://localhost:5000/api/candidates'+id,
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+      
+    };
+    return axios(configGetCandidatsById);
+  }
+// requete affichage localisations
   export function requeteGetAllLocalisation ()
   {
     var data = JSON.stringify({
@@ -67,18 +69,53 @@ export function requetePostConnexion(email, password){
     };
     return axios(configGetAllUsersCandidats);
   }
+//requete inscription candidats
 
-  export function requetePost(UserId,firstname,lastname,birthday){
+  export function requetePost(firstname,lastname,birthday, password, email, phone, address, zipCode, city, periods, degrees){
+    console.log(periods);
     var data = JSON.stringify({
-        "UserId":UserId,
-        "firstname":firstname,
-        "lastname":lastname,
-        "birthday":birthday
-        
+        // "UserId":UserId,
+        // "firstname":firstname,
+        // "lastname":lastname,
+        // "birthday":birthday,
+        // "password":password,
+        // "email": email,
+        // "phone": phone,
+        // "address": address,
+        // "zipCode":zipCode,
+        // "city":city,
+        // "periods:":periods,
+        // "degrees": degrees
+        "candidate": {
+          "firstname": firstname,
+          "lastname": lastname,
+          "birthday": birthday
+        },
+        "users": {
+          "password": password,
+          "email": email,
+          "phone": phone,
+          "isActif": true
+        },
+        "localisation": {
+          "address": address,
+          "zipCode": zipCode,
+          "city": city
+        },
+        "periods": [periods?.map((period) => {
+          
+          return {"id": period}
+        })
+        ],
+        "degrees": [degrees?.map((degree) => {
+          
+          return {"id": degree}
+        })
+        ]
       });
     var config = {
         method: 'post',
-        url: 'http://localhost:5000/api/candidate',
+        url: 'http://localhost:5000/api/candidates',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -86,18 +123,40 @@ export function requetePostConnexion(email, password){
       };
     return axios(config);
 }
-
-export function requeteUpdateProfil(UserId, firstname, lastname, birthday){
+//requete mis a jour candidats
+export function requeteUpdateProfil(firstname,lastname,birthday, password, email, phone, address, zipCode, city, periods, degrees){
   
   var data = JSON.stringify({
-      "UserId": UserId,
+    "candidate": {
       "firstname": firstname,
       "lastname": lastname,
-      "birthday": birthday,
-    });
+      "birthday": birthday
+    },
+    "users": {
+      "password": password,
+      "email": email,
+      "phone": phone,
+      "isActif": true
+    },
+    "localisation": {
+      "address": address,
+      "zipCode": zipCode,
+      "city": city
+    },
+    "periods": [periods?.map((period) => {
+      
+      return {"id": period}
+    })
+    ],
+    "degrees": [degrees?.map((degree) => {
+      
+      return {"id": degree}
+    })
+    ]
+  });
   var configUpdateProfile = {
       method: 'put',
-      url: 'http://localhost:5000/api/candidate/' +id,
+      url: 'http://localhost:5000/api/candidates/' +id,
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -105,7 +164,26 @@ export function requeteUpdateProfil(UserId, firstname, lastname, birthday){
     };
   return axios(configUpdateProfile);
 }
+// requete mis à jour employers
+export function requeteUpdateEmployers(UserId, siret, structurename){
+  
+  var data = JSON.stringify({
+      "UserId": UserId,
+      "siret": siret,
+      "structurename": structurename
+    });
+  var configUpdateEmployers = {
+      method: 'put',
+      url: 'http://localhost:5000/api/employers/' +id,
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+  return axios(configUpdateEmployers);
+}
 
+// requete affichage employers
 export function requeteGetAllEmployeurs (siret, structurename, UserId)
 {
   var data = JSON.stringify({
@@ -125,31 +203,24 @@ export function requeteGetAllEmployeurs (siret, structurename, UserId)
   };
   return axios(configGetAllUsersCandidats);
 }
-
-export function deleteCandidate (isActif)
+// requete delete ( ou archivage ) des candidats
+export function deleteCandidate (id)
 {
-  var data = JSON.stringify({
-    "isActif": isActif
-  });
 
   var configDeleteCandidateById = {
     method: 'delete',
-    url: 'http://localhost:5000/api/candidate/' +id,
+    url: 'http://localhost:5000/api/candidates/' +id,
     headers: { 
       'Content-Type': 'application/json'
-    },
-    data : data,
+    }
     
   };
   return axios(configDeleteCandidateById);
 }
 
-
-export function deleteEmployer (isActif)
+// requete delete ( ou archivage ) des employers
+export function deleteEmployer (id)
 {
-  var data = JSON.stringify({
-    "isActif": isActif
-  });
 
   var configDeleteEmployerById = {
     method: 'delete',
@@ -157,8 +228,9 @@ export function deleteEmployer (isActif)
     headers: { 
       'Content-Type': 'application/json'
     },
-    data : data,
     
   };
-  return axios(configDeleteCandidateById);
+  return axios(configDeleteEmployerById);
 }
+
+

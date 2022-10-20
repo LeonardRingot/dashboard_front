@@ -10,16 +10,10 @@ export default function consultemployeur()
     const router = useRouter()
     const {id} = router.query
     let [data, setData] = useState(null)
-    
-
     let [isLoading, setLoading] = useState(false)
-
     useEffect(() => {
-        
         setLoading(true)
-
         ServiceAPI.requeteGetAllEmployeurs()
-        
         .then(response => {
             console.log(response)
           if(response.status == 200){
@@ -31,13 +25,12 @@ export default function consultemployeur()
         })
         
     }, [])
-
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
        <><Navbar></Navbar>
        <div className={styles.montab} > 
-        <Link href="./#"><a className={styles.buttonCreate}>Crer un employeurs</a></Link>
+        <Link href="./employers/createemployer"><a className={styles.buttonCreate}>Crer un employeurs</a></Link>
     <table className={styles.table}>
         <thead className={styles.thead} >
             <tr className={styles.tr}>
@@ -50,7 +43,6 @@ export default function consultemployeur()
             </tr>
         </thead>
         <tbody>
-            
         {data.map((element) => {
       return (
             <tr>
@@ -67,16 +59,13 @@ export default function consultemployeur()
                     <h6 className={styles.nom}>{element.IsActive}</h6>
                 </td>
                 <td className={styles.td}>
-                    <h6 className={styles.nom}> <a className={styles.buttonModif} href='./updatecandidat/updatecandidat'>Modifier Profile</a></h6>
+                    <h6 className={styles.nom}> <a className={styles.buttonModif} href='./employer/updateemployer'>Modifier Profile</a></h6>
                 </td>
                 <td className={styles.td}>
-                <h6 className={styles.nom}>  <a className={styles.buttonSuppr} href='./#'>Supprimer</a></h6>
+                <h6 className={styles.nom}>  <a className={styles.buttonSuppr} href='./employer/deletecandidat'>Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
-    
-    
-    
         </tbody>
     </table>
     </div>

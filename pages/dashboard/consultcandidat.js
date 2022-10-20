@@ -8,35 +8,48 @@ import Link from 'next/link';
 export default function consultcandidat()
 {
     const router = useRouter()
-    const {id} = router.query
     let [data, setData] = useState(null)
     
-    useEffect(() => {
-        if(!id) {
-            return;
-          }
-    const deleteData =ServiceAPI.deleteCandidate().then(response => {
-        console.log(response)
-      if(response.status == 200)
-      {
-        if(response.data.length > 0)
-        {
-            setData(response.data)
-            setLoading(false)
-        }
-        }
-      })
-    }, [])
+
+    
+    function deleteData(id){
+        console.log(id);
+        ServiceAPI.deleteCandidate(id).then(response => {
+            console.log(response)
+          if(response.status == 200)
+          {
+            if(response.data.length > 0)
+            {
+                setData(response.data)
+                setLoading(false)
+            }
+            }
+          })
+    }
+
+    function modifData(id){
+        console.log(id);
+        ServiceAPI.requeteGetCandidatById(id).then(response =>{
+            console.log(response)
+            if(response.status == 200)
+            {
+                response.push('./candidate/updatecandidat/' +id)
+                if(response.data.length > 0)
+            {
+                setData(response.data)
+                setLoading(false)
+            }
+            }
+        })
+    }
+
     let [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
-        
         setLoading(true)
-
         ServiceAPI.requeteGetAllCandidats()
-        
         .then(response => {
-            console.log(response)
+            console.log(response.data[0].User.Localisation)
           if(response.status == 200){
             if(response.data.length > 0)
             {
@@ -47,7 +60,6 @@ export default function consultcandidat()
         })
         
     }, [])
-
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
@@ -69,8 +81,7 @@ export default function consultcandidat()
                 <th className={styles.th}>Supprimer</th>
             </tr>
         </thead>
-        <tbody>
-            
+        <tbody> 
         {data.map((element) => {
       return (
             <tr>
@@ -81,37 +92,33 @@ export default function consultcandidat()
                     <h6 className={styles.nom}>{element.firstname}</h6>
                 </td>
                 <td className={styles.td} >
-                      <h6 className={styles.nom} >{element.birthday}</h6>
+                      <h6 className={styles.nom} >{new Date(element.birthday).toLocaleDateString()}</h6>
                 </td>
                 <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.userId}</h6>
+                    <h6 className={styles.nom}>{element.UserId}</h6>
                 </td>
                 <td className={styles.td}>
-                     <h6 className={styles.nom}>  {element.address}</h6>
+                     <h6 className={styles.nom}>  {element.User.Localisation.zipCode}</h6>
                 </td>
                 <td className={styles.td}>
-                     <h6 className={styles.nom}> Ville</h6>
+                     <h6 className={styles.nom}> {element.User.Localisation.city}</h6>
                 </td>
                 <td className={styles.td}>
-                    <h6 className={styles.nom}>  EMail</h6>
+                    <h6 className={styles.nom}>  {element.User.email}</h6>
                 </td>
                 <td className={styles.td}>
-                    <h6 className={styles.nom}>  IsActive?</h6>
+                    <h6 className={styles.nom}>  {element.User.isActif? "✅": "❌"}</h6>
                 </td>
                 <td className={styles.td}>
-                    <h6 className={styles.nom}> <a className={styles.buttonModif}href='./candidate/updatecandidat'>Modifier Profile</a></h6>
+                    <h6 className={styles.nom}> <a  onClick = {() =>modifData(element.id)}className={styles.buttonModif}href='./candidate/updatecandidat/'> Modifier Profile</a></h6>
                 </td>
                 <td className={styles.td}>
-                <h6 className={styles.nom}>  <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} href='./#'>Supprimer</a></h6>
+                <h6 className={styles.nom}>  <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} >Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
-    
-    
-    
         </tbody>
     </table>
-
     </div>
        </>
     )

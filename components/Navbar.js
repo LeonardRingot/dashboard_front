@@ -18,7 +18,8 @@ export default function Navbar(){
     <li className={styles.nav}>
           <a className={styles.navlink} href="./dashboard">
             <div className={styles.monsvg}>
-              <svg width="12px" height="12px"  color="red" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
+              <MdOutlineHome></MdOutlineHome>
+              {/* <svg width="12px" height="12px"  color="red" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -30,7 +31,7 @@ export default function Navbar(){
                     </g>
                   </g>
                 </g>
-              </svg>
+              </svg> */}
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
@@ -38,7 +39,8 @@ export default function Navbar(){
         <li className={styles.nav}>
           <a className={styles.navlink} href="./consultcandidat">
             <div className={styles.monsvg}>
-              <svg width="12px" height="12px"  color="red" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
+              <MdOutlineAccountCircle></MdOutlineAccountCircle>
+              {/* <svg width="12px" height="12px"  color="red" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -50,7 +52,7 @@ export default function Navbar(){
                     </g>
                   </g>
                 </g>
-              </svg>
+              </svg> */}
             </div>
             <span class="nav-link-text ms-1">Consultation candidats</span>
           </a>
@@ -58,7 +60,8 @@ export default function Navbar(){
         <li className={styles.nav}>
           <a className={styles.navlink} href="./consultemployeur">
             <div className={styles.monsvg}>
-              <svg width="12px" height="12px"  color="red" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
+            <MdOutlineAccountBox></MdOutlineAccountBox>
+              {/* <svg width="12px" height="12px"  color="red" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -70,7 +73,7 @@ export default function Navbar(){
                     </g>
                   </g>
                 </g>
-              </svg>
+              </svg> */}
             </div>
             <span class="nav-link-text ms-1">Consultation profil employeurs</span>
           </a>
