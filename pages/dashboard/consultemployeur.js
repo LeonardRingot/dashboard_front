@@ -10,6 +10,39 @@ export default function consultemployeur()
     const router = useRouter()
     const {id} = router.query
     let [data, setData] = useState(null)
+
+    function deleteData(id){
+        console.log(id);
+        ServiceAPI.deleteEmployer(id).then(response => {
+            console.log(response)
+          if(response.status == 200)
+          {
+            if(response.data.length > 0)
+            {
+                setData(response.data)
+                setLoading(false)
+            }
+            }
+          })
+    }
+    
+    function modifData(id){
+        console.log(id);
+        ServiceAPI.requeteGetEmployerById(id).then(response =>{
+            console.log(response)
+            if(response.status == 200)
+            {   console.log('aaaaa')
+                response.push('./employers/updateemployer/' +id)
+                if(response.data.length > 0)
+            {
+                setData(response.data)
+                setLoading(false)
+            }
+            }
+        })
+    }
+
+
     let [isLoading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
@@ -37,6 +70,11 @@ export default function consultemployeur()
                 <th className={styles.th}>SIRET</th>
                 <th className={styles.th}>structurename</th>
                 <th className={styles.th}>UserId</th>
+                <th className={styles.th}>email</th>
+                <th className={styles.th}>phone</th>
+                <th className={styles.th}>adresse</th>
+                <th className={styles.th}>Code Postal</th>
+                <th className={styles.th}>Ville</th>
                 <th className={styles.th}>IsActive?</th>
                 <th className={styles.th}>Modifier Profile</th>
                 <th className={styles.th}>Supprimer</th>
@@ -55,14 +93,29 @@ export default function consultemployeur()
                 <td className={styles.td} >
                       <h6 className={styles.nom} >{element.UserId}</h6>
                 </td>
+                <td className={styles.td} >
+                      <h6 className={styles.nom} >{element.User.email}</h6>
+                </td>
+                <td className={styles.td} >
+                      <h6 className={styles.nom} >{element.User.phone}</h6>
+                </td>
+                <td className={styles.td} >
+                      <h6 className={styles.nom} >{element.User.Localisation.address}</h6>
+                </td>
+                <td className={styles.td} >
+                      <h6 className={styles.nom} >{element.User.Localisation.zipCode}</h6>
+                </td>
                 <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.IsActive}</h6>
+                    <h6 className={styles.nom}>{element.User.Localisation.city}</h6>
+                </td>
+                <td className={styles.td}>  
+                    <h6 className={styles.nom}>{element.User.isActif? "✅": "❌"}</h6>
                 </td>
                 <td className={styles.td}>
-                    <h6 className={styles.nom}> <a className={styles.buttonModif} href='./employer/updateemployer'>Modifier Profile</a></h6>
+                    <h6 className={styles.nom}>    <a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profile</a></h6>
                 </td>
                 <td className={styles.td}>
-                <h6 className={styles.nom}>  <a className={styles.buttonSuppr} href='./employer/deletecandidat'>Supprimer</a></h6>
+                <h6 className={styles.nom}>  <a className={styles.buttonSuppr} onClick={() => deleteData(element.id)}>Supprimer</a></h6>
                 </td>
             </tr>)  
     })}

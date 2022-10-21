@@ -10,24 +10,7 @@ export default function Register() {
     const router = useRouter()
     const {id} = router.query
     const[p, setP] = useState([]);
-
-    function periodExits(period) {
-      if(updateProfile.User.Periods != null){
-        return updateProfile.User.Periods.some(function(el) {
-          return el.periodname === period;
-        }); 
-      }
-      return false;
-    }
-
-    function degreeExits(degree) {
-      if(updateProfile.User.Periods != null){
-        return updateProfile.User.degrees.some(function(el) {
-          return el.degreename === degree;
-        }); 
-      }
-      return false;
-    }
+    const[d, setD] = useState([]);
 
     const [updateProfile, setUpdateProfile] = useState({
       birthday: '',
@@ -41,17 +24,24 @@ export default function Register() {
         },
         email: '',
         phone: '',
-        degrees:[]
+        degrees:d
       },
       periods:p
     })
-    const handleChange = (e) => {
+    const handleChange = (e) => 
+    {
       const value = e.target.value;
-      if (e.target.name == "periods"){
+      if (e.target.name == "periods")
+      {
         let test = p.find((p) => p == value)
-         if (test == null){
+        console.log(test);
+         if (test == null)
+         {
           p.push(value)
-         } else {
+          console.log(p);
+          console.log(value);
+         } else 
+         {
           let tab = []
           p.map((p) => {
             p != value? tab.push(p): ''
@@ -59,11 +49,30 @@ export default function Register() {
           setP(tab)
          }
       }
+      if (e.target.name == "degrees")
+      {
+        let testDegree = d.find((d) => d == value)
+        console.log(testDegree);
+         if (testDegree == null)
+         {
+          d.push(value)
+          console.log(d);
+          console.log(value);
+         } else 
+         {
+          let tabDegree = []
+          d.map((d) => {
+            d != value? tabDegree.push(d): ''
+          })
+          setD(tabDegree)
+          
+         }
+      }
         setUpdateProfile({
           ...updateProfile,
           [e.target.name]: value
         });
-       console.log(updateProfile)
+      //  console.log(updateProfile)//
     }
 
     useEffect(() => {
@@ -72,19 +81,28 @@ export default function Register() {
           .then(response => {
             if(response.status == 200){
               setUpdateProfile(response.data);
-              setP(response.data.User.Periods)
-              console.log(response.data)
+              let a = [];
+               response.data.User.Periods.map((p) => a.push(p.id))
+               let b = [];
+               response.data.User.Degrees.map((d) => b.push(d.id))
+              setP(a)
+              setD(b)
+              console.log(response.data.Periods)
+              console.log(p);
+              console.log(response.data.User.Degrees)
+              console.log(d);
             }
           })
           .catch(error => console.log(error))
         }
+        
         fetchSomethingById()
       }, [id])
 
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
-        ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname, updateProfile.birthday,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.Localisation.zipCode,
-          updateProfile.User.Localisation.city,updateProfile.periods,updateProfile.User.degrees).then(response => {
+        ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname, updateProfile.birthday,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
+          updateProfile.User.Localisation.city,p,d).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
               setIsOk('User mis a jour');
@@ -99,8 +117,8 @@ export default function Register() {
     return (
 <div >
      <h1>Formulaire Modif </h1>
-     <div>
-        <form className={styles.myform} onSubmit={ModifierProfileSubmit} action='' method="post">
+     <div >
+        <form className={styles.myform} onSubmit={ModifierProfileSubmit} action='' method="post"> 
         <label htmlFor='firstname'>firstname:</label>
           <input value={updateProfile.firstname} onChange={handleChange} type="text" className={styles.inputconnect} name="firstname" /><br></br>
           <label htmlFor='lastname'>lastname:</label>
@@ -118,71 +136,74 @@ export default function Register() {
           <label htmlFor='city'>city:</label>
           <input value={updateProfile.User.Localisation.city} onChange={handleChange} type="text"  className={styles.inputconnect} name="city" /><br></br>
           
-          <fieldset name="periods"id='periods'>
+          <fieldset name="periods"id='periods'> 
           <legend >periods</legend>
           <div>
-            {periodExits('Vacances de février') ? <input checked onChange={handleChange} type="checkbox" id="1" name="periods"/> : <input onChange={handleChange} type="checkbox" id="1" name="periods"/>}
+            <input  onChange={handleChange} type="checkbox" id="1" name="periods" value='1' checked={(p.find((p) => p == '1'))? true: false}/>
             <label htmlFor="Vacances de février">Vacances de février</label>
           </div>
           <div>
-          {periodExits('Vacances d’avril') ? <input checked onChange={handleChange} type="checkbox" id="2" name="periods"/> : <input onChange={handleChange} type="checkbox" id="2" name="periods"/>}
+            <input  onChange={handleChange} type="checkbox" id="2" name="periods" value='2' checked={(p.find((p) => p == '2'))? true: false}/>
             <label htmlFor="Vacances d’avril">Vacances d’avril</label>
           </div>
           <div>
-          <input onChange={handleChange} checked={periodExits('Vacances juillet')} type="checkbox" id="3" name="periods"/>
+            <input  onChange={handleChange} type="checkbox" id="3" name="periods" value='3' checked={(p.find((p) => p == '3'))? true: false}/>
             <label htmlFor="Vacances juillet">Vacances juillet</label>
           </div>
           <div>
-          {periodExits('Vacances Août') ? <input checked onChange={handleChange} type="checkbox" id="4" name="periods"/> : <input onChange={handleChange} type="checkbox" id="4" name="periods"/>}
+            <input  onChange={handleChange} type="checkbox" id="4" name="periods" value='4' checked={(p.find((p) => p == '4'))? true: false}/>
             <label htmlFor="Vacances Août">Vacances Août</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="5" name="periods" value="5"/>
+            <input  onChange={handleChange} type="checkbox" id="5" name="periods" value="5" checked={(p.find((p) => p == '5'))? true: false}/>
             <label htmlFor="Vacances Octobre">Vacances Octobre</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="6" name="periods" value="6"/>
+            <input  onChange={handleChange} type="checkbox" id="6" name="periods" value="6" checked={(p.find((p) => p == '6'))? true: false}/>
             <label htmlFor="Vacances Noël">Vacances Noël</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="7" name="periods" value="7"/>
+            <input  onChange={handleChange} type="checkbox" id="7" name="periods" value="7" checked={(p.find((p) => p == '7'))? true: false}/>
             <label htmlFor="Mercredi">Mercredi</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="8" name="periods" value="8"/>
+            <input  onChange={handleChange} type="checkbox" id="8" name="periods" value="8" checked={(p.find((p) => p == '8'))? true: false}/>
             <label htmlFor="Samedi">Samedi</label>
           </div>
       </fieldset>
       <fieldset name="degrees" id='degrees'>
           <legend >Diplomes</legend>
           <div>
-            <input onChange={handleChange} type="checkbox" id="3" name="BAFA" />
+            <input onChange={handleChange} type="checkbox" id="1" name="degrees" value="1" checked={(d.find((d) => d == '1'))? true: false}/>
             <label htmlFor="BAFA">BAFA</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="2" name="BAFD en cours"/>
+            <input  onChange={handleChange} type="checkbox" id="2" name="degrees" value="2"checked={(d.find((d) => d == '2'))? true: false}/>
             <label htmlFor="BAFD en cours">BAFD en cours</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="4" name="stage pratique"/>
+            <input  onChange={handleChange} type="checkbox" id="3" name="degrees" value="3" checked={(d.find((d) => d == '3'))? true: false}/>
             <label htmlFor="stage pratique">stage pratique</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="1" name="BAFD"/>
+            <input  onChange={handleChange} type="checkbox" id="4" name="degrees"value="4" checked={(d.find((d) => d == '4'))? true: false}/>
             <label htmlFor="BAFD">BAFD</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="6" name="BPJEPS"/>
+            <input  onChange={handleChange} type="checkbox" id="5" name="degrees"value="5" checked={(d.find((d) => d == '5'))? true: false}/>
             <label htmlFor="BPJEPS">BPJEPS</label>
           </div>
           <div>
-            <input  onChange={handleChange} type="checkbox" id="5" name="Non diplome"/>
+            <input  onChange={handleChange} type="checkbox" id="6" name="degrees"value="6"checked={(d.find((d) => d == '6'))? true: false}/>
             <label htmlFor="Non diplome">Non diplome</label>
           </div>
       </fieldset>
          
          <input  value="Submit" className={styles.inputsubmit} type="submit"/> <br></br>
+          
+         
           </form>
+          
          <p>{erreur}</p>
          <p>{IsOk}</p>
      </div> 

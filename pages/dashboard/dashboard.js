@@ -16,9 +16,7 @@ import Link from 'next/link';
 
 export default function dashboard(){
 
-    /*
-        CODE
-    */
+    
 function candidat () {
     <Link href="/dashboard/consultcandidat"></Link>
 } ;
