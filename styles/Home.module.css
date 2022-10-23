@@ -50,7 +50,7 @@
 {
   background-color: #556B2F;
   text-align: center;
-  height: 100px;
+  height: 10vh;
 }
 .spacebetween{
   padding-top: 100px;
@@ -372,6 +372,16 @@ color: #222;
 }
 
 .widthcinq{
-  width: 100%;
+  width: 50%;
   text-align: center;
+}
+
+.center_container {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  width: 10em;
 }

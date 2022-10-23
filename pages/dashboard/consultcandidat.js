@@ -67,8 +67,8 @@ export default function consultcandidat()
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
-       <><Navbar></Navbar>
-       <div className={styles.montab} > 
+       <Navbar>
+<div className={styles.montab} > 
         <Link href="./candidate/createcandidat"><a className={styles.buttonCreate}>Crer un candidat</a></Link>
     <table className={styles.table}>
         <thead className={styles.thead} >
@@ -134,6 +134,10 @@ export default function consultcandidat()
         </tbody>
     </table>
     </div>
-       </>
+       </Navbar>
     )
 }
+
+/**
+ * 
+ */

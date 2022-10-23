@@ -61,8 +61,8 @@ export default function consultemployeur()
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
-       <><Navbar></Navbar>
-       <div className={styles.montab} > 
+       <Navbar>
+               <div className={styles.montab} > 
         <Link href="./employers/createemployer"><a className={styles.buttonCreate}>Crer un employeurs</a></Link>
     <table className={styles.table}>
         <thead className={styles.thead} >
@@ -122,6 +122,7 @@ export default function consultemployeur()
         </tbody>
     </table>
     </div>
-       </>
+       </Navbar>
+
     )
 }

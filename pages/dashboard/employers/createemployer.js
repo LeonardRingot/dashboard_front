@@ -52,65 +52,73 @@ export default function createemployer() {
     });
   }
   return (
-    <div className={styles.myContainer}>
+    <div class="col py-3">
+            <div class="container">
       <h1>Formulaire d'Inscription employers</h1>
-      <div>
-        <form className={styles.myform} onSubmit={ScriptForm} action='' method="post">
+      <form class="row g-3" onSubmit={ScriptForm} action='' method="post">
+      <div class="col-md-6">  
           <label htmlFor='siret'>siret:</label>
-          <input onChange={handleChange} type="text" className={styles.inputconnect} name="siret" /><br></br>
-
+          <input onChange={handleChange} type="text" class="form-control" name="siret" /><br></br>
+        </div>
+        <div class="col-md-6">
           <label htmlFor='structurename'>structurename:</label>
-          <input onChange={handleChange} type="text" className={styles.inputconnect} name="structurename" /><br></br>
-
+          <input onChange={handleChange} type="text" class="form-control" name="structurename" /><br></br>
+        </div>
+        <div class="col-md-6">
           <label htmlFor='password'>password:</label>
-          <input onChange={handleChange} type="password" className={styles.inputconnect} name="password" /><br></br>
-
+          <input onChange={handleChange} type="password" class="form-control" name="password" /><br></br>
+        </div>
+        <div class="col-md-6">
           <label htmlFor='email'>email:</label>
-          <input onChange={handleChange} type="email" className={styles.inputconnect} name="email" /><br></br>
-
+          <input onChange={handleChange} type="email" class="form-control" name="email" /><br></br>
+          </div>
+          <div class="col-md-6">
           <label htmlFor='phone'>phone:</label>
-          <input onChange={handleChange} type="tel" className={styles.inputconnect} name="phone" /><br></br>
-
+          <input onChange={handleChange} type="tel" class="form-control" name="phone" /><br></br>
+          </div>
+          <div class="col-12"> 
           <label htmlFor='address'>address:</label>
-          <input onChange={handleChange} type="text" className={styles.inputconnect} name="address" /><br></br>
-
+          <input onChange={handleChange} type="text" class="form-control" name="address" /><br></br>
+          </div>
+          <div class="col-md-2">
           <label htmlFor='zipCode'>zipCode:</label>
-          <input onChange={handleChange} type="text" className={styles.inputconnect} name="zipCode" /><br></br>
-
+          <input onChange={handleChange} type="text" class="form-control" name="zipCode" /><br></br>
+            </div>
+            <div class="col-md-4">
           <label htmlFor='city'>city:</label>
-          <input onChange={handleChange} type="text" className={styles.inputconnect} name="city" /><br></br>
-
+          <input onChange={handleChange} type="text" class="form-control" name="city" /><br></br>
+            </div>
           <fieldset name="periods" id='periods'>
             <legend >periods</legend>
-            <div>
-              <input onChange={handleChange} type="checkbox" id="1" name="periods" value="1" />
+            <div class="form-check form-check-inline">
+              <input onChange={handleChange} type="checkbox"  id="1" name="periods" value="1" />
               <label htmlFor="Vacances de février">Vacances de février</label>
             </div>
-            <div>
+            <div class="form-check form-check-inline">
               <input onChange={handleChange} type="checkbox" id="2" name="periods" value="2" />
               <label htmlFor="Vacances d’avril">Vacances d’avril</label>
             </div>
-            <div>
+            <div class="form-check form-check-inline">
               <input onChange={handleChange} type="checkbox" id="3" name="periods" value="3" />
               <label htmlFor="Vacances juillet">Vacances juillet</label>
             </div>
-            <div>
+            <div class="form-check form-check-inline">
               <input onChange={handleChange} type="checkbox" id="4" name="periods" value="4" />
               <label htmlFor="Vacances Août">Vacances Août</label>
             </div>
-            <div>
+            <div class="form-check form-check-inline">
               <input onChange={handleChange} type="checkbox" id="5" name="periods" value="5" />
               <label htmlFor="Vacances Octobre">Vacances Octobre</label>
             </div>
-            <div>
+            <div class="form-check form-check-inline">
               <input onChange={handleChange} type="checkbox" id="6" name="periods" value="6" />
               <label htmlFor="Vacances Noël">Vacances Noël</label>
             </div>
-            <div>
+            <div class="form-check form-check-inline">
               <input onChange={handleChange} type="checkbox" id="7" name="periods" value="7" />
               <label htmlFor="Mercredi">Mercredi</label>
             </div>
-            <div>
+            <div class="form-check form-check-inline">
               <input onChange={handleChange} type="checkbox" id="8" name="periods" value="8" />
               <label htmlFor="Samedi">Samedi</label>
             </div>

@@ -86,62 +86,69 @@ export default function updateEmployer({  }) {
         }); 
     }
     return (
-<div >
+<div class="col py-3">
+<div class="container">
      <h1>Formulaire Modif </h1>
-     <div>
-        <form className={styles.myform} onSubmit={ModifierProfileSubmit} action='' method="post">
+     
+     <form class="row g-3" onSubmit={ModifierProfileSubmit} action='' method="post">
+     <div class="col-md-6">
           <label htmlFor='siret'>siret:</label>
-          <input  value={updateEmployer.siret} onChange={handleChange} className={styles.inputconnect}  type="text"  name="siret" /><br></br>
-          
+          <input  defaultValue={updateEmployer.siret} onChange={handleChange} class="form-control"  type="text"  name="siret" /><br></br>
+          </div>
+          <div class="col-md-6">
           <label htmlFor='structurename'>structurename:</label>
-          <input value={updateEmployer.structurename}  onChange={handleChange} className={styles.inputconnect} type="text"   name="structurename" /><br></br>
-          
+          <input defaultValue={updateEmployer.structurename}  onChange={handleChange} class="form-control" type="text"   name="structurename" /><br></br>
+          </div>
+          <div class="col-md-6">
           <label htmlFor='email'>email:</label>
-          <input value={updateEmployer.User.email}  onChange={handleChange} className={styles.inputconnect} type="email"   name="email" /><br></br>
-          
+          <input defaultValue={updateEmployer.User.email}  onChange={handleChange} class="form-control" type="email"   name="email" /><br></br>
+          </div>
           <label htmlFor='phone'>phone:</label>
-          <input value={updateEmployer.User.phone}  onChange={handleChange} className={styles.inputconnect} type="tel"   name="phone" /><br></br>
-          
+          <input defaultValue={updateEmployer.User.phone}  onChange={handleChange} class="form-control" type="tel"   name="phone" /><br></br>
+          <div class="col-12"> 
           <label htmlFor='address'>address:</label>
-          <input value={updateEmployer.User.Localisation.address}  onChange={handleChange} className={styles.inputconnect} type="text"   name="address" /><br></br>
-          
+          <input defaultValue={updateEmployer.User.Localisation.address}  onChange={handleChange} class="form-control" type="text"   name="address" /><br></br>
+          </div>
+          <div class="col-md-2">
           <label htmlFor='zipCode'>zipCode:</label>
-          <input value={updateEmployer.User.Localisation.zipCode}  onChange={handleChange} className={styles.inputconnect} type="text"   name="zipCode" /><br></br>
-
+          <input defaultValue={updateEmployer.User.Localisation.zipCode}  onChange={handleChange} class="form-control" type="text"   name="zipCode" /><br></br>
+          </div>
+          <div class="col-md-4">
           <label htmlFor='city'>city:</label>
-          <input value={updateEmployer.User.Localisation.city}  onChange={handleChange} className={styles.inputconnect} type="text"   name="city" /><br></br>
+          <input defaultValue={updateEmployer.User.Localisation.city}  onChange={handleChange} class="form-control" type="text"   name="city" /><br></br>
+          </div>
           <fieldset name="periods"id='periods'> 
-
+          
           <legend >periods</legend>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="1" name="periods" value='1' checked={(p.find((p) => p == '1'))? true: false}/>
             <label htmlFor="Vacances de février">Vacances de février</label>
           </div>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="2" name="periods" value='2' checked={(p.find((p) => p == '2'))? true: false}/>
             <label htmlFor="Vacances d’avril">Vacances d’avril</label>
           </div>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="3" name="periods" value='3' checked={(p.find((p) => p == '3'))? true: false}/>
             <label htmlFor="Vacances juillet">Vacances juillet</label>
           </div>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="4" name="periods" value='4' checked={(p.find((p) => p == '4'))? true: false}/>
             <label htmlFor="Vacances Août">Vacances Août</label>
           </div>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="5" name="periods" value="5" checked={(p.find((p) => p == '5'))? true: false}/>
             <label htmlFor="Vacances Octobre">Vacances Octobre</label>
           </div>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="6" name="periods" value="6" checked={(p.find((p) => p == '6'))? true: false}/>
             <label htmlFor="Vacances Noël">Vacances Noël</label>
           </div>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="7" name="periods" value="7" checked={(p.find((p) => p == '7'))? true: false}/>
             <label htmlFor="Mercredi">Mercredi</label>
           </div>
-          <div>
+          <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="8" name="periods" value="8" checked={(p.find((p) => p == '8'))? true: false}/>
             <label htmlFor="Samedi">Samedi</label>
           </div>
@@ -153,6 +160,6 @@ export default function updateEmployer({  }) {
          <p>{erreur}</p>
          <p>{IsOk}</p>
      </div> 
-   </div>
+    </div>
     );
 }

@@ -21,10 +21,8 @@ function candidat () {
     <Link href="/dashboard/consultcandidat"></Link>
 } ;
     return(
-        <><div>     
-        </div>
-        <Navbar></Navbar>
-      
-      </>   
+      <Navbar>
+        
+      </Navbar>
     )
 }
