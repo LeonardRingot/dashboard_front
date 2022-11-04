@@ -171,7 +171,7 @@ export function requetePostEmployers(siret, structurename, password, email, phon
 }
 
 //requete mis a jour candidats
-export function requeteUpdateProfil(id, firstname, lastname, birthday, email, phone, address,  zipCode, city, periods, degrees) {
+export function requeteUpdateProfil(id, firstname, lastname, email, phone,isActif, address,  zipCode, city, periods, degrees) {
   let obj = periods?.map(((period) => {
     return { "id": parseInt(period) }
   }))
@@ -183,12 +183,11 @@ export function requeteUpdateProfil(id, firstname, lastname, birthday, email, ph
     "candidate": {
       "firstname": firstname,
       "lastname": lastname,
-      "birthday": birthday
     },
     "users": {
       "email": email,
       "phone": phone,
-      "isActif": true
+      "isActif": isActif
     },
     "localisation": {
       "address": address,
@@ -304,3 +303,51 @@ export function requeteGetAllDegree() {
   return axios(configGetAllUsersDegree);
 }
 
+export function requeteGetAllAdmin()
+{
+  var data = JSON.stringify({
+  });
+  var configGetAllUsersRoles = {
+    method: 'get',
+    url: 'http://localhost:5000/api/users',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+  return axios(configGetAllUsersRoles);
+}
+
+export function requetePostAdmin(firstname, lastname, birthday, password, email, phone, address, zipCode, city, role) {
+  
+  var data = JSON.stringify({
+    "candidate": {
+      "firstname": firstname,
+      "lastname": lastname,
+      "birthday": birthday
+    },
+    "users": {
+      "password": password,
+      "email": email,
+      "phone": phone,
+      "isActif": true
+    },
+    "localisation": {
+      "address": address,
+      "zipCode": zipCode,
+      "city": city
+    },
+    "roles":{
+      "role:": role
+    }
+  });
+  var configAdmin = {
+    method: 'post',
+    url: 'http://localhost:5000/api/users',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+  return axios(configAdmin);
+}

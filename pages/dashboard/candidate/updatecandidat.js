@@ -11,23 +11,30 @@ export default function Register() {
     const {id} = router.query
     const[p, setP] = useState([]);
     const[d, setD] = useState([]);
+    const[r, setR] = useState([]);
 
     const [updateProfile, setUpdateProfile] = useState({
-      birthday: '',
       firstname: '',
-      lastname: '',
+        lastname: '',
       User:{
-        Localisation: {
+        Localisation:{
           address: '',
-          city: '',
-          zipCode: ''
-        },
-        email: '',
+          zipCode: '', 
+          city: ''
+         },
+         email: '',
         phone: '',
+        isActif:false,
         degrees:d
       },
-      periods:p
+      periods:p,
+      
+      
     })
+    
+    // console.log(updateProfile.firstname)
+    // console.log(updateProfile.User.email)
+    // console.log(updateProfile.Localisation.address)
     const handleChange = (e) => 
     {
       const value = e.target.value;
@@ -68,11 +75,21 @@ export default function Register() {
           
          }
       }
+    
         setUpdateProfile({
           ...updateProfile,
+            User:
+            {
+              ...updateProfile.User,
+              [e.target.name]: value,
+
+                Localisation: {
+                  ...updateProfile.User.Localisation,
+                  [e.target.name]: value,
+                },
+            },
           [e.target.name]: value
         });
-      //  console.log(updateProfile)//
     }
 
     useEffect(() => {
@@ -101,7 +118,7 @@ export default function Register() {
 
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
-        ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname, updateProfile.birthday,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
+        ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.isActif, updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
           updateProfile.User.Localisation.city,p,d).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
@@ -117,108 +134,112 @@ export default function Register() {
     return (
 <div class="col py-3">
             <div class="container">
-     <h1>Formulaire Modif </h1>
+     <h1>Formulaire de Modification Candidats </h1>
         <form class="row g-3" onSubmit={ModifierProfileSubmit} action='' method="post"> 
         <div class="col-md-6">
-            <label htmlFor='firstname'>firstname:</label>
+            <label htmlFor='firstname'>Prénom:</label>
             <input defaultValue={updateProfile.firstname} onChange={handleChange} type="text" class="form-control" name="firstname" /><br></br>
           </div>
           <div class="col-md-6">
-            <label htmlFor='lastname'>lastname:</label>
+            <label htmlFor='lastname'>Nom:</label>
             <input defaultValue={updateProfile.lastname} onChange={handleChange} type="text" class="form-control" name="lastname" /><br></br>
           </div>
           <div class="col-md-6">
-          <label htmlFor='birthday'>birthday:</label>
-          <input defaultValue={updateProfile.birthday} onChange={handleChange} type="date"  class="form-control" name="birthday" /><br></br>
+          <label htmlFor='email'>Email:</label>
+          <input defaultValue={updateProfile.User.email} onChange={handleChange}type="email"  class="form-control" name="email" /><br></br>
           </div>
           <div class="col-md-6">
-          <label htmlFor='email'>email:</label>
-          <input defaultValue={updateProfile.User.email} onChange={handleChange} type="email"  class="form-control" name="email" /><br></br>
-          </div>
-          <div class="col-md-6">
-          <label htmlFor='phone'>phone:</label>
+          <label htmlFor='phone'>Numéro de téléphone:</label>
           <input defaultValue={updateProfile.User.phone} onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
             </div>
+            <div class="form-check"  defaultValue={updateProfile.User.isActif} onChange={handleChange} >
+                <input   class="form-check-input"  defaultValue={updateProfile.User.isActif} onChange={handleChange} value={true}  type="radio" name="radio" id="true"  />
+                <label class="form-check-label" for="true">
+                ✅
+                </label>
+              </div>
+              <div class="form-check">
+                <input  class="form-check-input" defaultValue={updateProfile.User.isActif} onChange={handleChange} value={false}  type="radio" name="radio" id="false"  />
+                <label class="form-check-label" for="false">
+                ❌
+                </label>
+            </div>
             <div class="col-12"> 
-          <label htmlFor='address'>address:</label>
-          <input defaultValue={updateProfile.User.Localisation.address} onChange={handleChange} type="text"  class="form-control" name="address" /><br></br>
+          <label htmlFor='address'>Adresse:</label>
+          <input  defaultValue={updateProfile.User.Localisation.address} onChange={handleChange} type="text"  class="form-control" name="address" /><br></br>
           </div>
           <div class="col-md-2">
-          <label htmlFor='zipCode'>zipCode:</label>
+          <label htmlFor='zipCode'>Code Postal:</label>
           <input defaultValue={updateProfile.User.Localisation.zipCode} onChange={handleChange} type="text"  class="form-control" name="zipCode" /><br></br>
           </div>
           <div class="col-md-4">
-          <label htmlFor='city'>city:</label>
+          <label htmlFor='city'>Ville:</label>
           <input defaultValue={updateProfile.User.Localisation.city} onChange={handleChange} type="text"  class="form-control" name="city" /><br></br>
           </div>
           <fieldset name="periods"id='periods'> 
-          <legend >periods</legend>
+          <legend >Périodes disponibles</legend>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="1" name="periods" value='1' checked={(p.find((p) => p == '1'))? true: false}/>
-            <label htmlFor="Vacances de février">Vacances de février</label>
+            <label htmlFor="1">Vacances de février</label>
           </div>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="2" name="periods" value='2' checked={(p.find((p) => p == '2'))? true: false}/>
-            <label htmlFor="Vacances d’avril">Vacances d’avril</label>
+            <label htmlFor="2">Vacances d’avril</label>
           </div>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="3" name="periods" value='3' checked={(p.find((p) => p == '3'))? true: false}/>
-            <label htmlFor="Vacances juillet">Vacances juillet</label>
+            <label htmlFor="3">Vacances juillet</label>
           </div>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="4" name="periods" value='4' checked={(p.find((p) => p == '4'))? true: false}/>
-            <label htmlFor="Vacances Août">Vacances Août</label>
+            <label htmlFor="4">Vacances Août</label>
           </div>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="5" name="periods" value="5" checked={(p.find((p) => p == '5'))? true: false}/>
-            <label htmlFor="Vacances Octobre">Vacances Octobre</label>
+            <label htmlFor="5">Vacances Octobre</label>
           </div>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="6" name="periods" value="6" checked={(p.find((p) => p == '6'))? true: false}/>
-            <label htmlFor="Vacances Noël">Vacances Noël</label>
+            <label htmlFor="6">Vacances Noël</label>
           </div>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="7" name="periods" value="7" checked={(p.find((p) => p == '7'))? true: false}/>
-            <label htmlFor="Mercredi">Mercredi</label>
+            <label htmlFor="7">Mercredi</label>
           </div>
           <div class="form-check form-check-inline">
             <input  onChange={handleChange} type="checkbox" id="8" name="periods" value="8" checked={(p.find((p) => p == '8'))? true: false}/>
-            <label htmlFor="Samedi">Samedi</label>
+            <label htmlFor="8">Samedi</label>
           </div>
       </fieldset>
       <fieldset name="degrees" id='degrees'>
-          <legend >Diplomes</legend>
+          <legend >Diplômes</legend>
           <div class="form-check form-check-inline">
-            <input onChange={handleChange} type="checkbox" id="1" name="degrees" value="1" checked={(d.find((d) => d == '1'))? true: false}/>
-            <label htmlFor="BAFA">BAFA</label>
+            <input onChange={handleChange} type="checkbox" id="9" name="degrees" value="1" checked={(d.find((d) => d == '1'))? true: false}/>
+            <label htmlFor="9">BAFD</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="2" name="degrees" value="2"checked={(d.find((d) => d == '2'))? true: false}/>
-            <label htmlFor="BAFD en cours">BAFD en cours</label>
+            <input  onChange={handleChange} type="checkbox" id="10" name="degrees" value="2"checked={(d.find((d) => d == '2'))? true: false}/>
+            <label htmlFor="10">BAFD en cours</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="3" name="degrees" value="3" checked={(d.find((d) => d == '3'))? true: false}/>
-            <label htmlFor="stage pratique">stage pratique</label>
+            <input  onChange={handleChange} type="checkbox" id="11" name="degrees" value="3" checked={(d.find((d) => d == '3'))? true: false}/>
+            <label htmlFor="11">BAFA</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="4" name="degrees"value="4" checked={(d.find((d) => d == '4'))? true: false}/>
-            <label htmlFor="BAFD">BAFD</label>
+            <input  onChange={handleChange} type="checkbox" id="12" name="degrees"value="4" checked={(d.find((d) => d == '4'))? true: false}/>
+            <label htmlFor="12">stage pratique</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="5" name="degrees"value="5" checked={(d.find((d) => d == '5'))? true: false}/>
-            <label htmlFor="BPJEPS">BPJEPS</label>
+            <input  onChange={handleChange} type="checkbox" id="13" name="degrees"value="5" checked={(d.find((d) => d == '5'))? true: false}/>
+            <label htmlFor="13">Non diplome</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="6" name="degrees"value="6"checked={(d.find((d) => d == '6'))? true: false}/>
-            <label htmlFor="Non diplome">Non diplome</label>
+            <input  onChange={handleChange} type="checkbox" id="14" name="degrees"value="6"checked={(d.find((d) => d == '6'))? true: false}/>
+            <label htmlFor="14">BPJEPS</label>
           </div>
       </fieldset>
-         
-         <input  value="Submit" className={styles.inputsubmit} type="submit"/> <br></br>
-          
-         
+         <input  value="Envoyer" className={styles.inputsubmit} type="submit"/> <br></br>
           </form>
-          
          <p>{erreur}</p>
          <p>{IsOk}</p>
      </div> 

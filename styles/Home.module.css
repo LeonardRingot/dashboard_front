@@ -48,9 +48,10 @@
 }
 .headerdash
 {
-  background-color: #556B2F;
+  background-color: #212529;
   text-align: center;
   height: 10vh;
+ color: white;
 }
 .spacebetween{
   padding-top: 100px;
@@ -364,6 +365,7 @@ color: #222;
   border: none;
   color: white;
   padding: 15px 32px;
+  margin-bottom: 50px;
   text-align: center;
   float: right;
   text-decoration: none;

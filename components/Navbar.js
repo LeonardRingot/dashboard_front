@@ -38,6 +38,11 @@ export default function Navbar({children}){
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Consultations employeurs</span></a>
                       
                   </li>
+                  <li>
+                      <a href="./consultadmin" class="nav-link px-0 align-middle ">
+                          <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Consultations admin</span></a>
+                      
+                  </li>
               </ul>
               <hr/>
             

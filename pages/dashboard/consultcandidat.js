@@ -69,65 +69,65 @@ export default function consultcandidat()
     return (
        <Navbar>
 <div className={styles.montab} > 
-        <Link href="./candidate/createcandidat"><a className={styles.buttonCreate}>Crer un candidat</a></Link>
-    <table className={styles.table}>
-        <thead className={styles.thead} >
-            <tr className={styles.tr}>
-                <th className={styles.th}>lastname</th>
-                <th className={styles.th}>firstname</th>
-                <th className={styles.th}>birthday</th>
-                <th className={styles.th}>userId</th>
-                <th className={styles.th}>Email</th>
-                <th className={styles.th}>Phone</th>
-                <th className={styles.th}>Adresse</th>
-                <th className={styles.th}>Code postal</th>
-                <th className={styles.th}>Ville</th>
-                <th className={styles.th}>IsActive?</th>
-                <th className={styles.th}>Modifier Profile</th>
-                <th className={styles.th}>Supprimer</th>
+        <Link href="./candidate/createcandidat"><a className={styles.buttonCreate}>Creer un candidat</a></Link><br></br>
+    <table class="table table-hover table-dark">
+        <thead  >
+            <tr >
+                <th >Nom</th>
+                <th >Prénom</th>
+                <th >Date de naissance</th>
+                <th >ID Utilisateur</th>
+                <th >Email</th>
+                <th >Numéro de téléphone</th>
+                <th >Adresse</th>
+                <th >Code postal</th>
+                <th >Ville</th>
+                <th >IsActive?</th>
+                <th>Modifier Profile</th>
+                <th >Supprimer</th>
             </tr>
         </thead>
         <tbody> 
         {data.map((element) => {
       return (
             <tr>
-                <td  className={styles.td}>
-                    <h6 className={styles.nom}> {element.lastname}</h6>
+                <td  >
+                    <h6 > {element.lastname}</h6>
                 </td>
-                <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.firstname}</h6>
+                <td >  
+                    <h6 >{element.firstname}</h6>
                 </td>
-                <td className={styles.td} >
-                      <h6 className={styles.nom} >{new Date(element.birthday).toLocaleDateString()}</h6>
+                <td  >
+                      <h6  >{new Date(element.birthday).toLocaleDateString()}</h6>
                 </td>
-                <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.UserId}</h6>
+                <td >  
+                    <h6 >{element.UserId}</h6>
                 </td>
-                <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.User.email}</h6>
+                <td >  
+                    <h6 >{element.User.email}</h6>
                 </td>
-                <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.User.phone}</h6>
+                <td >  
+                    <h6 >{element.User.phone}</h6>
                 </td>
-                <td className={styles.td}>
-                     <h6 className={styles.nom}>  {element.User.Localisation.address}</h6>
+                <td >
+                     <h6 >  {element.User.Localisation.address}</h6>
                 </td>
-                <td className={styles.td}>
-                     <h6 className={styles.nom}>  {element.User.Localisation.zipCode}</h6>
+                <td >
+                     <h6 >  {element.User.Localisation.zipCode}</h6>
                 </td>
-                <td className={styles.td}>
-                     <h6 className={styles.nom}> {element.User.Localisation.city}</h6>
+                <td >
+                     <h6 > {element.User.Localisation.city}</h6>
                 </td>
-                <td className={styles.td}>
-                    <h6 className={styles.nom}>  {element.User.isActif? "✅": "❌"}</h6>
+                <td >
+                    <h6 >  {element.User.isActif? "✅": "❌"}</h6>
                 </td>
-                <td className={styles.td}>
-                    <h6 className={styles.nom}> <a  onClick = {() =>modifData(element.UserId)}className={styles.buttonModif}
+                <td>
+                    <h6 > <a  onClick = {() =>modifData(element.UserId)}className={styles.buttonModif}
                     href={`/dashboard/candidate/updatecandidat?id=${element.id}`}
                     > Modifier Profile</a></h6>
                 </td>
-                <td className={styles.td}>
-                <h6 className={styles.nom}>  <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} >Supprimer</a></h6>
+                <td >
+                <h6 >  <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} >Supprimer</a></h6>
                 </td>
             </tr>)  
     })}

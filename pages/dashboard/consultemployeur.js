@@ -59,63 +59,63 @@ export default function consultemployeur()
         
     }, [])
     if (isLoading) return <p>Loading...</p>
-    if (!data) return <p>No candidates</p>
+    if (!data) return <p>No employees</p>
     return (
        <Navbar>
                <div className={styles.montab} > 
-        <Link href="./employers/createemployer"><a className={styles.buttonCreate}>Crer un employeurs</a></Link>
-    <table className={styles.table}>
-        <thead className={styles.thead} >
-            <tr className={styles.tr}>
-                <th className={styles.th}>SIRET</th>
-                <th className={styles.th}>structurename</th>
-                <th className={styles.th}>UserId</th>
-                <th className={styles.th}>email</th>
-                <th className={styles.th}>phone</th>
-                <th className={styles.th}>adresse</th>
-                <th className={styles.th}>Code Postal</th>
-                <th className={styles.th}>Ville</th>
-                <th className={styles.th}>IsActive?</th>
-                <th className={styles.th}>Modifier Profile</th>
-                <th className={styles.th}>Supprimer</th>
+        <Link href="./employers/createemployer"><a className={styles.buttonCreate}>Creer un employeur</a></Link>
+    <table class="table table-hover table-dark">
+        <thead  >
+            <tr >
+                <th >Numéro de SIRET</th>
+                <th >Nom de l'entreprise</th>
+                <th >ID de l'Utilisateur</th>
+                <th >Email</th>
+                <th >Numéro de téléphone</th>
+                <th >Adresse</th>
+                <th >Code Postal</th>
+                <th >Ville</th>
+                <th >IsActive?</th>
+                <th >Modifier Profile</th>
+                <th >Supprimer</th>
             </tr>
         </thead>
         <tbody>
         {data.map((element) => {
       return (
             <tr>
-                <td  className={styles.td}>
-                    <h6 className={styles.nom}> {element.siret}</h6>
+                <td  >
+                    <h6 > {element.siret}</h6>
                 </td>
-                <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.structurename}</h6>
+                <td >  
+                    <h6 >{element.structurename}</h6>
                 </td>
-                <td className={styles.td} >
-                      <h6 className={styles.nom} >{element.UserId}</h6>
+                <td >
+                      <h6  >{element.UserId}</h6>
                 </td>
-                <td className={styles.td} >
-                      <h6 className={styles.nom} >{element.User.email}</h6>
+                <td  >
+                      <h6  >{element.User.email}</h6>
                 </td>
-                <td className={styles.td} >
-                      <h6 className={styles.nom} >{element.User.phone}</h6>
+                <td  >
+                      <h6  >{element.User.phone}</h6>
                 </td>
-                <td className={styles.td} >
-                      <h6 className={styles.nom} >{element.User.Localisation.address}</h6>
+                <td  >
+                      <h6  >{element.User.Localisation.address}</h6>
                 </td>
-                <td className={styles.td} >
-                      <h6 className={styles.nom} >{element.User.Localisation.zipCode}</h6>
+                <td  >
+                      <h6  >{element.User.Localisation.zipCode}</h6>
                 </td>
-                <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.User.Localisation.city}</h6>
+                <td>  
+                    <h6 >{element.User.Localisation.city}</h6>
                 </td>
-                <td className={styles.td}>  
-                    <h6 className={styles.nom}>{element.User.isActif? "✅": "❌"}</h6>
+                <td >  
+                    <h6 >{element.User.isActif? "✅": "❌"}</h6>
                 </td>
-                <td className={styles.td}>
-                    <h6 className={styles.nom}>    <a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profile</a></h6>
+                <td >
+                    <h6 >    <a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profile</a></h6>
                 </td>
-                <td className={styles.td}>
-                <h6 className={styles.nom}>  <a className={styles.buttonSuppr} onClick={() => deleteData(element.id)}>Supprimer</a></h6>
+                <td >
+                <h6 >  <a className={styles.buttonSuppr} onClick={() => deleteData(element.id)}>Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
