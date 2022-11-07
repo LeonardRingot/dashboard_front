@@ -1,9 +1,13 @@
 import axios from "axios";
 // requete connexion admin
-export function requetePostConnexion(email, password) {
+export function requetePostConnexion(email, password, role) {
   var data = JSON.stringify({
     "email": email,
-    "password": password
+    "password": password,
+    "roles":
+    {
+      "role": role
+    }
   });
   var configConnexion = {
     method: 'post',
@@ -318,17 +322,12 @@ export function requeteGetAllAdmin()
   return axios(configGetAllUsersRoles);
 }
 
-export function requetePostAdmin(firstname, lastname, birthday, password, email, phone, address, zipCode, city, role) {
+export function requetePostAdmin(email, password, phone, address, zipCode, city, role, roleID) {
   
   var data = JSON.stringify({
-    "candidate": {
-      "firstname": firstname,
-      "lastname": lastname,
-      "birthday": birthday
-    },
     "users": {
-      "password": password,
       "email": email,
+      "password": password,
       "phone": phone,
       "isActif": true
     },
@@ -338,7 +337,8 @@ export function requetePostAdmin(firstname, lastname, birthday, password, email,
       "city": city
     },
     "roles":{
-      "role:": role
+      "role:": role,
+      "roleID":1
     }
   });
   var configAdmin = {

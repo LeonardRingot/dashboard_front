@@ -11,7 +11,8 @@ export default function connexion() {
   
   const [ConnexionForm, setConnexionform]= useState({
    email:'',
-    password:''
+    password:'',
+    role:''
   })
   const handleChange = (e) =>
   {
@@ -25,7 +26,7 @@ export default function connexion() {
   {
     
     e.preventDefault()
-    ServiceAPI.requetePostConnexion( ConnexionForm.email, ConnexionForm.password).then(response => {
+    ServiceAPI.requetePostConnexion( ConnexionForm.email, ConnexionForm.password, ConnexionForm.role).then(response => {
         if(response.status == 200){
           
           router.push({pathname: '../dashboard/dashboard', query: {id: response.data.data}});
@@ -48,6 +49,9 @@ return(
 
       <label htmlFor='password'>Mot de passe:</label>
       <input className={styles.inputconnect} onChange={handleChange} type="password"  name="password" /><br></br>
+
+      <label htmlFor='role'>role:</label>
+      <input className={styles.inputconnect} onChange={handleChange} type="text" value={"ADMIN"} name="role" /><br></br>
 
       <input className={styles.inputsubmit} value="Submit" type="submit"/> <br></br>
     </form>
