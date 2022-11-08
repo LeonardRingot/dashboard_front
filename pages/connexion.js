@@ -26,7 +26,11 @@ export default function connexion() {
   {
     
     e.preventDefault()
-    ServiceAPI.requetePostConnexion( ConnexionForm.email, ConnexionForm.password, ConnexionForm.role).then(response => {
+    ServiceAPI.requetePostConnexion( ConnexionForm.email, ConnexionForm.password, ConnexionForm.roleId).then(response => {
+       if(ConnexionForm.role != "ADMIN"){
+        throw new Error('pas admin')
+       }else
+       {
         if(response.status == 200){
           
           router.push({pathname: '../dashboard/dashboard', query: {id: response.data.data}});
@@ -35,6 +39,9 @@ export default function connexion() {
           
           return res.status(400).send('Super-Administrateur ou administrateur introuvable')
         }
+       }
+
+      
       }).catch(function(error){
         console.log(error);
       });
@@ -50,8 +57,8 @@ return(
       <label htmlFor='password'>Mot de passe:</label>
       <input className={styles.inputconnect} onChange={handleChange} type="password"  name="password" /><br></br>
 
-      <label htmlFor='role'>role:</label>
-      <input className={styles.inputconnect} onChange={handleChange} type="text" value={"ADMIN"} name="role" /><br></br>
+      <label htmlFor='role'>Votre ID d'utilisateur :</label>
+      <input className={styles.inputconnect} onChange={handleChange} type="text" placeholder='ID utilisateur' name="role" /><br></br>
 
       <input className={styles.inputsubmit} value="Submit" type="submit"/> <br></br>
     </form>

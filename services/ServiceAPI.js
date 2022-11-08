@@ -182,6 +182,9 @@ export function requeteUpdateProfil(id, firstname, lastname, email, phone,isActi
   let objDegree = degrees?.map(((degree) => {
     return { "id": parseInt(degree) }
   }))
+  let objStatus = isActif?.map(((isActif) => {
+    return { "id": parseInt(isActif) }
+  }))
   console.log(city);
   var data = JSON.stringify({
     "candidate": {
@@ -191,7 +194,7 @@ export function requeteUpdateProfil(id, firstname, lastname, email, phone,isActi
     "users": {
       "email": email,
       "phone": phone,
-      "isActif": isActif
+      "isActif": objStatus
     },
     "localisation": {
       "address": address,
@@ -307,9 +310,10 @@ export function requeteGetAllDegree() {
   return axios(configGetAllUsersDegree);
 }
 
-export function requeteGetAllAdmin()
+export function requeteGetAllAdmin(role)
 {
   var data = JSON.stringify({
+    "role":"ADMIN"
   });
   var configGetAllUsersRoles = {
     method: 'get',
@@ -322,24 +326,18 @@ export function requeteGetAllAdmin()
   return axios(configGetAllUsersRoles);
 }
 
-export function requetePostAdmin(email, password, phone, address, zipCode, city, role, roleID) {
+export function requetePostAdmin(password, email, phone) {
   
   var data = JSON.stringify({
-    "users": {
-      "email": email,
-      "password": password,
-      "phone": phone,
-      "isActif": true
-    },
-    "localisation": {
-      "address": address,
-      "zipCode": zipCode,
-      "city": city
-    },
-    "roles":{
-      "role:": role,
-      "roleID":1
-    }
+    
+   " users":{
+      "password": "a",
+        "email": "tesd@free.fr",
+        "phone": "01",
+        "isActif": true,
+        "roleID":1
+  }
+    
   });
   var configAdmin = {
     method: 'post',

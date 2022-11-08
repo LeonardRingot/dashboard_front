@@ -24,7 +24,7 @@ export default function Register() {
          },
          email: '',
         phone: '',
-        isActif:false,
+        isActif:r,
         degrees:d
       },
       periods:p,
@@ -75,6 +75,25 @@ export default function Register() {
           
          }
       }
+      if (e.target.name == "isActif")
+      {
+        let testRadio = r.find((r) => r == value)
+        console.log(testRadio);
+         if (testRadio == null)
+         {
+          r.push(value)
+          console.log(r);
+          console.log(value);
+         } else 
+         {
+          let tabR = []
+          r.map((r) => {
+            r != value? tabR.push(r): ''
+          })
+          setR(tabR)
+          
+         }
+      }
     
         setUpdateProfile({
           ...updateProfile,
@@ -90,6 +109,7 @@ export default function Register() {
             },
           [e.target.name]: value
         });
+       
     }
 
     useEffect(() => {
@@ -102,12 +122,17 @@ export default function Register() {
                response.data.User.Periods.map((p) => a.push(p.id))
                let b = [];
                response.data.User.Degrees.map((d) => b.push(d.id))
+               let c = [];
+               response.data.User.isActif.map((r) => r.push(r.id))
               setP(a)
               setD(b)
+              setR(c)
               console.log(response.data.Periods)
               console.log(p);
               console.log(response.data.User.Degrees)
               console.log(d);
+              console.log(response.data.User.isActif)
+              console.log(r);
             }
           })
           .catch(error => console.log(error))
@@ -119,7 +144,7 @@ export default function Register() {
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
         ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.isActif, updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
-          updateProfile.User.Localisation.city,p,d).then(response => {
+          updateProfile.User.Localisation.city,p,d, r).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
               setIsOk('User mis a jour');
@@ -153,13 +178,13 @@ export default function Register() {
           <input defaultValue={updateProfile.User.phone} onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
             </div>
             <div class="form-check"  defaultValue={updateProfile.User.isActif} onChange={handleChange} >
-                <input   class="form-check-input"  defaultValue={updateProfile.User.isActif} onChange={handleChange} value={true}  type="radio" name="radio" id="true"  />
+                <input   class="form-check-input"  defaultValue={updateProfile.User.isActif} onChange={handleChange} value={true} checked={(r.find((r) => r == 'true'))? true: false}  type="radio" name="radio" id="true"  />
                 <label class="form-check-label" for="true">
                 ✅
                 </label>
               </div>
               <div class="form-check">
-                <input  class="form-check-input" defaultValue={updateProfile.User.isActif} onChange={handleChange} value={false}  type="radio" name="radio" id="false"  />
+                <input  class="form-check-input" defaultValue={updateProfile.User.isActif} onChange={handleChange} value={false} checked={(r.find((r) => r == 'false'))? true: false} type="radio" name="radio" id="false"  />
                 <label class="form-check-label" for="false">
                 ❌
                 </label>

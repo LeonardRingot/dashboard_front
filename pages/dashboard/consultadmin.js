@@ -16,7 +16,8 @@ export default function consultadmin()
         setLoading(true)
         ServiceAPI.requeteGetAllAdmin()
         .then(response => {
-            console.log(response.data[0].Roles)
+            response.data[0].Roles[0].role
+            console.log(response.data[0].Roles[0].role)
           if(response.status == 200){
             if(response.data.length > 0)
             {
@@ -54,7 +55,7 @@ export default function consultadmin()
                                 <h6 className={styles.nom}>{element.phone}</h6>
                             </td>
                             <td className={styles.td}>
-                                <h6 className={styles.nom}>{element.Roles.role}</h6>
+                                <h6 className={styles.nom}>{element.theRole}</h6>
                             </td>
                            
                            

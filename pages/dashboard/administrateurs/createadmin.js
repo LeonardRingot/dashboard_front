@@ -10,16 +10,10 @@ export default function createadministrateur()
     const[IsOk, setIsOk] = useState('');
 
     const [AdminForm, setAdminForm] = useState({
-      firstname:'',
-      lastname:'',
-      birthday:'',
-        email:'',
-      password:'',
-      phone:'',
-      address:'',
-      zipCode:'',
-      city:'',
-      role:''
+        password:'qqq',
+      email:'tesdxxxx@free.fr',
+      phone:'01',
+      roleId:1
     })
     const handleChange =(e) =>
     {
@@ -32,15 +26,10 @@ export default function createadministrateur()
     {
         e.preventDefault()
         ServiceAPI.requetePostAdmin(
-            AdminForm.firstname,
-            AdminForm.lastname,
-            AdminForm.email,
-            AdminForm.password, 
+            AdminForm.password,
+            AdminForm.phone, 
             AdminForm.phone,
-            AdminForm.address,
-            AdminForm.zipCode,
-            AdminForm.city,
-            AdminForm.role).then (response =>{
+            AdminForm.roleId).then (response =>{
                 if(response.status == 201){
                     //router.push('../profile/profile');
                     setIsOk('Compte crée');
@@ -56,14 +45,7 @@ export default function createadministrateur()
         <div class="container">
         <h1>Formulaire d'Inscription ADMIN</h1>
         <form class="row g-3"  id="register_form"  onSubmit={ScriptFormAdmin} action='' method="post">
-        <div class="col-md-6">
-                <label htmlFor='firstname'>Prenom:</label>
-                <input onChange={handleChange} type="text"  class="form-control" name="firstname" /><br></br>
-            </div>
-            <div class="col-md-6">
-                <label htmlFor='lastname'>lastname:</label>
-                <input onChange={handleChange} type="text"  class="form-control" name="lastname" /><br></br>
-            </div>
+       
         <div class="col-md-6">
                 <label htmlFor='email'>email:</label>
                 <input onChange={handleChange} type="email"  class="form-control" name="email" /><br></br>
@@ -78,21 +60,10 @@ export default function createadministrateur()
                 <label htmlFor='phone'>phone:</label>
                 <input onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
             </div>
-            <div class="col-12">
-                <label htmlFor='address'>address:</label>
-                <input onChange={handleChange} type="text"  class="form-control" name="address" /><br></br>
-            </div>
-            <div class="col-md-2">
-                <label htmlFor='zipCode'>zipCode:</label>
-                <input onChange={handleChange} type="text"  class="form-control" name="zipCode" /><br></br>
-            </div>
+            
             <div class="col-md-4">
-                <label htmlFor='city'>city:</label>
-                <input onChange={handleChange} type="text"  class="form-control" name="city" /><br></br>
-            </div>
-            <div class="col-md-4">
-                <label htmlFor='role'>role:</label>
-                <input onChange={handleChange} type="text" disable value={"ADMIN"} class="form-control" name="role" /><br></br>
+                <label htmlFor='role'>roleId:</label>
+                <input onChange={handleChange} type="text"  value={"1"} class="form-control" name="roleId" /><br></br>
             </div>
             <input  value="Submit"className={styles.inputsubmit} type="submit"/> <br></br>
          </form>
