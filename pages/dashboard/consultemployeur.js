@@ -64,6 +64,7 @@ export default function consultemployeur()
        <Navbar>
                <div className={styles.montab} > 
         <Link href="./employers/createemployer"><a className={styles.buttonCreate}>Creer un employeur</a></Link>
+        <Link href="./administrateurs/verifemployers"><a className={styles.buttonVerif}>Vérification employers</a></Link>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >

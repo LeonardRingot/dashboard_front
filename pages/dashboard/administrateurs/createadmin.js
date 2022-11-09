@@ -9,15 +9,14 @@ export default function createadministrateur()
     const [erreur, setErreur] = useState('');
     const[IsOk, setIsOk] = useState('');
 
-    const [AdminForm, setAdminForm] = useState({
-        password:'qqq',
-      email:'tesdxxxx@free.fr',
-      phone:'01',
-      roleId:1
+    const [AdminForm, setAdminForm] = useState({ 
+        password:'',
+        email:'',
+        phone:''
     })
     const handleChange =(e) =>
     {
-        const value = e.target.name;
+        const value = e.target.value;
         setAdminForm({
             ...AdminForm, [e.target.name]: value
           });
@@ -25,11 +24,7 @@ export default function createadministrateur()
     const ScriptFormAdmin = (e) =>
     {
         e.preventDefault()
-        ServiceAPI.requetePostAdmin(
-            AdminForm.password,
-            AdminForm.phone, 
-            AdminForm.phone,
-            AdminForm.roleId).then (response =>{
+        ServiceAPI.requetePostAdmin(AdminForm.password, AdminForm.email, AdminForm.phone ).then (response =>{
                 if(response.status == 201){
                     //router.push('../profile/profile');
                     setIsOk('Compte crée');
@@ -46,24 +41,17 @@ export default function createadministrateur()
         <h1>Formulaire d'Inscription ADMIN</h1>
         <form class="row g-3"  id="register_form"  onSubmit={ScriptFormAdmin} action='' method="post">
        
-        <div class="col-md-6">
-                <label htmlFor='email'>email:</label>
-                <input onChange={handleChange} type="email"  class="form-control" name="email" /><br></br>
-            </div>
-
             <div class="col-md-6">
                 <label htmlFor='password'>password:</label>
                 <input onChange={handleChange} type="password"  class="form-control" name="password" /><br></br>
             </div>
-           
+            <div class="col-md-6">
+                <label htmlFor='email'>email:</label>
+                <input onChange={handleChange} type="email"  class="form-control" name="email" /><br></br>
+            </div>
             <div class="col-md-6">
                 <label htmlFor='phone'>phone:</label>
                 <input onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
-            </div>
-            
-            <div class="col-md-4">
-                <label htmlFor='role'>roleId:</label>
-                <input onChange={handleChange} type="text"  value={"1"} class="form-control" name="roleId" /><br></br>
             </div>
             <input  value="Submit"className={styles.inputsubmit} type="submit"/> <br></br>
          </form>

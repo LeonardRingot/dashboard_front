@@ -9,9 +9,9 @@ export default function Register() {
     const[IsOk, setIsOk] = useState('');
     const router = useRouter()
     const {id} = router.query
-    const[p, setP] = useState([]);
-    const[d, setD] = useState([]);
-    const[r, setR] = useState([]);
+    const[period, setPeriod] = useState([]);
+    const[degree, setDegree] = useState([]);
+    
 
     const [updateProfile, setUpdateProfile] = useState({
       firstname: '',
@@ -24,10 +24,10 @@ export default function Register() {
          },
          email: '',
         phone: '',
-        isActif:r,
-        degrees:d
+        isActif:true,
+        degrees:degree
       },
-      periods:p,
+      periods:period,
       
       
     })
@@ -40,60 +40,42 @@ export default function Register() {
       const value = e.target.value;
       if (e.target.name == "periods")
       {
-        let test = p.find((p) => p == value)
-        console.log(test);
-         if (test == null)
+        let myperiod = period.find((period) => period == value)
+        console.log(myperiod);
+         if (myperiod == null)
          {
-          p.push(value)
-          console.log(p);
+          period.push(value)
+          console.log(period);
           console.log(value);
          } else 
          {
-          let tab = []
-          p.map((p) => {
-            p != value? tab.push(p): ''
+          let tabPeriod = []
+          period.map((period) => {
+            period != value? tabPeriod.push(period): ''
           })
-          setP(tab)
+          setPeriod(tabPeriod)
          }
       }
       if (e.target.name == "degrees")
       {
-        let testDegree = d.find((d) => d == value)
-        console.log(testDegree);
-         if (testDegree == null)
+        let mydegree = degree.find((degree) => degree == value)
+        console.log(mydegree);
+         if (mydegree == null)
          {
-          d.push(value)
-          console.log(d);
+          degree.push(value)
+          console.log(degree);
           console.log(value);
          } else 
          {
           let tabDegree = []
-          d.map((d) => {
-            d != value? tabDegree.push(d): ''
+          degree.map((degree) => {
+            degree != value? tabDegree.push(degree): ''
           })
-          setD(tabDegree)
+          setDegree(tabDegree)
           
          }
       }
-      if (e.target.name == "isActif")
-      {
-        let testRadio = r.find((r) => r == value)
-        console.log(testRadio);
-         if (testRadio == null)
-         {
-          r.push(value)
-          console.log(r);
-          console.log(value);
-         } else 
-         {
-          let tabR = []
-          r.map((r) => {
-            r != value? tabR.push(r): ''
-          })
-          setR(tabR)
-          
-         }
-      }
+      
     
         setUpdateProfile({
           ...updateProfile,
@@ -118,21 +100,19 @@ export default function Register() {
           .then(response => {
             if(response.status == 200){
               setUpdateProfile(response.data);
-              let a = [];
-               response.data.User.Periods.map((p) => a.push(p.id))
-               let b = [];
-               response.data.User.Degrees.map((d) => b.push(d.id))
-               let c = [];
-               response.data.User.isActif.map((r) => r.push(r.id))
-              setP(a)
-              setD(b)
-              setR(c)
+              let perioddata = [];
+               response.data.User.Periods.map((period) => perioddata.push(period.id))
+               let degreedata = [];
+               response.data.User.Degrees.map((degree) => degreedata.push(degree.id))
+               
+              setPeriod(perioddata)
+              setDegree(degreedata)
+             
               console.log(response.data.Periods)
-              console.log(p);
+              console.log(period);
               console.log(response.data.User.Degrees)
-              console.log(d);
-              console.log(response.data.User.isActif)
-              console.log(r);
+              console.log(degree);
+              
             }
           })
           .catch(error => console.log(error))
@@ -144,12 +124,12 @@ export default function Register() {
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
         ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.isActif, updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
-          updateProfile.User.Localisation.city,p,d, r).then(response => {
+          updateProfile.User.Localisation.city,period,degree).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
               setIsOk('User mis a jour');
             } else {
-              setErreur('NoN');
+              setIsOk('User mis a jour');
             }
           }).catch(function(error){
           console.log(error);
@@ -178,13 +158,13 @@ export default function Register() {
           <input defaultValue={updateProfile.User.phone} onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
             </div>
             <div class="form-check"  defaultValue={updateProfile.User.isActif} onChange={handleChange} >
-                <input   class="form-check-input"  defaultValue={updateProfile.User.isActif} onChange={handleChange} value={true} checked={(r.find((r) => r == 'true'))? true: false}  type="radio" name="radio" id="true"  />
+                <input   class="form-check-input"  defaultValue={updateProfile.User.isActif} onChange={handleChange} value={true}   type="radio" name="radio" id="true"  />
                 <label class="form-check-label" for="true">
                 ✅
                 </label>
               </div>
               <div class="form-check">
-                <input  class="form-check-input" defaultValue={updateProfile.User.isActif} onChange={handleChange} value={false} checked={(r.find((r) => r == 'false'))? true: false} type="radio" name="radio" id="false"  />
+                <input  class="form-check-input" defaultValue={updateProfile.User.isActif} onChange={handleChange} value={false}  type="radio" name="radio" id="false"  />
                 <label class="form-check-label" for="false">
                 ❌
                 </label>
@@ -204,62 +184,62 @@ export default function Register() {
           <fieldset name="periods"id='periods'> 
           <legend >Périodes disponibles</legend>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="1" name="periods" value='1' checked={(p.find((p) => p == '1'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="1" name="periods" value='1' checked={(period.find((period) => period == '1'))? true: false}/>
             <label htmlFor="1">Vacances de février</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="2" name="periods" value='2' checked={(p.find((p) => p == '2'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="2" name="periods" value='2' checked={(period.find((period) => period == '2'))? true: false}/>
             <label htmlFor="2">Vacances d’avril</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="3" name="periods" value='3' checked={(p.find((p) => p == '3'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="3" name="periods" value='3' checked={(period.find((period) => period == '3'))? true: false}/>
             <label htmlFor="3">Vacances juillet</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="4" name="periods" value='4' checked={(p.find((p) => p == '4'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="4" name="periods" value='4' checked={(period.find((period) => period == '4'))? true: false}/>
             <label htmlFor="4">Vacances Août</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="5" name="periods" value="5" checked={(p.find((p) => p == '5'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="5" name="periods" value="5" checked={(period.find((period) => period == '5'))? true: false}/>
             <label htmlFor="5">Vacances Octobre</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="6" name="periods" value="6" checked={(p.find((p) => p == '6'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="6" name="periods" value="6" checked={(period.find((period) => period == '6'))? true: false}/>
             <label htmlFor="6">Vacances Noël</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="7" name="periods" value="7" checked={(p.find((p) => p == '7'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="7" name="periods" value="7" checked={(period.find((period) => period == '7'))? true: false}/>
             <label htmlFor="7">Mercredi</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="8" name="periods" value="8" checked={(p.find((p) => p == '8'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="8" name="periods" value="8" checked={(period.find((period) => period == '8'))? true: false}/>
             <label htmlFor="8">Samedi</label>
           </div>
       </fieldset>
       <fieldset name="degrees" id='degrees'>
           <legend >Diplômes</legend>
           <div class="form-check form-check-inline">
-            <input onChange={handleChange} type="checkbox" id="9" name="degrees" value="1" checked={(d.find((d) => d == '1'))? true: false}/>
+            <input onChange={handleChange} type="checkbox" id="9" name="degrees" value="1" checked={(degree.find((degree) => degree == '1'))? true: false}/>
             <label htmlFor="9">BAFD</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="10" name="degrees" value="2"checked={(d.find((d) => d == '2'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="10" name="degrees" value="2"checked={(degree.find((degree) => degree == '2'))? true: false}/>
             <label htmlFor="10">BAFD en cours</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="11" name="degrees" value="3" checked={(d.find((d) => d == '3'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="11" name="degrees" value="3" checked={(degree.find((degree) => degree == '3'))? true: false}/>
             <label htmlFor="11">BAFA</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="12" name="degrees"value="4" checked={(d.find((d) => d == '4'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="12" name="degrees"value="4" checked={(degree.find((degree) => degree == '4'))? true: false}/>
             <label htmlFor="12">stage pratique</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="13" name="degrees"value="5" checked={(d.find((d) => d == '5'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="13" name="degrees"value="5" checked={(degree.find((degree) => degree == '5'))? true: false}/>
             <label htmlFor="13">Non diplome</label>
           </div>
           <div class="form-check form-check-inline">
-            <input  onChange={handleChange} type="checkbox" id="14" name="degrees"value="6"checked={(d.find((d) => d == '6'))? true: false}/>
+            <input  onChange={handleChange} type="checkbox" id="14" name="degrees"value="6"checked={(degree.find((degree) => degree == '6'))? true: false}/>
             <label htmlFor="14">BPJEPS</label>
           </div>
       </fieldset>

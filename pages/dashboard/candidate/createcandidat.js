@@ -7,8 +7,8 @@ export default function createcandidat()
   const router = useRouter()
     const [erreur, setErreur] = useState('');
     const[IsOk, setIsOk] = useState('');
-    const[p, setP] = useState([]);
-    const[d, setD] = useState([]);
+    const[period, setPeriod] = useState([]);
+    const[degree, setDegree] = useState([]);
     const [InscriptionForm, setInscriptionForm]= useState({
       firstname:'',
       lastname:'',
@@ -19,37 +19,37 @@ export default function createcandidat()
       address:'',
       zipCode:'',
       city:'',
-      periods:p,
-      degrees:d
+      periods:period,
+      degrees:degree
     })
     const handleChange = (e) =>
     {
       const value = e.target.value;
       if (e.target.name == "periods"){
-        let test = p.find((p) => p == value)
-         if (test == null){
-          p.push(value)
+        let myperiod = period.find((period) => period == value)
+         if (myperiod == null){
+          period.push(value)
          } else {
-          let tab = []
-          p.map((p) => {
-            p != value? tab.push(p): ''
+          let tabPeriod = []
+          period.map((period) => {
+            period != value? tabPeriod.push(period): ''
           })
-          setP(tab)
-          console.log(tab)
+          setPeriod(tabPeriod)
+          console.log(tabPeriod)
          }
       }
       if (e.target.name == "degrees")
       {
-        let testDegree = d.find((d) => d == value)
-         if (testDegree == null){
-          d.push(value)
+        let mydegree = degree.find((degree) => degree == value)
+         if (mydegree == null){
+          degree.push(value)
          } else {
           let tabDegree = []
-          d.map((d) => {
-            d != value? tabDegree.push(d): ''
+          degree.map((degree) => {
+            degree != value? tabDegree.push(degree): ''
           })
-          setD(tabDegree)
-          console.log(tab)
+          setDegree(tabDegree)
+          console.log(tabDegree)
          }
       }
       setInscriptionForm({
@@ -59,7 +59,7 @@ export default function createcandidat()
     const ScriptForm = (e) =>
     {
       e.preventDefault()
-      ServiceAPI.requetePost(InscriptionForm.firstname, InscriptionForm.lastname, InscriptionForm.birthday,InscriptionForm.password,InscriptionForm.email,InscriptionForm.phone,InscriptionForm.address,InscriptionForm.zipCode,InscriptionForm.city,p,d ).then(response => {
+      ServiceAPI.requetePost(InscriptionForm.firstname, InscriptionForm.lastname, InscriptionForm.birthday,InscriptionForm.password,InscriptionForm.email,InscriptionForm.phone,InscriptionForm.address,InscriptionForm.zipCode,InscriptionForm.city,period,degree ).then(response => {
           if(response.status == 201){
             //router.push('../profile/profile');
             setIsOk('Compte crée');

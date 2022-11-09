@@ -348,6 +348,7 @@ color: #222;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  height: 60px;
 }
 
 .buttonSuppr{
@@ -359,6 +360,7 @@ color: #222;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  height: 60px;
 }
 .buttonCreate{
   background-color: #5168ec; /* Green */
@@ -372,6 +374,20 @@ color: #222;
   display: inline-block;
   font-size: 16px;
 }
+.buttonVerif{
+  background-color: #5168ec; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin-bottom: 50px;
+  margin-right: 10px;
+  text-align: center;
+  float: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 
 .widthcinq{
   width: 50%;

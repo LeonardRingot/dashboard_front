@@ -16,8 +16,7 @@ export default function consultadmin()
         setLoading(true)
         ServiceAPI.requeteGetAllAdmin()
         .then(response => {
-            response.data[0].Roles[0].role
-            console.log(response.data[0].Roles[0].role)
+            console.log(response)
           if(response.status == 200){
             if(response.data.length > 0)
             {
@@ -35,13 +34,15 @@ export default function consultadmin()
         <Navbar>
            
         <div className={styles.montab} > 
-                <Link href="./administrateurs/createadmin"><a className={styles.buttonCreate}>Crer un admin</a></Link>
+                <Link href="./administrateurs/createadmin"><a className={styles.buttonCreate}>Creer un admin</a></Link>
+                
             <table className={styles.table}>
                 <thead className={styles.thead} >
                     <tr className={styles.tr}>
                         <th className={styles.th}>email</th>
                         <th className={styles.th}>phone</th>
                         <th className={styles.th}>Role</th>
+                        <th className={styles.th}>IsActive</th>
                     </tr>
                 </thead>
                 <tbody> 
@@ -55,7 +56,10 @@ export default function consultadmin()
                                 <h6 className={styles.nom}>{element.phone}</h6>
                             </td>
                             <td className={styles.td}>
-                                <h6 className={styles.nom}>{element.theRole}</h6>
+                                <h6 className={styles.nom}>{element.Roles[0].role}</h6>
+                            </td>
+                            <td className={styles.td}>
+                                <h6 className={styles.nom}>{element.isActif? "✅": "❌"}</h6>
                             </td>
                            
                            

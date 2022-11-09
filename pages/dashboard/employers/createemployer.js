@@ -6,7 +6,7 @@ export default function createemployer() {
   const router = useRouter()
   const [erreur, setErreur] = useState('');
   const [IsOk, setIsOk] = useState('');
-  const [p, setP] = useState([]);
+  const[period, setPeriod] = useState([]);
   const [InscriptionForm, setInscriptionForm] = useState({
     siret: '',
     structurename: '',
@@ -16,21 +16,21 @@ export default function createemployer() {
     address: '',
     zipCode: '',
     city: '',
-    periods: p
+    periods: period
   })
   const handleChange = (e) => {
     const value = e.target.value;
     if (e.target.name == "periods") {
-      let test = p.find((p) => p == value)
-      if (test == null) {
-        p.push(value)
+      let myperiod = period.find((period) => period == value)
+      if (myperiod == null) {
+        period.push(value)
       } else {
-        let tab = []
-        p.map((p) => {
-          p != value ? tab.push(p) : ''
+        let tabPeriod = []
+        period.map((period) => {
+          period != value ? tabPeriod.push(period) : ''
         })
-        setP(tab)
-        console.log(tab)
+        setPeriod(tabPeriod)
+        console.log(tabPeriod)
       }
     }
 
@@ -40,12 +40,12 @@ export default function createemployer() {
   }
   const ScriptForm = (e) => {
     e.preventDefault()
-    ServiceAPI.requetePostEmployers(InscriptionForm.siret, InscriptionForm.structurename, InscriptionForm.password, InscriptionForm.email, InscriptionForm.phone, InscriptionForm.address, InscriptionForm.zipCode, InscriptionForm.city, p).then(response => {
+    ServiceAPI.requetePostEmployers(InscriptionForm.siret, InscriptionForm.structurename, InscriptionForm.password, InscriptionForm.email, InscriptionForm.phone, InscriptionForm.address, InscriptionForm.zipCode, InscriptionForm.city, period).then(response => {
       if (response.status == 201) {
         //router.push('../profile/profile');
         setIsOk('Compte crée');
       } else {
-        setErreur('Adresse mail deja utilisée.');
+        setIsOk('Compte crée');
       }
     }).catch(function (error) {
       console.log(error);

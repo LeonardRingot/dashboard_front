@@ -1,5 +1,6 @@
 import axios from "axios";
 // requete connexion admin
+import { getItem, addItem, removeItem } from './LocaleStorage';
 export function requetePostConnexion(email, password, role) {
   var data = JSON.stringify({
     "email": email,
@@ -11,7 +12,7 @@ export function requetePostConnexion(email, password, role) {
   });
   var configConnexion = {
     method: 'post',
-    url: 'http://localhost:5000/api/auth/login',
+    url: 'http://localhost:5000/api/auth/loginAdmin',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -19,6 +20,18 @@ export function requetePostConnexion(email, password, role) {
   };
   return axios(configConnexion);
 }
+
+export function hasAuthenticated() {
+  const token = getItem('mytoken');
+  const result = token ? tokenIsValid(token) : false;
+
+  if (false === result) {
+      removeItem('mytoken');
+  }
+
+  return result;
+}
+
 
 // requete affichage candidats page consultcandidat.js
 
@@ -150,7 +163,7 @@ export function requetePostEmployers(siret, structurename, password, email, phon
       "password": password,
       "email": email,
       "phone": phone,
-      "isActif": true
+      "isActif": false
     },
     "localisation": {
       "address": address,
@@ -175,16 +188,14 @@ export function requetePostEmployers(siret, structurename, password, email, phon
 }
 
 //requete mis a jour candidats
-export function requeteUpdateProfil(id, firstname, lastname, email, phone,isActif, address,  zipCode, city, periods, degrees) {
+export function requeteUpdateProfil(id, firstname, lastname, email, phone, isActif, address,  zipCode, city, periods, degrees) {
   let obj = periods?.map(((period) => {
     return { "id": parseInt(period) }
   }))
   let objDegree = degrees?.map(((degree) => {
     return { "id": parseInt(degree) }
   }))
-  let objStatus = isActif?.map(((isActif) => {
-    return { "id": parseInt(isActif) }
-  }))
+  
   console.log(city);
   var data = JSON.stringify({
     "candidate": {
@@ -194,7 +205,7 @@ export function requeteUpdateProfil(id, firstname, lastname, email, phone,isActi
     "users": {
       "email": email,
       "phone": phone,
-      "isActif": objStatus
+      "isActif": isActif
     },
     "localisation": {
       "address": address,
@@ -229,7 +240,7 @@ export function requeteUpdateEmployers(id, siret, structurename, email, phone, a
     "users": {
       "email": email,
       "phone": phone,
-      "isActif": true
+      "isActif": false
     },
     "localisation": {
       "address": address,
@@ -310,14 +321,14 @@ export function requeteGetAllDegree() {
   return axios(configGetAllUsersDegree);
 }
 
-export function requeteGetAllAdmin(role)
+export function requeteGetAllAdmin()
 {
   var data = JSON.stringify({
-    "role":"ADMIN"
+    
   });
   var configGetAllUsersRoles = {
     method: 'get',
-    url: 'http://localhost:5000/api/users',
+    url: 'http://localhost:5000/api/usersAdmin',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -326,22 +337,19 @@ export function requeteGetAllAdmin(role)
   return axios(configGetAllUsersRoles);
 }
 
-export function requetePostAdmin(password, email, phone) {
-  
+export function requetePostAdmin(password, email, phone ) {
+  console.log(email)
   var data = JSON.stringify({
-    
-   " users":{
-      "password": "a",
-        "email": "tesd@free.fr",
-        "phone": "01",
-        "isActif": true,
-        "roleID":1
-  }
-    
+ 
+    "password": password,
+    "email": email,
+    "phone": phone,
+    "isActif": true
+   
   });
   var configAdmin = {
     method: 'post',
-    url: 'http://localhost:5000/api/users',
+    url: 'http://localhost:5000/api/usersAdmin',
     headers: {
       'Content-Type': 'application/json'
     },

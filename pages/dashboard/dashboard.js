@@ -11,18 +11,26 @@ import {
     MdOutlineModeEditOutline,
     MdOutlineLogout,
   } from "react-icons/md";
+  import {  useState, useContext, createContext } from 'react'
 import Link from 'next/link';
-
+import { UserContext } from '../connexion';
 
 export default function dashboard(){
 
+ const msg = useContext(UserContext)
     
 function candidat () {
     <Link href="/dashboard/consultcandidat"></Link>
 } ;
     return(
+      <>
       <Navbar>
         
       </Navbar>
+      {msg}
+      {console.log(msg)}
+      </>
+      
+      
     )
 }
