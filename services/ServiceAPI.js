@@ -79,25 +79,6 @@ export function requeteGetEmployerById(id) {
   };
   return axios(configGetEmployerById);
 }
-
-
-// requete affichage localisations
-export function requeteGetAllLocalisation() {
-  var data = JSON.stringify({
-
-  });
-
-
-  var configGetAllUsersCandidats = {
-    method: 'get',
-    url: 'http://localhost:5000/api/localisations',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    data: data
-  };
-  return axios(configGetAllUsersCandidats);
-}
 //requete inscription candidats
 
 export function requetePost(firstname, lastname, birthday, password, email, phone, address, zipCode, city, periods, degrees) {
@@ -303,24 +284,6 @@ export function deleteEmployer(id) {
   };
   return axios(configDeleteEmployerById);
 }
-
-export function requeteGetAllDegree() {
-  var data = JSON.stringify({
-
-  });
-
-
-  var configGetAllUsersDegree = {
-    method: 'get',
-    url: 'http://localhost:5000/api/degrees',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    data: data
-  };
-  return axios(configGetAllUsersDegree);
-}
-
 export function requeteGetAllAdmin()
 {
   var data = JSON.stringify({

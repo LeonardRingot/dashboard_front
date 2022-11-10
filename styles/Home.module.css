@@ -297,7 +297,7 @@
   cursor: default;
 }
 .navlink.active{
-  background-color: #6495ed;
+  background-color: #122953;
 }
 .monsvg{
     
@@ -403,3 +403,17 @@ color: #222;
 .item {
   width: 10em;
 }
+
+.bg-image-vertical {
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+  }
+  
+  @media (min-width: 1025px) {
+  .h-custom-2 {
+  height: 100%;
+  }
+  }

@@ -33,36 +33,34 @@ export default function consultadmin()
     return (
         <Navbar>
            
-        <div className={styles.montab} > 
+        <div  > 
                 <Link href="./administrateurs/createadmin"><a className={styles.buttonCreate}>Creer un admin</a></Link>
                 
-            <table className={styles.table}>
-                <thead className={styles.thead} >
-                    <tr className={styles.tr}>
-                        <th className={styles.th}>email</th>
-                        <th className={styles.th}>phone</th>
-                        <th className={styles.th}>Role</th>
-                        <th className={styles.th}>IsActive</th>
+                <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th>Adresse mail</th>
+                        <th>Numéro de téléphone</th>
+                        <th>Role</th>
+                        <th>Activé/Désactivé</th>
                     </tr>
                 </thead>
                 <tbody> 
                 {data.map((element) => {
                      return (
                         <tr>
-                            <td  className={styles.td}>
-                                <h6 className={styles.nom}> {element.email}</h6>
+                            <td>
+                                <h6>{element.email}</h6>
                             </td>
-                            <td className={styles.td}>  
-                                <h6 className={styles.nom}>{element.phone}</h6>
+                            <td >  
+                                <h6>{element.phone}</h6>
                             </td>
-                            <td className={styles.td}>
-                                <h6 className={styles.nom}>{element.Roles[0].role}</h6>
+                            <td >
+                                <h6>{element.Roles[0].role}</h6>
                             </td>
-                            <td className={styles.td}>
-                                <h6 className={styles.nom}>{element.isActif? "✅": "❌"}</h6>
+                            <td >
+                                <h6>{element.isActif? "✅": "❌"}</h6>
                             </td>
-                           
-                           
                         </tr>)  
                 })}
                     </tbody>
@@ -70,5 +68,5 @@ export default function consultadmin()
                 </div>
                    </Navbar>   
     )
-    console.log(element.Roles.role)
+    
 }

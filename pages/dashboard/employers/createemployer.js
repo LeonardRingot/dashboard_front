@@ -33,7 +33,6 @@ export default function createemployer() {
         console.log(tabPeriod)
       }
     }
-
     setInscriptionForm({
       ...InscriptionForm, [e.target.name]: value
     });

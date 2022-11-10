@@ -18,7 +18,6 @@ import { UserContext } from '../connexion';
 export default function dashboard(){
 
  const msg = useContext(UserContext)
-    
 function candidat () {
     <Link href="/dashboard/consultcandidat"></Link>
 } ;
@@ -30,7 +29,5 @@ function candidat () {
       {msg}
       {console.log(msg)}
       </>
-      
-      
     )
 }

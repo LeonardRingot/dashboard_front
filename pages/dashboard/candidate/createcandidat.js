@@ -74,8 +74,6 @@ export default function createcandidat()
           <div class="col py-3">
             <div class="container">
               <h1>Formulaire d'Inscription</h1>
-        
-  
         <form class="row g-3"  id="register_form"  onSubmit={ScriptForm} action='' method="post">
         <div class="col-md-6">
              <label htmlFor='firstname'>Prénom:</label>
@@ -175,9 +173,7 @@ export default function createcandidat()
             <label htmlFor="14">BPJEPS</label>
           </div>
       </fieldset>
-
           <input  value="Envoyer"className={styles.inputsubmit} type="submit"/> <br></br>
-          
        </form>
        </div>
           </div>

@@ -9,9 +9,6 @@ export default function consultcandidat()
 {
     const router = useRouter()
     let [data, setData] = useState(null)
-    
-
-    
     function deleteData(id){
         console.log(id);
         ServiceAPI.deleteCandidate(id).then(response => {
@@ -26,7 +23,6 @@ export default function consultcandidat()
             }
           })
     }
-    
     function modifData(id){
         console.log(id);
         ServiceAPI.requeteGetCandidatById(id).then(response =>{
@@ -42,9 +38,7 @@ export default function consultcandidat()
             }
         })
     }
-
     let [isLoading, setLoading] = useState(false)
-
     useEffect(() => {
         setLoading(true)
         ServiceAPI.requeteGetAllCandidats()
@@ -61,14 +55,11 @@ export default function consultcandidat()
         )
     }, [])
 
-
-
-
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
        <Navbar>
-<div className={styles.montab} > 
+        <div  > 
         <Link href="./candidate/createcandidat"><a className={styles.buttonCreate}>Creer un candidat</a></Link><br></br>
     <table class="table table-hover table-dark">
         <thead  >
@@ -91,43 +82,43 @@ export default function consultcandidat()
         {data.map((element) => {
       return (
             <tr>
-                <td  >
-                    <h6 > {element.lastname}</h6>
+                <td>
+                    <h6>{element.lastname}</h6>
                 </td>
-                <td >  
-                    <h6 >{element.firstname}</h6>
-                </td>
-                <td  >
-                      <h6  >{new Date(element.birthday).toLocaleDateString()}</h6>
-                </td>
-                <td >  
-                    <h6 >{element.UserId}</h6>
-                </td>
-                <td >  
-                    <h6 >{element.User.email}</h6>
-                </td>
-                <td >  
-                    <h6 >{element.User.phone}</h6>
-                </td>
-                <td >
-                     <h6 >  {element.User.Localisation.address}</h6>
-                </td>
-                <td >
-                     <h6 >  {element.User.Localisation.zipCode}</h6>
-                </td>
-                <td >
-                     <h6 > {element.User.Localisation.city}</h6>
-                </td>
-                <td >
-                    <h6 >  {element.User.isActif? "✅": "❌"}</h6>
+                <td>  
+                    <h6>{element.firstname}</h6>
                 </td>
                 <td>
-                    <h6 > <a  onClick = {() =>modifData(element.UserId)}className={styles.buttonModif}
+                    <h6>{new Date(element.birthday).toLocaleDateString()}</h6>
+                </td>
+                <td>  
+                    <h6>{element.UserId}</h6>
+                </td>
+                <td>  
+                    <h6>{element.User.email}</h6>
+                </td>
+                <td>  
+                    <h6>{element.User.phone}</h6>
+                </td>
+                <td>
+                     <h6>{element.User.Localisation.address}</h6>
+                </td>
+                <td>
+                     <h6>{element.User.Localisation.zipCode}</h6>
+                </td>
+                <td>
+                     <h6>{element.User.Localisation.city}</h6>
+                </td>
+                <td>
+                    <h6>{element.User.isActif? "✅": "❌"}</h6>
+                </td>
+                <td>
+                    <h6><a  onClick = {() =>modifData(element.UserId)}className={styles.buttonModif}
                     href={`/dashboard/candidate/updatecandidat?id=${element.id}`}
                     > Modifier Profile</a></h6>
                 </td>
-                <td >
-                <h6 >  <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} >Supprimer</a></h6>
+                <td>
+                <h6> <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} >Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
@@ -137,7 +128,3 @@ export default function consultcandidat()
        </Navbar>
     )
 }
-
-/**
- * 
- */

@@ -12,11 +12,9 @@ export default function Home() {
       <Head>
         <title>CSE Dashboard</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
-        
         <link rel="icon" href="/poke.ico" />
       </Head>
       <div className={styles.header}><Header></Header></div>
-      
       <div className={styles.body}> <Body></Body></div>
       
       {/* 
@@ -56,7 +54,7 @@ export default function Home() {
         </div>
       */}
 
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -67,7 +65,7 @@ export default function Home() {
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
-      </footer>
+      </footer> */}
     </div>
   )
 }

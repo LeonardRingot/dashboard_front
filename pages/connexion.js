@@ -4,10 +4,9 @@ import * as ServiceAPI from '../services/ServiceAPI'
 import styles from '../styles/Home.module.css'
 
 //const UserContext = React.createContext({ email: 'aa', auth: false });
-export const UserContext = createContext( "ici y'aura l'adresse mail ")
+export const UserContext = createContext( "(adresse mail)")
 
 export default function connexion(history) {
-
     const router = useRouter()
   //const {isAuthenticated, setIsAuthenticated} = useContext(Auth);
   const [ConnexionForm, setConnexionform]= useState({
@@ -23,7 +22,6 @@ export default function connexion(history) {
       ...ConnexionForm, [e.target.name]: value
     });
   }
-  
   const ScriptFormConnexion = (e) =>
   {
     e.preventDefault()
@@ -47,19 +45,21 @@ export default function connexion(history) {
   // }, [history, isAuthenticated]);
 
 return(
-    <div className={styles.mycontainer}>
+  <div class="col py-3">
+  <div class="container">
     <h1>Formulaire de connexion Administrateur</h1>
-    <form className={styles.myform} action="" onSubmit={ScriptFormConnexion} method="post">
-
+    <form class="row g-3" action="" onSubmit={ScriptFormConnexion} method="post">
+    <div class="col-md-6">
       <label htmlFor='email'>Email:</label>
-      <input className={styles.inputconnect} onChange={handleChange} type="email"  name="email" /><br></br>
-
+      <input  onChange={handleChange} class="form-control" type="email"  name="email" /><br></br>
+    </div>
+    <div class="col-md-6">
       <label htmlFor='password'>Mot de passe:</label>
-      <input className={styles.inputconnect} onChange={handleChange} type="password"  name="password" /><br></br>
+      <input  onChange={handleChange} class="form-control" type="password"  name="password" /><br></br>
+      </div>
       <input className={styles.inputsubmit} value="Submit" type="submit"/> <br></br>
     </form>
   </div>
+  </div>
 )
-
-
 }

@@ -25,7 +25,6 @@ export default function consultemployeur()
             }
           })
     }
-    
     function modifData(id){
         console.log(id);
         ServiceAPI.requeteGetEmployerById(id).then(response =>{
@@ -41,8 +40,6 @@ export default function consultemployeur()
             }
         })
     }
-
-
     let [isLoading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
@@ -62,61 +59,61 @@ export default function consultemployeur()
     if (!data) return <p>No employees</p>
     return (
        <Navbar>
-               <div className={styles.montab} > 
+               <div  > 
         <Link href="./employers/createemployer"><a className={styles.buttonCreate}>Creer un employeur</a></Link>
         <Link href="./administrateurs/verifemployers"><a className={styles.buttonVerif}>Vérification employers</a></Link>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
-                <th >Numéro de SIRET</th>
-                <th >Nom de l'entreprise</th>
-                <th >ID de l'Utilisateur</th>
-                <th >Email</th>
-                <th >Numéro de téléphone</th>
-                <th >Adresse</th>
-                <th >Code Postal</th>
-                <th >Ville</th>
-                <th >IsActive?</th>
-                <th >Modifier Profile</th>
-                <th >Supprimer</th>
+                <th>Numéro de SIRET</th>
+                <th>Nom de l'entreprise</th>
+                <th>ID de l'Utilisateur</th>
+                <th>Email</th>
+                <th>Numéro de téléphone</th>
+                <th>Adresse</th>
+                <th>Code Postal</th>
+                <th>Ville</th>
+                <th>IsActive?</th>
+                <th>Modifier Profile</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody>
         {data.map((element) => {
       return (
             <tr>
-                <td  >
-                    <h6 > {element.siret}</h6>
-                </td>
-                <td >  
-                    <h6 >{element.structurename}</h6>
-                </td>
-                <td >
-                      <h6  >{element.UserId}</h6>
-                </td>
-                <td  >
-                      <h6  >{element.User.email}</h6>
-                </td>
-                <td  >
-                      <h6  >{element.User.phone}</h6>
-                </td>
-                <td  >
-                      <h6  >{element.User.Localisation.address}</h6>
-                </td>
-                <td  >
-                      <h6  >{element.User.Localisation.zipCode}</h6>
+                <td>
+                    <h6>{element.siret}</h6>
                 </td>
                 <td>  
-                    <h6 >{element.User.Localisation.city}</h6>
+                    <h6>{element.structurename}</h6>
+                </td>
+                <td>
+                    <h6>{element.UserId}</h6>
+                </td>
+                <td>
+                    <h6>{element.User.email}</h6>
+                </td>
+                <td>
+                    <h6>{element.User.phone}</h6>
+                </td>
+                <td>
+                    <h6>{element.User.Localisation.address}</h6>
+                </td>
+                <td>
+                    <h6>{element.User.Localisation.zipCode}</h6>
+                </td>
+                <td>  
+                    <h6>{element.User.Localisation.city}</h6>
                 </td>
                 <td >  
-                    <h6 >{element.User.isActif? "✅": "❌"}</h6>
+                    <h6>{element.User.isActif? "✅": "❌"}</h6>
                 </td>
                 <td >
-                    <h6 >    <a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profile</a></h6>
+                    <h6><a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profile</a></h6>
                 </td>
                 <td >
-                <h6 >  <a className={styles.buttonSuppr} onClick={() => deleteData(element.id)}>Supprimer</a></h6>
+                    <h6 ><a className={styles.buttonSuppr} onClick={() => deleteData(element.id)}>Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
@@ -124,6 +121,5 @@ export default function consultemployeur()
     </table>
     </div>
        </Navbar>
-
     )
 }

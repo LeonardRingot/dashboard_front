@@ -11,8 +11,8 @@ export default function Register() {
     const {id} = router.query
     const[period, setPeriod] = useState([]);
     const[degree, setDegree] = useState([]);
+    const [isActif, setIsActif] = useState([]);
     
-
     const [updateProfile, setUpdateProfile] = useState({
       firstname: '',
         lastname: '',
@@ -24,17 +24,11 @@ export default function Register() {
          },
          email: '',
         phone: '',
-        isActif:true,
+        isActif:'',
         degrees:degree
       },
       periods:period,
-      
-      
     })
-    
-    // console.log(updateProfile.firstname)
-    // console.log(updateProfile.User.email)
-    // console.log(updateProfile.Localisation.address)
     const handleChange = (e) => 
     {
       const value = e.target.value;
@@ -75,8 +69,10 @@ export default function Register() {
           
          }
       }
-      
-    
+      if(e.target.name == "isActif")
+      {
+        console.log(updateProfile.User.isActif)
+      }
         setUpdateProfile({
           ...updateProfile,
             User:
@@ -91,9 +87,7 @@ export default function Register() {
             },
           [e.target.name]: value
         });
-       
     }
-
     useEffect(() => {
         const fetchSomethingById = async () => {
           ServiceAPI.requeteGetCandidatById(id)
@@ -104,27 +98,24 @@ export default function Register() {
                response.data.User.Periods.map((period) => perioddata.push(period.id))
                let degreedata = [];
                response.data.User.Degrees.map((degree) => degreedata.push(degree.id))
-               
+
               setPeriod(perioddata)
               setDegree(degreedata)
-             
+              
               console.log(response.data.Periods)
               console.log(period);
               console.log(response.data.User.Degrees)
               console.log(degree);
-              
             }
           })
           .catch(error => console.log(error))
         }
-        
         fetchSomethingById()
       }, [id])
-
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
         ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.isActif, updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
-          updateProfile.User.Localisation.city,period,degree).then(response => {
+          updateProfile.User.Localisation.city,period,degree, isActif).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
               setIsOk('User mis a jour');
@@ -135,7 +126,6 @@ export default function Register() {
           console.log(error);
         });
     }
-
     return (
 <div class="col py-3">
             <div class="container">
@@ -157,18 +147,16 @@ export default function Register() {
           <label htmlFor='phone'>Numéro de téléphone:</label>
           <input defaultValue={updateProfile.User.phone} onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
             </div>
-            <div class="form-check"  defaultValue={updateProfile.User.isActif} onChange={handleChange} >
-                <input   class="form-check-input"  defaultValue={updateProfile.User.isActif} onChange={handleChange} value={true}   type="radio" name="radio" id="true"  />
-                <label class="form-check-label" for="true">
-                ✅
-                </label>
+            <fieldset name='isActif'>
+            <div class="form-check"   >
+                <input   class="form-check-input"   onChange={handleChange}  value="true"  defaultChecked={updateProfile.User.isActif} type="radio" name="isActif" id="true"  />
+                <label class="form-check-label" htmlFor="true">✅</label>
               </div>
               <div class="form-check">
-                <input  class="form-check-input" defaultValue={updateProfile.User.isActif} onChange={handleChange} value={false}  type="radio" name="radio" id="false"  />
-                <label class="form-check-label" for="false">
-                ❌
-                </label>
+                <input  class="form-check-input"  onChange={handleChange} value="false" defaultChecked={updateProfile.User.isActif} type="radio" name="isActif" id="false"  />
+                <label class="form-check-label" htmlFor="false">❌</label>
             </div>
+            </fieldset>
             <div class="col-12"> 
           <label htmlFor='address'>Adresse:</label>
           <input  defaultValue={updateProfile.User.Localisation.address} onChange={handleChange} type="text"  class="form-control" name="address" /><br></br>
@@ -249,7 +237,5 @@ export default function Register() {
          <p>{IsOk}</p>
      </div> 
    </div>
-  
     );
-    
 }

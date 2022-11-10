@@ -10,7 +10,6 @@ export default function updateEmployer({  }) {
     const {id} = router.query
     const[period, setPeriod] = useState([]);
     
-
     const [updateEmployer, setUpdateEmployer] = useState({
         siret: '',
         structurename: '',
@@ -25,7 +24,6 @@ export default function updateEmployer({  }) {
         },
         periods:period
     })
-
     const handleChange = (e) => 
     {
       const value = e.target.value;
@@ -60,7 +58,6 @@ export default function updateEmployer({  }) {
         [e.target.name]: value
       });
     }
-
     useEffect(() => {
         const fetchSomethingById = async () => {
           ServiceAPI.requeteGetEmployerById(id)
@@ -78,9 +75,7 @@ export default function updateEmployer({  }) {
         }
         fetchSomethingById()
       }, [id])
-
     const ModifierProfileSubmit = (e) => {
-        
         e.preventDefault()
         ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city, period).then(response => {
             if(response.status == 201){
@@ -163,8 +158,6 @@ export default function updateEmployer({  }) {
       </fieldset>
       <input  value="Envoyer" className={styles.inputsubmit} type="submit"/> <br></br>
          </form>
-         
-          
          <p>{erreur}</p>
          <p>{IsOk}</p>
      </div> 

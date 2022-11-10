@@ -28,7 +28,6 @@ export default function Navbar({children}){
                           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Accueil</span>
                       </a>
                   </li>
-                 
                   <li>
                       <a href="./consultcandidat" class="nav-link px-0 align-middle">
                           <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Consultations candidats</span></a>
@@ -36,42 +35,25 @@ export default function Navbar({children}){
                   <li>
                       <a href="./consultemployeur" class="nav-link px-0 align-middle ">
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Consultations employeurs</span></a>
-                      
                   </li>
                   <li>
                       <a href="./consultadmin" class="nav-link px-0 align-middle ">
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Consultations admin</span></a>
-                      
                   </li>
                   <li>
                       <a href="./disconnect" class="nav-link px-0 align-middle ">
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Se deconnecter</span></a>
-                      
                   </li>
               </ul>
               <hr/>
-            
           </div>
       </div>
-      
       <div class="col py-3">
-        
       <UserContext.Provider value="hello">
             {children}
 </UserContext.Provider>
-      
-     
-      </div>
-  </div>
-    </div>
-   
+        </div>
+        </div>
+        </div>
     )
-    
 }
-
-
-
-
-     
-
- 
