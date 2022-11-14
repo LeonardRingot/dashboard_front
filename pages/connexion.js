@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 //const UserContext = React.createContext({ email: 'aa', auth: false });
 export const UserContext = createContext( "(adresse mail)")
 
-export default function connexion(history) {
+export default function connexion(email) {
     const router = useRouter()
   //const {isAuthenticated, setIsAuthenticated} = useContext(Auth);
   const [ConnexionForm, setConnexionform]= useState({
@@ -22,15 +22,23 @@ export default function connexion(history) {
       ...ConnexionForm, [e.target.name]: value
     });
   }
+   
   const ScriptFormConnexion = (e) =>
   {
     e.preventDefault()
+    
     ServiceAPI.requetePostConnexion( ConnexionForm.email, ConnexionForm.password).then(response => {
       
         if(response.status == 200){
          // const reponse =  await async login(ConnexionForm);
           //setIsAuthenticated(reponse);
+          console.log(response.data.accessToken)
+          localStorage.setItem("AccessToken", response.data.accessToken)
+          localStorage.setItem("RefreshToken", response.data.refreshToken)
           router.push({pathname: '../dashboard/dashboard', query: {id: response.data.data}});
+          const MyUser = response.config.data
+   console.log(MyUser)
+         
         } else {
           return res.status(400).send('Super-Administrateur ou administrateur introuvable')
         }
@@ -45,21 +53,47 @@ export default function connexion(history) {
   // }, [history, isAuthenticated]);
 
 return(
-  <div class="col py-3">
-  <div class="container">
-    <h1>Formulaire de connexion Administrateur</h1>
-    <form class="row g-3" action="" onSubmit={ScriptFormConnexion} method="post">
-    <div class="col-md-6">
-      <label htmlFor='email'>Email:</label>
-      <input  onChange={handleChange} class="form-control" type="email"  name="email" /><br></br>
-    </div>
-    <div class="col-md-6">
-      <label htmlFor='password'>Mot de passe:</label>
-      <input  onChange={handleChange} class="form-control" type="password"  name="password" /><br></br>
+  <section class="vh-100">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 text-black">
+
+        <div class="px-5 ms-xl-4">
+          <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style={{color: '#709085'}}></i>
+          <span class="h1 fw-bold mb-0">Formulaire de connexion Administrateur</span>
+        </div>
+
+        <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+
+          <form style={{width: '23rem'}} onSubmit={ScriptFormConnexion} method="post">
+
+            
+
+            <div class="form-outline mb-4">
+              <input onChange={handleChange} type="email" name="email" id="form2Example18" class="form-control form-control-lg" />
+              <label class="form-label" for="form2Example18">Adresse mail</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input onChange={handleChange} type="password" name="password" id="form2Example28" class="form-control form-control-lg" />
+              <label class="form-label" for="form2Example28">Mot de passe</label>
+            </div>
+
+            <div class="pt-1 mb-4">
+              <button class="btn btn-info btn-lg btn-block" value="Submit" type="submit">Se connecter</button>
+            </div>
+
+          </form>
+
+        </div>
+
       </div>
-      <input className={styles.inputsubmit} value="Submit" type="submit"/> <br></br>
-    </form>
+      <div class="col-sm-6 px-0 d-none d-sm-block">
+        <img src="/logo_cse.jpg"
+          alt="Login image" class="w-100 vh-100" style={{objectfit: 'cover', objectposition: 'left', position:'relative', overflow:"hidden", backgroundRepeat:"no-repeat", backgroundPosition:'right center', backgroundSize:"auto 100%"}}/>
+      </div>
+    </div>
   </div>
-  </div>
+</section>
 )
 }

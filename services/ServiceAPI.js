@@ -1,14 +1,12 @@
 import axios from "axios";
 // requete connexion admin
 import { getItem, addItem, removeItem } from './LocaleStorage';
-export function requetePostConnexion(email, password, role) {
+
+export function requetePostConnexion(email, password) {
   var data = JSON.stringify({
     "email": email,
-    "password": password,
-    "roles":
-    {
-      "role": role
-    }
+    "password": password
+    
   });
   var configConnexion = {
     method: 'post',
@@ -16,6 +14,7 @@ export function requetePostConnexion(email, password, role) {
     headers: {
       'Content-Type': 'application/json'
     },
+
     data: data
   };
   return axios(configConnexion);

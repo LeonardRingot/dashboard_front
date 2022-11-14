@@ -15,19 +15,28 @@ import {
 import Link from 'next/link';
 import { UserContext } from '../connexion';
 
+import {MyUser} from '../connexion'
+console.log(MyUser)
+
 export default function dashboard(){
 
  const msg = useContext(UserContext)
+ 
+//  const msgData = useContext(MyUser)
 function candidat () {
     <Link href="/dashboard/consultcandidat"></Link>
 } ;
+
     return(
       <>
+     
       <Navbar>
         
       </Navbar>
       {msg}
+      {/* {msgData}
       {console.log(msg)}
+      {console.log(msgData)} */}
       </>
     )
 }

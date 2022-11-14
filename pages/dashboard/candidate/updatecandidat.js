@@ -126,6 +126,7 @@ export default function Register() {
           console.log(error);
         });
     }
+    console.log(updateProfile.User.isActif);
     return (
 <div class="col py-3">
             <div class="container">
@@ -153,7 +154,7 @@ export default function Register() {
                 <label class="form-check-label" htmlFor="true">✅</label>
               </div>
               <div class="form-check">
-                <input  class="form-check-input"  onChange={handleChange} value="false" defaultChecked={updateProfile.User.isActif} type="radio" name="isActif" id="false"  />
+                <input  class="form-check-input"  onChange={handleChange} value="false" defaultChecked={!updateProfile.User.isActif} type="radio" name="isActif" id="false"  />
                 <label class="form-check-label" htmlFor="false">❌</label>
             </div>
             </fieldset>

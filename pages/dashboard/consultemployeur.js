@@ -73,7 +73,7 @@ export default function consultemployeur()
                 <th>Adresse</th>
                 <th>Code Postal</th>
                 <th>Ville</th>
-                <th>IsActive?</th>
+                <th>Activé/Désactivé</th>
                 <th>Modifier Profile</th>
                 <th>Supprimer</th>
             </tr>

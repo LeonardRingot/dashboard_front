@@ -14,22 +14,22 @@ export default function disconnect()
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-          <form style={{width: '23rem'}}>
+          <form style={{width: '23rem'}} onSubmit={ScriptFormConnexion} method="post">
 
             
 
             <div class="form-outline mb-4">
-              <input type="email" id="form2Example18" class="form-control form-control-lg" />
+              <input onChange={handleChange} type="email" name="email" id="form2Example18" class="form-control form-control-lg" />
               <label class="form-label" for="form2Example18">Adresse mail</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
+              <input onChange={handleChange} type="password" name="password" id="form2Example28" class="form-control form-control-lg" />
               <label class="form-label" for="form2Example28">Mot de passe</label>
             </div>
 
             <div class="pt-1 mb-4">
-              <button class="btn btn-info btn-lg btn-block" type="button">Se connecter</button>
+              <button class="btn btn-info btn-lg btn-block" value="Submit" type="submit">Se connecter</button>
             </div>
 
           </form>

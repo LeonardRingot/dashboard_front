@@ -122,7 +122,7 @@ export default function createemployer() {
               <label htmlFor="8">Samedi</label>
             </div>
           </fieldset>
-          <input value="Submit" className={styles.inputsubmit} type="submit" /> <br></br>
+          <input value="Envoyer" className={styles.inputsubmit} type="submit" /> <br></br>
         </form>
         <p>{erreur}</p>
         <p>{IsOk}</p>
