@@ -2,19 +2,21 @@ import {  useState, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import * as ServiceAPI from '../services/ServiceAPI'
 import styles from '../styles/Home.module.css'
-
+import {useCookies} from 'react-cookie'
 //const UserContext = React.createContext({ email: 'aa', auth: false });
-export const UserContext = createContext( "(adresse mail)")
+export const UserContext = createContext("aaaaaa")
 
-export default function connexion(email) {
-    const router = useRouter()
-  //const {isAuthenticated, setIsAuthenticated} = useContext(Auth);
+export default function connexion() {
+  
+  
+  
+  const router = useRouter()
+  
   const [ConnexionForm, setConnexionform]= useState({
     email:'',
     password:'',
   })
-  const emaildisplay = ConnexionForm.email;
-  console.log(emaildisplay)
+  const [cookie, setCookie, removeCookie] = useCookies(["user"]);
   const handleChange = (e) =>
   {
     const value = e.target.value;
@@ -30,17 +32,18 @@ export default function connexion(email) {
     ServiceAPI.requetePostConnexion( ConnexionForm.email, ConnexionForm.password).then(response => {
       
         if(response.status == 200){
-         // const reponse =  await async login(ConnexionForm);
-          //setIsAuthenticated(reponse);
+        
           console.log(response.data.accessToken)
-          localStorage.setItem("AccessToken", response.data.accessToken)
-          localStorage.setItem("RefreshToken", response.data.refreshToken)
+          
           router.push({pathname: '../dashboard/dashboard', query: {id: response.data.data}});
-          const MyUser = response.config.data
-   console.log(MyUser)
-         
+          console.log(response.data.accessToken)
+        
+          setCookie("user", response.data.accessToken, response.data.refreshToken, "/");
+          
+          console.log("tu es co")
         } else {
           return res.status(400).send('Super-Administrateur ou administrateur introuvable')
+          
         }
       }).catch(function(error){
         console.log(error);

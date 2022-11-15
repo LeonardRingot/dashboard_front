@@ -1,42 +1,69 @@
 import styles from '../../styles/Home.module.css'
-import { GiHamburgerMenu } from "react-icons/gi";
 import Headerdashboard from '../../components/Headerdashboard';
 import Navbar from '../../components/Navbar';
+import { useRouter } from 'next/router'
 import consultcandidat from './consultcandidat';
-import {
-    MdOutlineHome,
-    MdOutlineNotifications,
-    MdOutlineAccountCircle,
-    MdOutlineAccountBox,
-    MdOutlineModeEditOutline,
-    MdOutlineLogout,
-  } from "react-icons/md";
   import {  useState, useContext, createContext } from 'react'
 import Link from 'next/link';
-import { UserContext } from '../connexion';
 
-import {MyUser} from '../connexion'
-console.log(MyUser)
+import {useCookies} from 'react-cookie'
+import {ConnexionForm, response} from '../connexion'
 
 export default function dashboard(){
-
- const msg = useContext(UserContext)
+  const router = useRouter()
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [user, setUser] = useState(null);
  
-//  const msgData = useContext(MyUser)
+
+  function setHeaders(user) {
+    const headers = new Headers();
+    headers.append("Authorization", `Bearer ${user}`);
+    const options = {
+      method: "GET",
+      mode: "cors",
+      headers,
+    };
+
+    return options;
+  }
+  
+  async function dashboardUser()
+  {
+    if(cookies.user)
+    {
+      let continu;
+      let options = setHeaders(cookies.user[0]);
+      const res = await fetch("http://localhost:3000/dashboard/dashboard", options);
+      console.log(response)
+      if(response.status == 401)
+      {
+        let options = setHeaders(cookies.user[1])
+        
+      }
+    }
+  }
+ 
+ 
+
 function candidat () {
     <Link href="/dashboard/consultcandidat"></Link>
 } ;
 
     return(
       <>
-     
-      <Navbar>
+      {user != null ? (
+        <Navbar >
         
       </Navbar>
-      {msg}
-      {/* {msgData}
-      {console.log(msg)}
-      {console.log(msgData)} */}
+      ): (
+       
+        window.location.replace("/")
+      )}
+     
+      
+      
+      
+      
       </>
     )
 }

@@ -319,3 +319,15 @@ export function requetePostAdmin(password, email, phone ) {
   };
   return axios(configAdmin);
 }
+
+// export default function GetAdminConnected(id, email, password)
+// {
+//    var data = JSON.stringify({
+//     "email": email,
+//     "password":password
+//    });
+//    var configGetAdminCo = {
+//     method:"get",
+//     url:"local"
+//    }
+// }
