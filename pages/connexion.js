@@ -1,4 +1,4 @@
-import {  useState, useContext, createContext } from 'react'
+import {  useState, createContext } from 'react'
 import { useRouter } from 'next/router'
 import * as ServiceAPI from '../services/ServiceAPI'
 import styles from '../styles/Home.module.css'
@@ -38,7 +38,7 @@ export default function connexion() {
           router.push({pathname: '../dashboard/dashboard', query: {id: response.data.data}});
           console.log(response.data.accessToken)
         
-          setCookie("user", response.data.accessToken, response.data.refreshToken, "/");
+          setCookie("user", [response.data.accessToken, response.data.refreshToken], "/");
           
           console.log("tu es co")
         } else {
