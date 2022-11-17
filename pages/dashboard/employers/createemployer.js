@@ -11,6 +11,7 @@ export default function createemployer() {
     siret: '',
     structurename: '',
     password: '',
+    passwordconf:'',
     email: '',
     phone: '',
     address: '',
@@ -39,7 +40,7 @@ export default function createemployer() {
   }
   const ScriptForm = (e) => {
     e.preventDefault()
-    ServiceAPI.requetePostEmployers(InscriptionForm.siret, InscriptionForm.structurename, InscriptionForm.password, InscriptionForm.email, InscriptionForm.phone, InscriptionForm.address, InscriptionForm.zipCode, InscriptionForm.city, period).then(response => {
+    ServiceAPI.requetePostEmployers(InscriptionForm.siret, InscriptionForm.structurename, InscriptionForm.password,InscriptionForm.passwordconf, InscriptionForm.email, InscriptionForm.phone, InscriptionForm.address, InscriptionForm.zipCode, InscriptionForm.city, period).then(response => {
       if (response.status == 201) {
         //router.push('../profile/profile');
         setIsOk('Compte crée');
@@ -67,6 +68,10 @@ export default function createemployer() {
           <label htmlFor='password'>Mot de passe:</label>
           <input onChange={handleChange} type="password" class="form-control" name="password" /><br></br>
         </div>
+        <div class="col-md-6">
+          <label htmlFor='passwordconf'>Mot de passe conf:</label>
+          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" /><br></br>
+          </div>
         <div class="col-md-6">
           <label htmlFor='email'>Email:</label>
           <input onChange={handleChange} type="email" class="form-control" name="email" /><br></br>

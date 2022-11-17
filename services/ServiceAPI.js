@@ -2,6 +2,7 @@ import axios from "axios";
 // requete connexion admin
 import { getItem, addItem, removeItem } from './LocaleStorage';
 
+const URL = 'http://localhost:5000/api/';
 export function requetePostConnexion(email, password) {
   var data = JSON.stringify({
     "email": email,
@@ -10,7 +11,7 @@ export function requetePostConnexion(email, password) {
   });
   var configConnexion = {
     method: 'post',
-    url: 'http://localhost:5000/api/auth/loginAdmin',
+    url: `${URL}auth/loginAdmin`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -31,34 +32,24 @@ export function hasAuthenticated() {
   return result;
 }
 
-
 // requete affichage candidats page consultcandidat.js
 
 export function requeteGetAllCandidats(firstname, lastname, address, zipCode, city) {
   var configGetAllUsersCandidats = {
     method: 'get',
-    url: 'http://localhost:5000/api/candidates',
+    url: `${URL}candidates`,
     headers: {
       'Content-Type': 'application/json'
     }
 
   };
-  // var configGetAllCandidatsLocalisations = {
-  //   method: 'get',
-  //   url: 'http://localhost:5000/api/localisations',
-  //   headers: { 
-  //     'Content-Type': 'application/json'
-  //   },
-  //   dataLocalisations :dataLocalisations
-  // };
-
   return axios(configGetAllUsersCandidats);
 }
 
 export function requeteGetCandidatById(id) {
   var configGetCandidatsById = {
     method: 'get',
-    url: 'http://localhost:5000/api/candidates/' + id,
+    url:`${URL}candidates/` + id,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -70,7 +61,7 @@ export function requeteGetCandidatById(id) {
 export function requeteGetEmployerById(id) {
   var configGetEmployerById = {
     method: 'get',
-    url: 'http://localhost:5000/api/employers/' + id,
+    url: `${URL}employers/` + id,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -80,7 +71,7 @@ export function requeteGetEmployerById(id) {
 }
 //requete inscription candidats
 
-export function requetePost(firstname, lastname, birthday, password, email, phone, address, zipCode, city, periods, degrees) {
+export function requetePost(firstname, lastname, birthday,wantToBe, password, passwordconf, email, phone, address, zipCode, city, periods, degrees) {
   console.log(periods);
   let obj = periods?.map(((period) => {
     return { "id": parseInt(period) }
@@ -93,10 +84,12 @@ export function requetePost(firstname, lastname, birthday, password, email, phon
     "candidate": {
       "firstname": firstname,
       "lastname": lastname,
-      "birthday": birthday
+      "birthday": birthday,
+      "wantToBe": wantToBe
     },
     "users": {
       "password": password,
+      "passwordconf":passwordconf,
       "email": email,
       "phone": phone,
       "isActif": true
@@ -112,7 +105,7 @@ export function requetePost(firstname, lastname, birthday, password, email, phon
   });
   var config = {
     method: 'post',
-    url: 'http://localhost:5000/api/candidates',
+    url: `${URL}candidates`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -120,27 +113,16 @@ export function requetePost(firstname, lastname, birthday, password, email, phon
   };
   return axios(config);
 }
-export function requetePostEmployers(siret, structurename, password, email, phone, address, zipCode, city, periods) {
+export function requetePostEmployers(siret, structurename, password,passwordconf, email, phone, address, zipCode, city, periods) {
   console.log(periods);
   var data = JSON.stringify({
-    // "UserId":UserId,
-    // "firstname":firstname,
-    // "lastname":lastname,
-    // "birthday":birthday,
-    // "password":password,
-    // "email": email,
-    // "phone": phone,
-    // "address": address,
-    // "zipCode":zipCode,
-    // "city":city,
-    // "periods:":periods,
-    // "degrees": degrees
     "employer": {
       "siret": siret,
       "structurename": structurename
     },
     "users": {
       "password": password,
+      "passwordconf":passwordconf,
       "email": email,
       "phone": phone,
       "isActif": false
@@ -158,7 +140,7 @@ export function requetePostEmployers(siret, structurename, password, email, phon
   });
   var confiPostEmployers = {
     method: 'post',
-    url: 'http://localhost:5000/api/employers',
+    url: `${URL}employers`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -168,7 +150,7 @@ export function requetePostEmployers(siret, structurename, password, email, phon
 }
 
 //requete mis a jour candidats
-export function requeteUpdateProfil(id, firstname, lastname, email, phone, isActif, address,  zipCode, city, periods, degrees) {
+export function requeteUpdateProfil(id, firstname, lastname, password, passwordconf, email, phone, isActif, address,  zipCode, city, periods, degrees) {
   let obj = periods?.map(((period) => {
     return { "id": parseInt(period) }
   }))
@@ -183,6 +165,8 @@ export function requeteUpdateProfil(id, firstname, lastname, email, phone, isAct
       "lastname": lastname,
     },
     "users": {
+      "password":password,
+      "passwordconf": passwordconf,
       "email": email,
       "phone": phone,
       "isActif": isActif
@@ -198,7 +182,7 @@ export function requeteUpdateProfil(id, firstname, lastname, email, phone, isAct
   });
   var configUpdateProfile = {
     method: 'put',
-    url: 'http://localhost:5000/api/form/candidat/' + id,
+    url: `${URL}candidates/form/` + id,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -207,7 +191,7 @@ export function requeteUpdateProfil(id, firstname, lastname, email, phone, isAct
   return axios(configUpdateProfile);
 }
 // requete mis à jour employers
-export function requeteUpdateEmployers(id, siret, structurename, email, phone, address, zipCode, city,periods ) {
+export function requeteUpdateEmployers(id, siret, structurename,password,passwordconf, email, phone, address, zipCode, city,periods ) {
   let obj = periods?.map(((period) => {
     return { "id": parseInt(period) }
   }))
@@ -218,6 +202,8 @@ export function requeteUpdateEmployers(id, siret, structurename, email, phone, a
     "structurename": structurename
     }, 
     "users": {
+      "password":password,
+      "passwordconf:":passwordconf,
       "email": email,
       "phone": phone,
       "isActif": false
@@ -233,7 +219,7 @@ export function requeteUpdateEmployers(id, siret, structurename, email, phone, a
   });
   var configUpdateEmployers = {
     method: 'put',
-    url: 'http://localhost:5000/api/form/employers/' + id,
+    url: `${URL}employers/form/` + id,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -247,7 +233,7 @@ export function requeteGetAllEmployeurs(siret, structurename, UserId) {
   
   var configGetAllUsersEmployers = {
     method: 'get',
-    url: 'http://localhost:5000/api/employers',
+    url: `${URL}employers`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -261,7 +247,7 @@ export function deleteCandidate(id) {
 
   var configDeleteCandidateById = {
     method: 'delete',
-    url: 'http://localhost:5000/api/candidates/' + id,
+    url: `${URL}candidates/ `+ id,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -275,7 +261,7 @@ export function deleteEmployer(id) {
 
   var configDeleteEmployerById = {
     method: 'delete',
-    url: 'http://localhost:5000/api/employers/' + id,
+    url: `${URL}employers/` + id,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -290,7 +276,7 @@ export function requeteGetAllAdmin()
   });
   var configGetAllUsersRoles = {
     method: 'get',
-    url: 'http://localhost:5000/api/usersAdmin',
+    url: `${URL}/users/admin/all`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -311,7 +297,7 @@ export function requetePostAdmin(password, email, phone ) {
   });
   var configAdmin = {
     method: 'post',
-    url: 'http://localhost:5000/api/usersAdmin',
+    url: `${URL}users/admin`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -320,14 +306,3 @@ export function requetePostAdmin(password, email, phone ) {
   return axios(configAdmin);
 }
 
-// export default function GetAdminConnected(id, email, password)
-// {
-//    var data = JSON.stringify({
-//     "email": email,
-//     "password":password
-//    });
-//    var configGetAdminCo = {
-//     method:"get",
-//     url:"local"
-//    }
-// }

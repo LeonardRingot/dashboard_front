@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from '../styles/Home.module.css'
 import { useCookies } from "react-cookie";
-
+import { UserContext } from "../components/UserContext";
 import {
     MdOutlineHome,
     MdOutlineNotifications,
@@ -11,14 +11,14 @@ import {
     MdOutlineLogout,
   } from "react-icons/md";
 import Headerdashboard from "./Headerdashboard";
-import { UserContext } from "../pages/connexion";
 export default function Navbar({children}){
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-    function logout() {
-        removeCookie(["user"])
+    // function logout() {
+    //     removeCookie(["user"])
         
-        window.location.replace('/')
-      }
+    //     window.location.replace('/')
+    //   }
+    console.log(UserContext)
     return (
     <div>
  <Headerdashboard></Headerdashboard>
@@ -48,7 +48,7 @@ export default function Navbar({children}){
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Consultations admin</span></a>
                   </li>
                   <li>
-                      <a href="#" onClick={logout}  class="nav-link px-0 align-middle ">
+                      <a href="#"   class="nav-link px-0 align-middle ">
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Se deconnecter</span></a>
                   </li>
               </ul>
@@ -56,7 +56,7 @@ export default function Navbar({children}){
           </div>
       </div>
       <div class="col py-3">
-      <UserContext.Provider value="hello">
+      <UserContext.Provider>
             {children}
 </UserContext.Provider>
         </div>

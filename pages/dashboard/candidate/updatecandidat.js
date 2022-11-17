@@ -22,6 +22,8 @@ export default function Register() {
           zipCode: '', 
           city: ''
          },
+         password:'',
+         passwordconf:'',
          email: '',
         phone: '',
         isActif:'',
@@ -114,7 +116,7 @@ export default function Register() {
       }, [id])
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
-        ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.isActif, updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
+        ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname,updateProfile.User.password,updateProfile.User.passwordconf,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.isActif, updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
           updateProfile.User.Localisation.city,period,degree, isActif).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
@@ -139,6 +141,14 @@ export default function Register() {
           <div class="col-md-6">
             <label htmlFor='lastname'>Nom:</label>
             <input defaultValue={updateProfile.lastname} onChange={handleChange} type="text" class="form-control" name="lastname" /><br></br>
+          </div>
+          <div class="col-md-6">
+          <label htmlFor='password'>Mot de passe:</label>
+          <input defaultValue={updateProfile.User.password} onChange={handleChange} type="password"  class="form-control" name="password" /><br></br>
+          </div>
+          <div class="col-md-6">
+          <label htmlFor='password'>Mot de passe conf:</label>
+          <input defaultValue={updateProfile.User.passwordconf} onChange={handleChange} type="password"  class="form-control" name="passwordconf" /><br></br>
           </div>
           <div class="col-md-6">
           <label htmlFor='email'>Email:</label>

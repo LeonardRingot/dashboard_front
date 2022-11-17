@@ -19,6 +19,8 @@ export default function updateEmployer({  }) {
             city: '',
             zipCode: ''
           },
+          password:'',
+          passwordconf:'',
           email: '',
           phone: ''
         },
@@ -77,7 +79,7 @@ export default function updateEmployer({  }) {
       }, [id])
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
-        ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city, period).then(response => {
+        ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.password , updateEmployer.User.passwordconf,updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city, period).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
               setIsOk('User mis a jour');
@@ -101,6 +103,14 @@ export default function updateEmployer({  }) {
           <div class="col-md-6">
           <label htmlFor='structurename'>Nom de l'entreprise:</label>
           <input defaultValue={updateEmployer.structurename}  onChange={handleChange} class="form-control" type="text"   name="structurename" /><br></br>
+          </div>
+          <div class="col-md-6">
+          <label htmlFor='password'>Mot de passe:</label>
+          <input defaultValue={updateEmployer.User.password}  onChange={handleChange} type="password"  class="form-control" name="password" /><br></br>
+          </div>
+          <div class="col-md-6">
+          <label htmlFor='passwordconf'>Mot de passe conf:</label>
+          <input defaultValue={updateEmployer.User.passwordconf}  onChange={handleChange} type="password"  class="form-control" name="passwordconf" /><br></br>
           </div>
           <div class="col-md-6">
           <label htmlFor='email'>Email:</label>

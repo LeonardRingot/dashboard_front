@@ -13,7 +13,9 @@ export default function createcandidat()
       firstname:'',
       lastname:'',
       birthday:'',
+      wantToBe:'',
       password:'',
+      passwordconf:'',
       email:'',
       phone:'',
       address:'',
@@ -59,7 +61,7 @@ export default function createcandidat()
     const ScriptForm = (e) =>
     {
       e.preventDefault()
-      ServiceAPI.requetePost(InscriptionForm.firstname, InscriptionForm.lastname, InscriptionForm.birthday,InscriptionForm.password,InscriptionForm.email,InscriptionForm.phone,InscriptionForm.address,InscriptionForm.zipCode,InscriptionForm.city,period,degree ).then(response => {
+      ServiceAPI.requetePost(InscriptionForm.firstname, InscriptionForm.lastname, InscriptionForm.birthday, InscriptionForm.wantToBe,InscriptionForm.password, InscriptionForm.passwordconf,InscriptionForm.email,InscriptionForm.phone,InscriptionForm.address,InscriptionForm.zipCode,InscriptionForm.city,period,degree ).then(response => {
           if(response.status == 201){
             //router.push('../profile/profile');
             setIsOk('Compte crée');
@@ -88,8 +90,20 @@ export default function createcandidat()
           <input onChange={handleChange} type="date"  class="form-control" name="birthday" /><br></br>
         </div>
         <div class="col-md-6">
+             <label htmlFor='wantToBe'>wantToBe:</label>
+             <select onChange={handleChange}  class="form-control" name="wantToBe" ><br></br>
+             <option value="">--Please choose an option--</option>
+             <option value="animateur">animateur</option>
+             <option value="directeur">directeur</option>
+             </select>
+           </div>
+        <div class="col-md-6">
           <label htmlFor='password'>Mot de passe:</label>
           <input onChange={handleChange} type="password"  class="form-control" name="password" /><br></br>
+          </div>
+          <div class="col-md-6">
+          <label htmlFor='passwordconf'>Mot de passe conf:</label>
+          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" /><br></br>
           </div>
           <div class="col-md-6">
           <label htmlFor='email'>Email:</label>

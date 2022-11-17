@@ -3,8 +3,7 @@ import { useRouter } from 'next/router'
 import * as ServiceAPI from '../services/ServiceAPI'
 import styles from '../styles/Home.module.css'
 import {useCookies} from 'react-cookie'
-//const UserContext = React.createContext({ email: 'aa', auth: false });
-export const UserContext = createContext("aaaaaa")
+
 
 export default function connexion() {
   
@@ -29,7 +28,7 @@ export default function connexion() {
   {
     e.preventDefault()
     
-    ServiceAPI.requetePostConnexion( ConnexionForm.email, ConnexionForm.password).then(response => {
+    ServiceAPI.requetePostConnexion(ConnexionForm.email, ConnexionForm.password).then(response => {
       
         if(response.status == 200){
         
@@ -41,6 +40,8 @@ export default function connexion() {
           setCookie("user", [response.data.accessToken, response.data.refreshToken], "/");
           
           console.log("tu es co")
+          
+          console.log(UserContext)
         } else {
           return res.status(400).send('Super-Administrateur ou administrateur introuvable')
           

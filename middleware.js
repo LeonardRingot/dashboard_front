@@ -6,7 +6,7 @@ function validCookie(request){
 
 export function middleware(request) {
     if(request.url.includes('/dashboard') && !validCookie(request)) {
-        return NextResponse.redirect("http://localhost:3000/")
+        return NextResponse.redirect("http://:3000/")
     }
 }
 

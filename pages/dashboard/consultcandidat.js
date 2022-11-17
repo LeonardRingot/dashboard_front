@@ -9,6 +9,7 @@ export default function consultcandidat()
 {
     const router = useRouter()
     let [data, setData] = useState(null)
+    
     function deleteData(id){
         console.log(id);
         ServiceAPI.deleteCandidate(id).then(response => {
@@ -67,6 +68,7 @@ export default function consultcandidat()
                 <th >Nom</th>
                 <th >Prénom</th>
                 <th >Date de naissance</th>
+                <th >wantToBe</th>
                 <th >ID Utilisateur</th>
                 <th >Email</th>
                 <th >Numéro de téléphone</th>
@@ -92,13 +94,16 @@ export default function consultcandidat()
                     <h6>{new Date(element.birthday).toLocaleDateString()}</h6>
                 </td>
                 <td>  
+                    <h6>{element.wantToBe}</h6>
+                </td>
+                <td>  
                     <h6>{element.UserId}</h6>
                 </td>
                 <td>  
                     <h6>{element.User.email}</h6>
                 </td>
                 <td>  
-                    <h6>{element.User.phone}</h6>
+                    <h6>0{element.User.phone}</h6>
                 </td>
                 <td>
                      <h6>{element.User.Localisation.address}</h6>
@@ -118,7 +123,7 @@ export default function consultcandidat()
                     > Modifier Profile</a></h6>
                 </td>
                 <td>
-                <h6> <a onClick={() => deleteData(element.id)} className={styles.buttonSuppr} >Supprimer</a></h6>
+                <h6> <a onClick={() => deleteData(element.id) } className={styles.buttonSuppr} >Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
