@@ -1,7 +1,6 @@
 import axios from "axios";
 // requete connexion admin
 import { getItem, addItem, removeItem } from './LocaleStorage';
-
 const URL = 'http://localhost:5000/api/';
 export function requetePostConnexion(email, password) {
   var data = JSON.stringify({

@@ -13,11 +13,11 @@ import {
 import Headerdashboard from "./Headerdashboard";
 export default function Navbar({children}){
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-    // function logout() {
-    //     removeCookie(["user"])
+    function logout() {
+        removeCookie(["user"])
         
-    //     window.location.replace('/')
-    //   }
+        window.location.replace('/')
+      }
     console.log(UserContext)
     return (
     <div>
@@ -48,7 +48,7 @@ export default function Navbar({children}){
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Consultations admin</span></a>
                   </li>
                   <li>
-                      <a href="#"   class="nav-link px-0 align-middle ">
+                      <a href="#"   onClick={logout} class="nav-link px-0 align-middle ">
                           <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Se deconnecter</span></a>
                   </li>
               </ul>
