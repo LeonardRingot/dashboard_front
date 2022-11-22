@@ -2,6 +2,7 @@ import React ,{ useEffect, useState } from 'react'
 import * as ServiceAPI from '../../../services/ServiceAPI'
 import { useRouter } from 'next/router'
 import styles from '../../../styles/Home.module.css'
+import Link from 'next/link';
 export default function createcandidat() 
 {
   const router = useRouter()
@@ -75,6 +76,7 @@ export default function createcandidat()
      return (
           <div class="col py-3">
             <div class="container">
+              <Link href="../consultcandidat"><a class="btn btn-primary" >Retour à la page consultation candidats</a></Link>
               <h1>Formulaire d'Inscription</h1>
         <form class="row g-3"  id="register_form"  onSubmit={ScriptForm} action='' method="post">
         <div class="col-md-6">

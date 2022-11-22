@@ -2,6 +2,7 @@ import axios from "axios";
 // requete connexion admin
 import { getItem, addItem, removeItem } from './LocaleStorage';
 const URL = 'http://localhost:5000/api/';
+//const URL = 'http://alexis-cuvillier.online:5000/api/';
 export function requetePostConnexion(email, password) {
   var data = JSON.stringify({
     "email": email,
@@ -192,9 +193,9 @@ export function requeteUpdateProfil(id, firstname, lastname, password, passwordc
 // requete mis à jour employers
 export function requeteUpdateEmployers(id, siret, structurename,password,passwordconf, email, phone, address, zipCode, city,periods ) {
   let obj = periods?.map(((period) => {
+ 
     return { "id": parseInt(period) }
   }))
-  console.log(siret);
   var data = JSON.stringify({
     "employer":{
       "siret": siret,
@@ -202,7 +203,7 @@ export function requeteUpdateEmployers(id, siret, structurename,password,passwor
     }, 
     "users": {
       "password":password,
-      "passwordconf:":passwordconf,
+      "passwordconf":passwordconf,
       "email": email,
       "phone": phone,
       "isActif": false

@@ -74,7 +74,7 @@ export default function consultemployeur()
                 <th>Code Postal</th>
                 <th>Ville</th>
                 <th>Activé/Désactivé</th>
-                <th>Modifier Profile</th>
+                <th>Modifier Profil</th>
                 <th>Supprimer</th>
             </tr>
         </thead>
@@ -110,7 +110,7 @@ export default function consultemployeur()
                     <h6>{element.User.isActif? "✅": "❌"}</h6>
                 </td>
                 <td >
-                    <h6><a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profile</a></h6>
+                    <h6><a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profil</a></h6>
                 </td>
                 <td >
                     <h6 ><a className={styles.buttonSuppr} onClick={() => deleteData(element.id)}>Supprimer</a></h6>

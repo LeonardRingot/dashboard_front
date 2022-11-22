@@ -2,6 +2,7 @@
 import { useRouter } from 'next/router';
 import React, { useState , useEffect } from 'react'
 import * as ServiceAPI from '../../../services/ServiceAPI'
+import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
 
 export default function Register() {
@@ -126,12 +127,15 @@ export default function Register() {
             }
           }).catch(function(error){
           console.log(error);
+          console.log(updateProfile.User.password)
+              console.log(updateProfile.User.passwordconf)
         });
     }
     console.log(updateProfile.User.isActif);
     return (
 <div class="col py-3">
             <div class="container">
+            <Link href="../consultcandidat"><a class="btn btn-primary" >Retour à la page consultation candidats</a></Link>
      <h1>Formulaire de Modification Candidats </h1>
         <form class="row g-3" onSubmit={ModifierProfileSubmit} action='' method="post"> 
         <div class="col-md-6">

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState , useEffect } from 'react'
 import * as ServiceAPI from '../../../services/ServiceAPI'
+import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
 
 export default function updateEmployer({  }) {
@@ -24,7 +25,7 @@ export default function updateEmployer({  }) {
           email: '',
           phone: ''
         },
-        periods:period
+        periods:period,
     })
     const handleChange = (e) => 
     {
@@ -67,7 +68,9 @@ export default function updateEmployer({  }) {
             if(response.status == 200){
               setUpdateEmployer(response.data);
               let perioddata = [];
-               response.data.User.Periods.map((period) => perioddata.push(period.id))
+              
+               response.data.User.Periods.map((period) =>  perioddata.push(period.id))
+              console.log(response.data.User)
                setPeriod(perioddata)
                console.log(response.data.Periods)
                console.log(period);
@@ -83,16 +86,20 @@ export default function updateEmployer({  }) {
             if(response.status == 201){
               //router.push('../profile/profile');
               setIsOk('User mis a jour');
+              
             } else {
               setErreur('NoN');
             }
           }).catch(function(error){
           console.log(error);
+          console.log(updateEmployer.User.password)
+              console.log(updateEmployer.User.passwordconf)
         }); 
     }
     return (
 <div class="col py-3">
 <div class="container">
+<Link href="../consultemployeur"><a class="btn btn-primary"> Retour à la page consultation employeurs</a></Link>
      <h1>Formulaire de Modification Employers </h1>
      
      <form class="row g-3" onSubmit={ModifierProfileSubmit} action='' method="post">

@@ -16,7 +16,7 @@ export default function Navbar({children}){
     function logout() {
         removeCookie(["user"])
         
-        window.location.replace('/')
+         window.location.replace('/')
       }
     console.log(UserContext)
     return (

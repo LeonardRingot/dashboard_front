@@ -75,8 +75,8 @@ export default function consultcandidat()
                 <th >Adresse</th>
                 <th >Code postal</th>
                 <th >Ville</th>
-                <th >IsActive?</th>
-                <th>Modifier Profile</th>
+                <th >Activé/Désactivé</th>
+                <th>Modifier Profil</th>
                 <th >Supprimer</th>
             </tr>
         </thead>
@@ -120,7 +120,7 @@ export default function consultcandidat()
                 <td>
                     <h6><a  onClick = {() =>modifData(element.UserId)}className={styles.buttonModif}
                     href={`/dashboard/candidate/updatecandidat?id=${element.id}`}
-                    > Modifier Profile</a></h6>
+                    > Modifier Profil</a></h6>
                 </td>
                 <td>
                 <h6> <a onClick={() => deleteData(element.id) } className={styles.buttonSuppr} >Supprimer</a></h6>
