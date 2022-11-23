@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from '../styles/Home.module.css'
 import { useCookies } from "react-cookie";
 import { UserContext } from "../components/UserContext";
+import { middleware } from "../middleware";
 import {
     MdOutlineHome,
     MdOutlineNotifications,
@@ -14,7 +15,7 @@ import Headerdashboard from "./Headerdashboard";
 export default function Navbar({children}){
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     function logout() {
-        removeCookie(["user"])
+        removeCookie("user")
         
          window.location.replace('/')
       }
@@ -31,7 +32,7 @@ export default function Navbar({children}){
               </a>
               <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                   <li class="nav-item">
-                      <a href="./dashboard" class="nav-link align-middle px-0">
+                      <a href="./dashboard/" class="nav-link align-middle px-0">
                           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Accueil</span>
                       </a>
                   </li>

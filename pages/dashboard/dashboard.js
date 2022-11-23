@@ -33,10 +33,12 @@ export default function dashboard(){
       let continu;
       let options = setHeaders(cookies.user[0]);
       const res = await fetch("http://localhost:3000/dashboard/dashboard", options);
+      console.log(cookies.user)
       if(response != null){
         if(response.status == 401)
         {
           let options = setHeaders(cookies.user[1])
+          console.log("jai pas recu cookie")
         }
       }
     }

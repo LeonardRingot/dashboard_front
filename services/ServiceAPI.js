@@ -2,7 +2,7 @@ import axios from "axios";
 // requete connexion admin
 import { getItem, addItem, removeItem } from './LocaleStorage';
 const URL = 'http://localhost:5000/api/';
-//const URL = 'http://alexis-cuvillier.online:5000/api/';
+
 export function requetePostConnexion(email, password) {
   var data = JSON.stringify({
     "email": email,
@@ -21,16 +21,6 @@ export function requetePostConnexion(email, password) {
   return axios(configConnexion);
 }
 
-export function hasAuthenticated() {
-  const token = getItem('mytoken');
-  const result = token ? tokenIsValid(token) : false;
-
-  if (false === result) {
-      removeItem('mytoken');
-  }
-
-  return result;
-}
 
 // requete affichage candidats page consultcandidat.js
 
@@ -304,5 +294,20 @@ export function requetePostAdmin(password, email, phone ) {
     data: data
   };
   return axios(configAdmin);
+}
+
+export default function GetMyTokenId()
+{
+  
+  
+  var configAdminToken = {
+    method: 'get',
+    url: `${URL}users/tokens/1` ,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+   
+  };
+  return axios(configAdminToken);
 }
 

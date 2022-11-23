@@ -16,6 +16,7 @@ export default function connexion() {
     password:'',
   })
   const [cookie, setCookie, removeCookie] = useCookies(["user"]);
+  
   const handleChange = (e) =>
   {
     const value = e.target.value;
