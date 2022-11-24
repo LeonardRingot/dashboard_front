@@ -276,7 +276,7 @@ export function requeteGetAllAdmin()
 }
 
 export function requetePostAdmin(password, email, phone ) {
-  console.log(email)
+  
   var data = JSON.stringify({
  
     "password": password,

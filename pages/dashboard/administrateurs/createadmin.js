@@ -9,16 +9,14 @@ export default function createadministrateur()
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [user, setUser] = useState(null);
     const router = useRouter()
-    const {id} = router.query
     const [erreur, setErreur] = useState('');
     const[IsOk, setIsOk] = useState('');
-
     const [AdminForm, setAdminForm] = useState({ 
-        password:'',
-        email:'',
-        phone:'',
-        user:''
-    })
+      password:'',
+      email:'',
+      phone:''
+  })
+    
     const handleChange =(e) =>
     {
         const value = e.target.value;
@@ -26,30 +24,43 @@ export default function createadministrateur()
             ...AdminForm, [e.target.name]: value
           });
     }
-  const setHeaders = (user) => {
+  function setHeaders(cookie){
     const headers = new Headers();
-    headers.append("Authorization", `Bearer ${user}`);
+    headers.append("Authorization", `Bearer ${cookie}`);
+  
+    const data = JSON.stringify({
+      "password":AdminForm.password,
+      "email": AdminForm.email,
+    "phone": AdminForm.phone,
+    "isActif": true
+    })
     const options = {
-      method: "GET",
-      mode: "cors",
+      method: 'post',
+      //body: JSON.stringify({"password": AdminForm.password, "email": AdminForm.email, "phone":AdminForm.phone, "isActif":true}),
+      mode: 'cors',
       headers,
+      body:data
     };
+
+    
     return options;
+    
   }
   
-   const dashboardCreateAdmin = async() => 
+   const dashboardCreateAdmin = async(e) => 
   {
+    e.preventDefault()
     if(cookies.user)
     {
       setUser(cookies.user);
       let continu;
       let options = setHeaders(cookies.user[0]);
-      const res =  await fetch("http://localhost:5000/api/auth/loginAdmin", options);
+      const res =  await fetch("http://localhost:5000/api/users/admin", options);
       console.log("euh oui ?")
       if(res != null)
       {
-        
-        if (res.status == 401) {
+        console.log("PAS NULLLLLLLLLLL");
+        if (res.status == 403) {
             let options = setHeaders(cookies.user[1]);
     
             const res2 = await fetch("http://localhost:5000/api/auth/token", options);
@@ -59,11 +70,12 @@ export default function createadministrateur()
               console.log("pas marche");
             } else {
               continu = await res2.json();
-              setCookie("user", [continu.token, cookies.user[1]], "/");
-                console.log('c passé')
-              let options = setHeaders(cookies.user[0]);
+
+              // setCookie("user", [continu.token, cookies.user[1]], "/");
+                console.log('c passé',[continu.accessToken, ' '] )
+              let options = setHeaders(continu.accessToken);
     
-              const res = await fetch("http://localhost:5000/api/auth/loginAdmin", options);
+              const res = await fetch("http://localhost:5000/api/users/admin", options);
               continu = await res.json();
             }
           } else {
@@ -72,44 +84,28 @@ export default function createadministrateur()
       }
     }
   }
-  useEffect(() => {
-    dashboardCreateAdmin()
-}, [user])
+
     const ScriptFormAdmin = (e) =>
     {
-        if (user != null)
-        {
             e.preventDefault()
             ServiceAPI.requetePostAdmin(AdminForm.password, AdminForm.email, AdminForm.phone ).then (response =>{
                 if(response.status == 200){
                     
                     //router.push('../profile/profile');
                     setIsOk('Compte crée');
-                    router.push({pathname:'../consultadmin/', query:{user}})
+                    router.push({pathname:'../consultadmin/'})
                   } else {
                     setErreur('Adresse mail deja utilisée.');
                   }
             }).catch(function(error){
                 console.log(error);
-                console.log(user[1])
-                
-              });
-              
-        }else
-        {
-            
-            console.log('non')
-        }
-        
+              }); 
     }
     return (
-        <>
-        {user != null ?
-            (
             <div class="col py-3">
         <div class="container">
         <h1>Formulaire d'Inscription ADMIN</h1>
-        <form class="row g-3"  id="register_form"  onSubmit={ScriptFormAdmin} action='' method="post">
+        <form class="row g-3"  id="register_form"  onSubmit={dashboardCreateAdmin} action='' method="post">
        
             <div class="col-md-6">
                 <label htmlFor='password'>password:</label>
@@ -127,11 +123,5 @@ export default function createadministrateur()
          </form>
           </div>
           </div>
-        ): (
-
-            <h1>j'ai pas de token </h1>
-        
-        )}
-        </>
     );
 }
