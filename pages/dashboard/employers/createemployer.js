@@ -32,7 +32,6 @@ export default function createemployer() {
           period != value ? tabPeriod.push(period) : ''
         })
         setPeriod(tabPeriod)
-        console.log(tabPeriod)
       }
     }
     setInscriptionForm({
@@ -129,7 +128,7 @@ export default function createemployer() {
               <label htmlFor="8">Samedi</label>
             </div>
           </fieldset>
-          <input value="Envoyer" className={styles.inputsubmit} type="submit" /> <br></br>
+          <input value="Envoyer" class="btn btn-success" type="submit" /> <br></br>
         </form>
         <p>{erreur}</p>
         <p>{IsOk}</p>

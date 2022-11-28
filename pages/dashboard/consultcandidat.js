@@ -2,6 +2,7 @@ import styles from '../../styles/Home.module.css'
 import Navbar from '../../components/Navbar'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
+// import { middleware } from "../../middleware"
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
 
@@ -9,33 +10,31 @@ export default function consultcandidat()
 {
     const router = useRouter()
     let [data, setData] = useState(null)
-    
+
     function deleteData(id){
-        console.log(id);
         ServiceAPI.deleteCandidate(id).then(response => {
-            console.log(response)
           if(response.status == 200)
           {
             if(response.data.length > 0)
             {
+                
                 setData(response.data)
                 setLoading(false)
+                
             }
             }
           })
     }
     function modifData(id){
-        console.log(id);
         ServiceAPI.requeteGetCandidatById(id).then(response =>{
-            console.log(response)
             if(response.status == 200)
-            {   console.log('aaaaa')
+            {
                 response.push('./candidate/updatecandidat/' +id)
                 if(response.data.length > 0)
-            {
-                setData(response.data)
-                setLoading(false)
-            }
+                {
+                    setData(response.data)
+                    setLoading(false)
+                }
             }
         })
     }
@@ -44,7 +43,6 @@ export default function consultcandidat()
         setLoading(true)
         ServiceAPI.requeteGetAllCandidats()
         .then(response => {
-            console.log(response.data[0].User.Localisation)
           if(response.status == 200){
             if(response.data.length > 0)
             {
@@ -59,9 +57,10 @@ export default function consultcandidat()
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
-       <Navbar>
+       <Navbar  >
         <div  > 
-        <Link href="./candidate/createcandidat"><a className={styles.buttonCreate}>Creer un candidat</a></Link><br></br>
+        <Link href="./candidate/createcandidat"><a class="btn btn-primary">Creer un candidat</a></Link><br></br>
+        
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
@@ -83,7 +82,7 @@ export default function consultcandidat()
         <tbody> 
         {data.map((element) => {
       return (
-            <tr>
+            <tr key={element.UserId}>
                 <td>
                     <h6>{element.lastname}</h6>
                 </td>
@@ -118,17 +117,18 @@ export default function consultcandidat()
                     <h6>{element.User.isActif? "✅": "❌"}</h6>
                 </td>
                 <td>
-                    <h6><a  onClick = {() =>modifData(element.UserId)}className={styles.buttonModif}
+                    <h6><a  onClick = {() =>modifData(element.UserId)}class="btn btn-secondary"
                     href={`/dashboard/candidate/updatecandidat?id=${element.id}`}
                     > Modifier Profil</a></h6>
                 </td>
                 <td>
-                <h6> <a onClick={() => deleteData(element.id) } className={styles.buttonSuppr} >Supprimer</a></h6>
+                <h6> <a onClick={() => deleteData(element.id) } class="btn btn-danger" >Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
         </tbody>
     </table>
+    
     </div>
        </Navbar>
     )

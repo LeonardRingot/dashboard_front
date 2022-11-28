@@ -1,10 +1,4 @@
-.container {
-  padding: 0 2rem;
-  background-color: rgb(24, 167, 233);
-  position: relative;
-  top:0;
-  text-align: center;
-}
+
 .menuadmin{
   text-align: center;
 }
@@ -27,10 +21,12 @@
   width: 100%;
 }
 .container {
-  display: flex;
+  
   justify-content: space-between;
   width: 100%;
-  background-color:#FAEBD7;
+  text-align: center;
+  background-color:#212529;
+  color: white;
   padding: 2rem;
   box-shadow: 0 0 5px #333;
 }
@@ -416,4 +412,15 @@ color: #222;
   .h-custom-2 {
   height: 100%;
   }
+  }
+  .CardInfoPerso{
+    background-color: #0070f3;
+    display: flex;
+    text-align: center;
+    border: 2px dotted;
+    width: 50%;
+    height: 50%;
+  }
+  .mybody{
+    margin-top: 50px;
   }

@@ -55,27 +55,20 @@ export default function createadministrateur()
       setUser(cookies.user);
       let continu;
       let options = setHeaders(cookies.user[0]);
-      const res =  await fetch("http://localhost:5000/api/users/admin", options);
-      console.log("euh oui ?")
+      const res =  await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
       if(res != null)
       {
-        console.log("PAS NULLLLLLLLLLL");
         if (res.status == 403) {
             let options = setHeaders(cookies.user[1]);
     
-            const res2 = await fetch("http://localhost:5000/api/auth/token", options);
-            console.log
-            console.log(res2)
+            const res2 = await fetch(`${process.env.NEXT_PUBLIC_URL}auth/token`, options);
             if (res2.status == 400) {
-              console.log("pas marche");
             } else {
               continu = await res2.json();
-
               // setCookie("user", [continu.token, cookies.user[1]], "/");
-                console.log('c passé',[continu.accessToken, ' '] )
               let options = setHeaders(continu.accessToken);
     
-              const res = await fetch("http://localhost:5000/api/users/admin", options);
+              const res = await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
               continu = await res.json();
             }
           } else {

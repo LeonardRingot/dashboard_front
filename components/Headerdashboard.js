@@ -1,18 +1,24 @@
 
 import styles from '../styles/Home.module.css'
-import {  useState, useEffect, useContext } from 'react'
-import { useRouter } from 'next/router'
-import * as ServiceAPI from '../services/ServiceAPI'
+import { useCookies } from "react-cookie";
+import { useState, useEffect } from 'react'
 
-//import { UserContext } from '../components/UserContext'
 export default function Headerdashboard() 
 {
-    // const msg = UserContext._currentValue.email
-    // console.log(msg)
-return (
+    const [cookies] = useCookies();
+    const [user, setUser] = useState("");
+    useEffect(() => {
+        if (cookies != undefined){
+            if (cookies["user"] != undefined){
+                if(cookies["user"][2] != undefined){
+                    setUser(cookies["user"][2]);
+                }
+            }
+        }
+    }, [user]);
+    return (
     <div className={styles.headerdash}>
-        <h1>Bienvenue sur votre dashboard  </h1>
-        
+        <h1>Bienvenue {user} sur votre dashboard</h1>
     </div>
 );
 }

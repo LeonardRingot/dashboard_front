@@ -16,7 +16,6 @@ export default function consultadmin()
         setLoading(true)
         ServiceAPI.requeteGetAllAdmin()
         .then(response => {
-            console.log(response)
           if(response.status == 200){
             if(response.data.length > 0)
             {
@@ -34,7 +33,7 @@ export default function consultadmin()
         <Navbar>
            
         <div  > 
-                <Link href="./administrateurs/createadmin"><a className={styles.buttonCreate}>Creer un admin</a></Link>
+                <Link href="./administrateurs/createadmin"><a class="btn btn-primary">Creer un admin</a></Link>
                 
                 <table class="table table-hover table-dark">
                 <thead>
@@ -48,7 +47,7 @@ export default function consultadmin()
                 <tbody> 
                 {data.map((element) => {
                      return (
-                        <tr>
+                        <tr key={element.email}>
                             <td>
                                 <h6>{element.email}</h6>
                             </td>

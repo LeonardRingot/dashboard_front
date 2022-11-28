@@ -12,9 +12,7 @@ export default function consultemployeur()
     let [data, setData] = useState(null)
 
     function deleteData(id){
-        console.log(id);
         ServiceAPI.deleteEmployer(id).then(response => {
-            console.log(response)
           if(response.status == 200)
           {
             if(response.data.length > 0)
@@ -26,11 +24,9 @@ export default function consultemployeur()
           })
     }
     function modifData(id){
-        console.log(id);
         ServiceAPI.requeteGetEmployerById(id).then(response =>{
-            console.log(response)
             if(response.status == 200)
-            {   console.log('aaaaa')
+            {
                 response.push('./employers/updateemployer/' +id)
                 if(response.data.length > 0)
             {
@@ -45,7 +41,6 @@ export default function consultemployeur()
         setLoading(true)
         ServiceAPI.requeteGetAllEmployeurs()
         .then(response => {
-            console.log(response)
           if(response.status == 200){
             if(response.data.length > 0){
                 setData(response.data)
@@ -60,8 +55,8 @@ export default function consultemployeur()
     return (
        <Navbar>
                <div  > 
-        <Link href="./employers/createemployer"><a className={styles.buttonCreate}>Creer un employeur</a></Link>
-        <Link href="./administrateurs/verifemployers"><a className={styles.buttonVerif}>Vérification employers</a></Link>
+        <Link href="./employers/createemployer"><a class="btn btn-primary">Creer un employeur</a></Link>
+        <Link href="./administrateurs/verifemployers"><a class="btn btn-primary">Vérification employers</a></Link>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
@@ -81,7 +76,7 @@ export default function consultemployeur()
         <tbody>
         {data.map((element) => {
       return (
-            <tr>
+            <tr key={element.UserId}>
                 <td>
                     <h6>{element.siret}</h6>
                 </td>
@@ -110,10 +105,10 @@ export default function consultemployeur()
                     <h6>{element.User.isActif? "✅": "❌"}</h6>
                 </td>
                 <td >
-                    <h6><a onClick = {() =>modifData(element.UserId)} className={styles.buttonModif} href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profil</a></h6>
+                    <h6><a onClick = {() =>modifData(element.UserId)} class="btn btn-secondary" href={`/dashboard/employers/updateemployer?id=${element.id}`}>Modifier Profil</a></h6>
                 </td>
                 <td >
-                    <h6 ><a className={styles.buttonSuppr} onClick={() => deleteData(element.id)}>Supprimer</a></h6>
+                    <h6 ><a class="btn btn-danger" onClick={() => deleteData(element.id)}>Supprimer</a></h6>
                 </td>
             </tr>)  
     })}

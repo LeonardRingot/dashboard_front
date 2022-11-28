@@ -1,14 +1,11 @@
 import {  useState, createContext } from 'react'
 import { useRouter } from 'next/router'
 import * as ServiceAPI from '../services/ServiceAPI'
-import styles from '../styles/Home.module.css'
 import {useCookies} from 'react-cookie'
+import * as React from 'react'
 
+export default function connexion(setIsLogged) {
 
-export default function connexion() {
-  
-  
-  
   const router = useRouter()
   
   const [ConnexionForm, setConnexionform]= useState({
@@ -31,18 +28,10 @@ export default function connexion() {
     
     ServiceAPI.requetePostConnexion(ConnexionForm.email, ConnexionForm.password).then(response => {
       
-        if(response.status == 200){
-        
-          console.log(response.data.accessToken)
-          
-          router.push({pathname: '../dashboard/dashboard', query: {id: response.data.data}});
-          console.log(response.data.accessToken)
-        
-          setCookie("user", [response.data.accessToken, response.data.refreshToken], "/");
-          
-          console.log("tu es co")
-          
-          console.log(UserContext)
+        if(response.status == 200){          
+          router.push({pathname: '../dashboard/dashboard/'});
+          setCookie("user", [response.data.accessToken, response.data.refreshToken, ConnexionForm.email], "/");
+          console.log("COOKIE CREATED");
         } else {
           return res.status(400).send('Super-Administrateur ou administrateur introuvable')
           
@@ -51,11 +40,6 @@ export default function connexion() {
         console.log(error);
       });
   }
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     history.replace('../dashboard/dashboard');
-  //   }
-  // }, [history, isAuthenticated]);
 
 return(
   <section class="vh-100">

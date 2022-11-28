@@ -33,12 +33,9 @@ export default function updateEmployer({  }) {
       if (e.target.name == "periods")
       {
         let myperiod = period.find((period) => period == value)
-        console.log(myperiod);
          if (myperiod == null)
          {
           period.push(value)
-          console.log(period);
-          console.log(value);
          } else 
          {
           let tabPeriod = []
@@ -70,10 +67,7 @@ export default function updateEmployer({  }) {
               let perioddata = [];
               
                response.data.User.Periods.map((period) =>  perioddata.push(period.id))
-              console.log(response.data.User)
                setPeriod(perioddata)
-               console.log(response.data.Periods)
-               console.log(period);
             }
           })
           .catch(error => console.log(error))
@@ -91,9 +85,7 @@ export default function updateEmployer({  }) {
               setErreur('NoN');
             }
           }).catch(function(error){
-          console.log(error);
-          console.log(updateEmployer.User.password)
-              console.log(updateEmployer.User.passwordconf)
+            console.log(error);
         }); 
     }
     return (
@@ -173,7 +165,7 @@ export default function updateEmployer({  }) {
             <label htmlFor="8">Samedi</label>
           </div>
       </fieldset>
-      <input  value="Envoyer" className={styles.inputsubmit} type="submit"/> <br></br>
+      <input  value="Envoyer" class="btn btn-success" type="submit"/> <br></br>
          </form>
          <p>{erreur}</p>
          <p>{IsOk}</p>

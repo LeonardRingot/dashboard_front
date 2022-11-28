@@ -2,25 +2,23 @@ import Link from "next/link";
 import styles from '../styles/Home.module.css'
 import { useCookies } from "react-cookie";
 import { UserContext } from "../components/UserContext";
-import { middleware } from "../middleware";
-import {
-    MdOutlineHome,
-    MdOutlineNotifications,
-    MdOutlineAccountCircle,
-    MdOutlineAccountBox,
-    MdOutlineModeEditOutline,
-    MdOutlineLogout,
-  } from "react-icons/md";
+import * as React from 'react';
+//import { middleware } from "../middleware";
+import { useRouter } from 'next/router';
 import Headerdashboard from "./Headerdashboard";
 export default function Navbar({children}){
-    const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-    function logout() {
-        removeCookie("user")
-        
-         window.location.replace('/')
-      }
-    console.log(UserContext)
+    const [cookies, setCookie, removeCookie] = useCookies();
+    const router = useRouter()
+    
+    const logout = () =>
+    {
+        console.log("COOKIE DELETED");
+        removeCookie("user", { path: '/' });
+        window.location.replace('/');
+    }
+
     return (
+        
     <div>
  <Headerdashboard></Headerdashboard>
   
@@ -58,7 +56,8 @@ export default function Navbar({children}){
       </div>
       <div class="col py-3">
       <UserContext.Provider>
-            {children}
+            {children }
+            
 </UserContext.Provider>
         </div>
         </div>

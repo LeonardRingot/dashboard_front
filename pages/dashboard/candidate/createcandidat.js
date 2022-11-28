@@ -3,6 +3,7 @@ import * as ServiceAPI from '../../../services/ServiceAPI'
 import { useRouter } from 'next/router'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
+import CardInfoPerso from '../../../components/CardInfoPerso';
 export default function createcandidat() 
 {
   const router = useRouter()
@@ -38,7 +39,6 @@ export default function createcandidat()
             period != value? tabPeriod.push(period): ''
           })
           setPeriod(tabPeriod)
-          console.log(tabPeriod)
          }
       }
       if (e.target.name == "degrees")
@@ -52,7 +52,6 @@ export default function createcandidat()
             degree != value? tabDegree.push(degree): ''
           })
           setDegree(tabDegree)
-          console.log(tabDegree)
          }
       }
       setInscriptionForm({
@@ -74,6 +73,7 @@ export default function createcandidat()
       });
     }
      return (
+      <>
           <div class="col py-3">
             <div class="container">
               <Link href="../consultcandidat"><a class="btn btn-primary" >Retour à la page consultation candidats</a></Link>
@@ -81,19 +81,19 @@ export default function createcandidat()
         <form class="row g-3"  id="register_form"  onSubmit={ScriptForm} action='' method="post">
         <div class="col-md-6">
              <label htmlFor='firstname'>Prénom:</label>
-             <input onChange={handleChange} type="text" class="form-control" name="firstname" /><br></br>
+             <input onChange={handleChange} type="text" class="form-control" name="firstname" />
           </div>
           <div class="col-md-6">
              <label htmlFor='lastname'>Nom:</label>
-             <input onChange={handleChange} type="text" class="form-control" name="lastname" /><br></br>
+             <input onChange={handleChange} type="text" class="form-control" name="lastname" />
            </div>
         <div class="col-md-6"> 
           <label htmlFor='birthday'>Date de naissance:</label>
-          <input onChange={handleChange} type="date"  class="form-control" name="birthday" /><br></br>
+          <input onChange={handleChange} type="date"  class="form-control" name="birthday" />
         </div>
         <div class="col-md-6">
              <label htmlFor='wantToBe'>wantToBe:</label>
-             <select onChange={handleChange}  class="form-control" name="wantToBe" ><br></br>
+             <select onChange={handleChange}  class="form-control" name="wantToBe" >
              <option value="">--Please choose an option--</option>
              <option value="animateur">animateur</option>
              <option value="directeur">directeur</option>
@@ -101,31 +101,31 @@ export default function createcandidat()
            </div>
         <div class="col-md-6">
           <label htmlFor='password'>Mot de passe:</label>
-          <input onChange={handleChange} type="password"  class="form-control" name="password" /><br></br>
+          <input onChange={handleChange} type="password"  class="form-control" name="password" />
           </div>
           <div class="col-md-6">
           <label htmlFor='passwordconf'>Mot de passe conf:</label>
-          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" /><br></br>
+          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" />
           </div>
           <div class="col-md-6">
           <label htmlFor='email'>Email:</label>
-          <input onChange={handleChange} type="email"  class="form-control" name="email" /><br></br>
+          <input onChange={handleChange} type="email"  class="form-control" name="email" />
           </div>
           <div class="col-md-6">
           <label htmlFor='phone'>Numéro de téléphone:</label>
-          <input onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
+          <input onChange={handleChange} type="tel"  class="form-control" name="phone" />
           </div>
           <div class="col-12">
           <label htmlFor='address'>Adresse:</label>
-          <input onChange={handleChange} type="text"  class="form-control" name="address" /><br></br>
+          <input onChange={handleChange} type="text"  class="form-control" name="address" />
           </div>
           <div class="col-md-2">
           <label htmlFor='zipCode'>Code Postal:</label>
-          <input onChange={handleChange} type="text"  class="form-control" name="zipCode" /><br></br>
+          <input onChange={handleChange} type="text"  class="form-control" name="zipCode" />
           </div>
           <div class="col-md-4">
           <label htmlFor='city'>Ville:</label>
-          <input onChange={handleChange} type="text"  class="form-control" name="city" /><br></br>
+          <input onChange={handleChange} type="text"  class="form-control" name="city" />
           </div>
           <fieldset name="periods"id='periods'>
           <legend >Périodes disponibles</legend>
@@ -189,11 +189,14 @@ export default function createcandidat()
             <label htmlFor="14">BPJEPS</label>
           </div>
       </fieldset>
-          <input  value="Envoyer"className={styles.inputsubmit} type="submit"/> <br></br>
+          <input  value="Envoyer" class="btn btn-success" type="submit"/> 
        </form>
        </div>
           </div>
-    
+          
+<CardInfoPerso></CardInfoPerso>
+          
+          </>
             
        
 

@@ -1,16 +1,9 @@
-import styles from '../../styles/Home.module.css'
-import Headerdashboard from '../../components/Headerdashboard';
 import Navbar from '../../components/Navbar';
 import { useRouter } from 'next/router'
-import consultcandidat from './consultcandidat';
-  import {  useState, useEffect } from 'react'
-import Link from 'next/link';
+import {  useState, useEffect } from 'react'
 import {useCookies} from 'react-cookie'
-import {ConnexionForm, response} from '../connexion'
 
-
-
-export default function dashboard(){
+export default function dashboard(logout){
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [user, setUser] = useState(null);
   const router = useRouter();
@@ -32,13 +25,11 @@ export default function dashboard(){
       setUser(cookies.user);
       let continu;
       let options = setHeaders(cookies.user[0]);
-      const res = await fetch("http://localhost:3000/dashboard/dashboard", options);
-      console.log(cookies.user)
-      if(response != null){
-        if(response.status == 401)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL_DASHBOARD_ACCUEIL}`, options);
+      if(res != null){
+        if(res.status == 401)
         {
           let options = setHeaders(cookies.user[1])
-          console.log("jai pas recu cookie")
         }
       }
     }
@@ -47,13 +38,16 @@ export default function dashboard(){
     dashboardUser()
 }, [user])
 
-function candidat () {
-    <Link href="/dashboard/consultcandidat"></Link>
-} ;
+
+
+function logout() {
+  removeCookie("user")
+  window.location.replace('/')
+}
 
     return(
       <>
-     <Navbar >
+     <Navbar   >
       </Navbar>
       </>
     )

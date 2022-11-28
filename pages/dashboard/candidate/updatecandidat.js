@@ -38,12 +38,9 @@ export default function Register() {
       if (e.target.name == "periods")
       {
         let myperiod = period.find((period) => period == value)
-        console.log(myperiod);
          if (myperiod == null)
          {
           period.push(value)
-          console.log(period);
-          console.log(value);
          } else 
          {
           let tabPeriod = []
@@ -56,12 +53,9 @@ export default function Register() {
       if (e.target.name == "degrees")
       {
         let mydegree = degree.find((degree) => degree == value)
-        console.log(mydegree);
          if (mydegree == null)
          {
           degree.push(value)
-          console.log(degree);
-          console.log(value);
          } else 
          {
           let tabDegree = []
@@ -104,11 +98,6 @@ export default function Register() {
 
               setPeriod(perioddata)
               setDegree(degreedata)
-              
-              console.log(response.data.Periods)
-              console.log(period);
-              console.log(response.data.User.Degrees)
-              console.log(degree);
             }
           })
           .catch(error => console.log(error))
@@ -126,12 +115,9 @@ export default function Register() {
               setIsOk('User mis a jour');
             }
           }).catch(function(error){
-          console.log(error);
-          console.log(updateProfile.User.password)
-              console.log(updateProfile.User.passwordconf)
+            console.log(error);
         });
     }
-    console.log(updateProfile.User.isActif);
     return (
 <div class="col py-3">
             <div class="container">
@@ -246,7 +232,7 @@ export default function Register() {
             <label htmlFor="14">BPJEPS</label>
           </div>
       </fieldset>
-         <input  value="Envoyer" className={styles.inputsubmit} type="submit"/> <br></br>
+         <input  value="Envoyer" class="btn btn-success" type="submit"/> <br></br>
           </form>
          <p>{erreur}</p>
          <p>{IsOk}</p>

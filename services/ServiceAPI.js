@@ -1,9 +1,7 @@
 import axios from "axios";
-// requete connexion admin
-import { getItem, addItem, removeItem } from './LocaleStorage';
-const URL = 'http://localhost:5000/api/';
 
 export function requetePostConnexion(email, password) {
+  
   var data = JSON.stringify({
     "email": email,
     "password": password
@@ -11,7 +9,7 @@ export function requetePostConnexion(email, password) {
   });
   var configConnexion = {
     method: 'post',
-    url: `${URL}auth/loginAdmin`,
+    url: `${process.env.NEXT_PUBLIC_URL}auth/loginAdmin`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -27,7 +25,7 @@ export function requetePostConnexion(email, password) {
 export function requeteGetAllCandidats(firstname, lastname, address, zipCode, city) {
   var configGetAllUsersCandidats = {
     method: 'get',
-    url: `${URL}candidates`,
+    url: `${process.env.NEXT_PUBLIC_URL}candidates`,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -39,7 +37,7 @@ export function requeteGetAllCandidats(firstname, lastname, address, zipCode, ci
 export function requeteGetCandidatById(id) {
   var configGetCandidatsById = {
     method: 'get',
-    url:`${URL}candidates/` + id,
+    url:`${process.env.NEXT_PUBLIC_URL}candidates/` + id,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -51,7 +49,7 @@ export function requeteGetCandidatById(id) {
 export function requeteGetEmployerById(id) {
   var configGetEmployerById = {
     method: 'get',
-    url: `${URL}employers/` + id,
+    url: `${process.env.NEXT_PUBLIC_URL}employers/` + id,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -62,14 +60,12 @@ export function requeteGetEmployerById(id) {
 //requete inscription candidats
 
 export function requetePost(firstname, lastname, birthday,wantToBe, password, passwordconf, email, phone, address, zipCode, city, periods, degrees) {
-  console.log(periods);
   let obj = periods?.map(((period) => {
     return { "id": parseInt(period) }
   }))
   let objDegree = degrees?.map(((degree) => {
     return { "id": parseInt(degree) }
   }))
-  console.log(obj);
   var data = JSON.stringify({
     "candidate": {
       "firstname": firstname,
@@ -95,7 +91,7 @@ export function requetePost(firstname, lastname, birthday,wantToBe, password, pa
   });
   var config = {
     method: 'post',
-    url: `${URL}candidates`,
+    url: `${process.env.NEXT_PUBLIC_URL}candidates`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -104,7 +100,6 @@ export function requetePost(firstname, lastname, birthday,wantToBe, password, pa
   return axios(config);
 }
 export function requetePostEmployers(siret, structurename, password,passwordconf, email, phone, address, zipCode, city, periods) {
-  console.log(periods);
   var data = JSON.stringify({
     "employer": {
       "siret": siret,
@@ -130,7 +125,7 @@ export function requetePostEmployers(siret, structurename, password,passwordconf
   });
   var confiPostEmployers = {
     method: 'post',
-    url: `${URL}employers`,
+    url: `${process.env.NEXT_PUBLIC_URL}employers`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -147,8 +142,6 @@ export function requeteUpdateProfil(id, firstname, lastname, password, passwordc
   let objDegree = degrees?.map(((degree) => {
     return { "id": parseInt(degree) }
   }))
-  
-  console.log(city);
   var data = JSON.stringify({
     "candidate": {
       "firstname": firstname,
@@ -172,7 +165,7 @@ export function requeteUpdateProfil(id, firstname, lastname, password, passwordc
   });
   var configUpdateProfile = {
     method: 'put',
-    url: `${URL}candidates/form/` + id,
+    url: `${process.env.NEXT_PUBLIC_URL}candidates/form/` + id,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -209,7 +202,7 @@ export function requeteUpdateEmployers(id, siret, structurename,password,passwor
   });
   var configUpdateEmployers = {
     method: 'put',
-    url: `${URL}employers/form/` + id,
+    url: `${process.env.NEXT_PUBLIC_URL}employers/form/` + id,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -223,7 +216,7 @@ export function requeteGetAllEmployeurs(siret, structurename, UserId) {
   
   var configGetAllUsersEmployers = {
     method: 'get',
-    url: `${URL}employers`,
+    url: `${process.env.NEXT_PUBLIC_URL}employers`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -237,7 +230,7 @@ export function deleteCandidate(id) {
 
   var configDeleteCandidateById = {
     method: 'delete',
-    url: `${URL}candidates/ `+ id,
+    url: `${process.env.NEXT_PUBLIC_URL}candidates/ `+ id,
     headers: {
       'Content-Type': 'application/json'
     }
@@ -251,7 +244,7 @@ export function deleteEmployer(id) {
 
   var configDeleteEmployerById = {
     method: 'delete',
-    url: `${URL}employers/` + id,
+    url: `${process.env.NEXT_PUBLIC_URL}employers/` + id,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -266,7 +259,7 @@ export function requeteGetAllAdmin()
   });
   var configGetAllUsersRoles = {
     method: 'get',
-    url: `${URL}/users/admin/all`,
+    url: `${process.env.NEXT_PUBLIC_URL}/users/admin/all`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -287,7 +280,7 @@ export function requetePostAdmin(password, email, phone ) {
   });
   var configAdmin = {
     method: 'post',
-    url: `${URL}users/admin`,
+    url: `${process.env.NEXT_PUBLIC_URL}users/admin`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -302,7 +295,7 @@ export default function GetMyTokenId()
   
   var configAdminToken = {
     method: 'get',
-    url: `${URL}users/tokens/1` ,
+    url: `${process.env.NEXT_PUBLIC_URL}users/tokens/1` ,
     headers: {
       'Content-Type': 'application/json'
     },
