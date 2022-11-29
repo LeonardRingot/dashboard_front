@@ -49,7 +49,7 @@ function logout() {
     return(
       <>
      <Head>
-     <title> Dashboard</title>
+     <title> Dashboard CSE</title>
      
      </Head>
      <Navbar   >
