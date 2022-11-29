@@ -260,7 +260,8 @@ export function requeteGetAllAdmin()
     method: 'get',
     url: `${process.env.NEXT_PUBLIC_URL}/users/admin/all`,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
     },
     data: data
   };
