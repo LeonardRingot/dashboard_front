@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from '../styles/Home.module.css'
 import { useCookies } from "react-cookie";
-import { UserContext } from "../components/UserContext";
 import * as React from 'react';
 //import { middleware } from "../middleware";
 import { useRouter } from 'next/router';
@@ -55,10 +54,10 @@ export default function Navbar({children}){
           </div>
       </div>
       <div class="col py-3">
-      <UserContext.Provider>
+      
             {children }
             
-</UserContext.Provider>
+
         </div>
         </div>
         </div>
