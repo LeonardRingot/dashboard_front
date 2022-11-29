@@ -1,6 +1,8 @@
 import React ,{ useEffect, useState } from 'react'
+import Head from 'next/head'
 import * as ServiceAPI from '../../../services/ServiceAPI'
 import { useRouter } from 'next/router'
+import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
 import { useCookies } from "react-cookie";
 
@@ -24,59 +26,59 @@ export default function createadministrateur()
             ...AdminForm, [e.target.name]: value
           });
     }
-  function setHeaders(cookie){
-    const headers = new Headers();
-    headers.append("Authorization", `Bearer ${cookie}`);
+  // function setHeaders(cookie){
+  //   const headers = new Headers();
+  //   headers.append("Authorization", `Bearer ${cookie}`);
   
-    const data = JSON.stringify({
-      "password":AdminForm.password,
-      "email": AdminForm.email,
-    "phone": AdminForm.phone,
-    "isActif": true
-    })
-    const options = {
-      method: 'post',
-      //body: JSON.stringify({"password": AdminForm.password, "email": AdminForm.email, "phone":AdminForm.phone, "isActif":true}),
-      mode: 'cors',
-      headers,
-      body:data
-    };
+  //   const data = JSON.stringify({
+  //     "password":AdminForm.password,
+  //     "email": AdminForm.email,
+  //   "phone": AdminForm.phone,
+  //   "isActif": true
+  //   })
+  //   const options = {
+  //     method: 'post',
+  //     //body: JSON.stringify({"password": AdminForm.password, "email": AdminForm.email, "phone":AdminForm.phone, "isActif":true}),
+  //     mode: 'cors',
+  //     headers,
+  //     body:data
+  //   };
 
     
-    return options;
+  //   return options;
     
-  }
+  // }
   
-   const dashboardCreateAdmin = async(e) => 
-  {
-    e.preventDefault()
-    if(cookies.user)
-    {
-      setUser(cookies.user);
-      let continu;
-      let options = setHeaders(cookies.user[0]);
-      const res =  await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
-      if(res != null)
-      {
-        if (res.status == 403) {
-            let options = setHeaders(cookies.user[1]);
+  //  const dashboardCreateAdmin = async(e) => 
+  // {
+  //   e.preventDefault()
+  //   if(cookies.user)
+  //   {
+  //     setUser(cookies.user);
+  //     let continu;
+  //     let options = setHeaders(cookies.user[0]);
+  //     const res =  await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
+  //     if(res != null)
+  //     {
+  //       if (res.status == 403) {
+  //           let options = setHeaders(cookies.user[1]);
     
-            const res2 = await fetch(`${process.env.NEXT_PUBLIC_URL}auth/token`, options);
-            if (res2.status == 400) {
-            } else {
-              continu = await res2.json();
-              // setCookie("user", [continu.token, cookies.user[1]], "/");
-              let options = setHeaders(continu.accessToken);
+  //           const res2 = await fetch(`${process.env.NEXT_PUBLIC_URL}auth/token`, options);
+  //           if (res2.status == 400) {
+  //           } else {
+  //             continu = await res2.json();
+  //             // setCookie("user", [continu.token, cookies.user[1]], "/");
+  //             let options = setHeaders(continu.accessToken);
     
-              const res = await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
-              continu = await res.json();
-            }
-          } else {
-            continu = await res.json();
-          }
-      }
-    }
-  }
+  //             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
+  //             continu = await res.json();
+  //           }
+  //         } else {
+  //           continu = await res.json();
+  //         }
+  //     }
+  //   }
+  // }
 
     const ScriptFormAdmin = (e) =>
     {
@@ -95,26 +97,56 @@ export default function createadministrateur()
               }); 
     }
     return (
-            <div class="col py-3">
-        <div class="container">
-        <h1>Formulaire d'Inscription ADMIN</h1>
-        <form class="row g-3"  id="register_form"  onSubmit={dashboardCreateAdmin} action='' method="post">
-       
-            <div class="col-md-6">
-                <label htmlFor='password'>password:</label>
-                <input onChange={handleChange} type="password"  class="form-control" name="password" /><br></br>
+      <>
+      <Head><title>Créations administrateurs</title></Head>
+      <div class="col py-3">
+      <div class="container">
+        <Link href="../consultadmin"><a class="btn btn-primary" >Retour à la page consultation Administrateurs</a></Link>
+        <section>
+        <div class="row g-3">
+            <div class=" mb-4">
+              <div class="card mb-4">
+                <div class="card-header py-3">
+                       <h5 class="mb-0">Formulaire d'Inscriptions Administrateurs</h5>
+                 </div>
+                 <div class="card-body">
+          <form id="register_form"  onSubmit={ScriptFormAdmin} action='' method="post" >
+          <h5 class="mb-4">Informations de l'Administrateurs</h5>
+          <div class="row mb-4">
+              <div class="col">
+              <div class="form-outline">
+                        <label htmlFor='password'>Mot de passe:</label>
+                        <input onChange={handleChange} type="password"  class="form-control" name="password" />
+                      </div>
+              </div>
             </div>
-            <div class="col-md-6">
-                <label htmlFor='email'>email:</label>
-                <input onChange={handleChange} type="email"  class="form-control" name="email" /><br></br>
+            <div class="row mb-4">
+              <div class="col">
+              <div class="form-outline">
+                        <label htmlFor='password'>Email:</label>
+                        <input onChange={handleChange} type="email"  class="form-control" name="email" />
+                      </div>
+              </div>
+              
             </div>
-            <div class="col-md-6">
-                <label htmlFor='phone'>phone:</label>
-                <input onChange={handleChange} type="tel"  class="form-control" name="phone" /><br></br>
+            <div class="row mb-4">
+              <div class="col">
+              <div class="form-outline">
+                        <label htmlFor='phone'>Numéro de téléphone:</label>
+                        <input onChange={handleChange} type="tel" maxLength={9} placeholder='ex: 782361188' class="form-control" name="phone" />
+                      </div>
+              </div>
+              
             </div>
-            <input  value="Submit"className={styles.inputsubmit} type="submit"/> <br></br>
-         </form>
+                <input  value="Envoyer" class="btn btn-success" type="submit"/>
+              </form>
+              </div>
+               </div>
+            </div>
           </div>
-          </div>
+        </section>
+     </div>
+      </div>
+          </>
     );
 }

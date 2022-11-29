@@ -1,4 +1,5 @@
 import styles from '../../styles/Home.module.css'
+import Head from 'next/head'
 import Navbar from '../../components/Navbar'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
@@ -12,16 +13,23 @@ export default function consultemployeur()
     let [data, setData] = useState(null)
 
     function deleteData(id){
-        ServiceAPI.deleteEmployer(id).then(response => {
-          if(response.status == 200)
-          {
-            if(response.data.length > 0)
-            {
-                setData(response.data)
-                setLoading(false)
-            }
-            }
-          })
+        if(confirm("Etes vous sure de  vouloir supprimer" ) == true)
+        {
+            ServiceAPI.deleteEmployer(id).then(response => {
+                if(response.status == 200)
+                {
+                  if(response.data.length > 0)
+                  {
+                      setData(response.data)
+                      setLoading(false)
+                  }
+                  }
+                })
+        }else
+        {
+            event.preventDefault();
+        }
+        
     }
     function modifData(id){
         ServiceAPI.requeteGetEmployerById(id).then(response =>{
@@ -53,6 +61,10 @@ export default function consultemployeur()
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No employees</p>
     return (
+        <>
+        <Head>
+            <title>Consultations employeurs</title>
+        </Head>
        <Navbar>
                <div  > 
         <Link href="./employers/createemployer"><a class="btn btn-primary">Creer un employeur</a></Link>
@@ -116,5 +128,6 @@ export default function consultemployeur()
     </table>
     </div>
        </Navbar>
+       </>
     )
 }

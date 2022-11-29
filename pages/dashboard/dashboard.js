@@ -1,4 +1,5 @@
 import Navbar from '../../components/Navbar';
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {  useState, useEffect } from 'react'
 import {useCookies} from 'react-cookie'
@@ -47,6 +48,9 @@ function logout() {
 
     return(
       <>
+     <Head>
+     <title> Dashboard</title>
+     </Head>
      <Navbar   >
       </Navbar>
       </>

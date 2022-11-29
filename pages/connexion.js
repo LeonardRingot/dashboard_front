@@ -1,4 +1,5 @@
 import {  useState, createContext } from 'react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import * as ServiceAPI from '../services/ServiceAPI'
 import {useCookies} from 'react-cookie'
@@ -42,6 +43,10 @@ export default function connexion(setIsLogged) {
   }
 
 return(
+  <>
+  <Head>
+  <title>Connexion Dashboard</title>
+  </Head>
   <section class="vh-100">
   <div class="container-fluid">
     <div class="row">
@@ -84,5 +89,6 @@ return(
     </div>
   </div>
 </section>
+</>
 )
 }

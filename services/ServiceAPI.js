@@ -100,6 +100,9 @@ export function requetePost(firstname, lastname, birthday,wantToBe, password, pa
   return axios(config);
 }
 export function requetePostEmployers(siret, structurename, password,passwordconf, email, phone, address, zipCode, city, periods) {
+  let obj = periods?.map(((period) => {
+    return { "id": parseInt(period) }
+  }))
   var data = JSON.stringify({
     "employer": {
       "siret": siret,
@@ -117,11 +120,7 @@ export function requetePostEmployers(siret, structurename, password,passwordconf
       "zipCode": zipCode,
       "city": city
     },
-    "periods": [periods?.map((period) => {
-
-      return { "id": period }
-    })
-    ]
+    "periods": obj
   });
   var confiPostEmployers = {
     method: 'post',

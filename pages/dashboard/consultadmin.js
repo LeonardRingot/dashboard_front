@@ -1,5 +1,6 @@
 import styles from '../../styles/Home.module.css'
 import Navbar from '../../components/Navbar'
+import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import * as  ServiceAPI  from '../../services/ServiceAPI'
@@ -30,6 +31,10 @@ export default function consultadmin()
     if (!data) return <p>No candidates</p>
 
     return (
+        <>
+<Head>
+    <title>Consultations Administrateurs</title>
+</Head>
         <Navbar>
            
         <div  > 
@@ -66,6 +71,7 @@ export default function consultadmin()
                 </table>
                 </div>
                    </Navbar>   
+                   </>
     )
     
 }

@@ -1,4 +1,5 @@
 import styles from '../../styles/Home.module.css'
+import Head from 'next/head'
 import Navbar from '../../components/Navbar'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
@@ -12,6 +13,8 @@ export default function consultcandidat()
     let [data, setData] = useState(null)
 
     function deleteData(id){
+       if (confirm("Etes vous sure de  vouloir supprimer" ) == true)
+       {
         ServiceAPI.deleteCandidate(id).then(response => {
           if(response.status == 200)
           {
@@ -24,6 +27,11 @@ export default function consultcandidat()
             }
             }
           })
+       } else
+       {
+        event.preventDefault();
+       }
+        
     }
     function modifData(id){
         ServiceAPI.requeteGetCandidatById(id).then(response =>{
@@ -57,6 +65,10 @@ export default function consultcandidat()
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No candidates</p>
     return (
+        <>
+        <Head>
+        <title>Consultations candidats</title>
+        </Head>
        <Navbar  >
         <div  > 
         <Link href="./candidate/createcandidat"><a class="btn btn-primary">Creer un candidat</a></Link><br></br>
@@ -122,7 +134,7 @@ export default function consultcandidat()
                     > Modifier Profil</a></h6>
                 </td>
                 <td>
-                <h6> <a onClick={() => deleteData(element.id) } class="btn btn-danger" >Supprimer</a></h6>
+                <h6> <a onClick={() => deleteData(element.id)  } class="btn btn-danger" >Supprimer</a></h6>
                 </td>
             </tr>)  
     })}
@@ -131,5 +143,6 @@ export default function consultcandidat()
     
     </div>
        </Navbar>
+       </>
     )
 }

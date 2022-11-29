@@ -22,7 +22,7 @@ export default function Home() {
     </div>
     <div className={styles.mybody}>
     <div>  <Body>
-
+      
     </Body>
     </div>
     </div>
