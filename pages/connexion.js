@@ -46,6 +46,7 @@ return(
   <>
   <Head>
   <title>Connexion Dashboard</title>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
   </Head>
   <section class="vh-100">
   <div class="container-fluid">

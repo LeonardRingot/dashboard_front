@@ -11,8 +11,8 @@ export function requetePostConnexion(email, password) {
     method: 'post',
     url: `${process.env.NEXT_PUBLIC_URL}auth/loginAdmin`,
     headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
+      'Content-Type': 'application/json'
+      
     },
 
     data: data
@@ -261,8 +261,8 @@ export function requeteGetAllAdmin()
     method: 'get',
     url: `${process.env.NEXT_PUBLIC_URL}/users/admin/all`,
     headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
+      'Content-Type': 'application/json'
+      
     },
     data: data
   };
