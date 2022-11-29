@@ -30,7 +30,7 @@ export default function Connexion(setIsLogged) {
     ServiceAPI.requetePostConnexion(ConnexionForm.email, ConnexionForm.password).then(response => {
       
         if(response.status == 200){          
-          Router.push({pathname: '../dashboard/dashboard/'});
+          Router.push({pathname:`${process.env.NEXT_PUBLIC_URL_DASHBOARD_ACCUEIL}`});
           setCookie("user", [response.data.accessToken, response.data.refreshToken, ConnexionForm.email], "/");
           console.log("COOKIE CREATED");
         } else {
