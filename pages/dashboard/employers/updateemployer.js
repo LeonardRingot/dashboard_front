@@ -5,7 +5,7 @@ import * as ServiceAPI from '../../../services/ServiceAPI'
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
 
-export default function updateEmployer({  }) {
+export default function UpdateEmployer({  }) {
     const [erreur, setErreur] = useState('');
     const[IsOk, setIsOk] = useState('');
     const router = useRouter()

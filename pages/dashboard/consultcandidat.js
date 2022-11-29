@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
 
-export default function consultcandidat()
+export default function Consultcandidat()
 {
     const router = useRouter()
     let [data, setData] = useState(null)

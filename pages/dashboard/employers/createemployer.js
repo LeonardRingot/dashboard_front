@@ -3,7 +3,7 @@ import Head from 'next/head'
 import * as ServiceAPI from '../../../services/ServiceAPI'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
-export default function createemployer() {
+export default function Createemployer() {
   const [erreur, setErreur] = useState('');
   const [IsOk, setIsOk] = useState('');
   const[period, setPeriod] = useState([]);

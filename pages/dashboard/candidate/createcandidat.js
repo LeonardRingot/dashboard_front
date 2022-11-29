@@ -3,7 +3,7 @@ import Head from 'next/head'
 import * as ServiceAPI from '../../../services/ServiceAPI'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
-export default function createcandidat() 
+export default function Createcandidat() 
 {
   
     const [erreur, setErreur] = useState('');

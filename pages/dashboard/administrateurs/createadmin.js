@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
 
 
-export default function createadministrateur()
+export default function Createadministrateur()
 {
     
   const [user, setUser] = useState(null);

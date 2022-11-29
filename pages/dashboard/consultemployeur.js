@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
 
-export default function consultemployeur()
+export default function Consultemployeur()
 {
     
     let [data, setData] = useState(null)

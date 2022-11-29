@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
 
-export default function consultadmin()
+export default function Consultadmin()
 {
     const router = useRouter()
     const {id} = router.query

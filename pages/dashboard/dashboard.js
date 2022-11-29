@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import {  useState, useEffect } from 'react'
 import {useCookies} from 'react-cookie'
 
-export default function dashboard(logout){
+export default function Dashboard(logout){
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [user, setUser] = useState(null);
   const router = useRouter();

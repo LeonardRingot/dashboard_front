@@ -1,5 +1,5 @@
 import Head from 'next/head'
-export default function verifemployers()
+export default function Verifemployers()
 {
     return(
         <>
