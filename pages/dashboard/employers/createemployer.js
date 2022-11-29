@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import * as ServiceAPI from '../../../services/ServiceAPI'
-import { useRouter } from 'next/router'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
 export default function createemployer() {
-  const router = useRouter()
   const [erreur, setErreur] = useState('');
   const [IsOk, setIsOk] = useState('');
   const[period, setPeriod] = useState([]);
@@ -43,7 +41,7 @@ export default function createemployer() {
     e.preventDefault()
     ServiceAPI.requetePostEmployers(InscriptionForm.siret, InscriptionForm.structurename, InscriptionForm.password,InscriptionForm.passwordconf, InscriptionForm.email, InscriptionForm.phone, InscriptionForm.address, InscriptionForm.zipCode, InscriptionForm.city, period).then(response => {
       if (response.status == 201) {
-        //router.push('../profile/profile');
+        
         setIsOk('Compte crée');
       } else {
         setIsOk('Compte crée');

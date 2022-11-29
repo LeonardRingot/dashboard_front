@@ -78,7 +78,6 @@ export default function updateEmployer({  }) {
         e.preventDefault()
         ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.password , updateEmployer.User.passwordconf,updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city,period).then(response => {
             if(response.status == 201){
-              //router.push('../profile/profile');
               setIsOk('User mis a jour');
               
             } else {

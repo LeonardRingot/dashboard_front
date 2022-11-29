@@ -4,11 +4,11 @@ import * as ServiceAPI from '../../../services/ServiceAPI'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
-import { useCookies } from "react-cookie";
+
 
 export default function createadministrateur()
 {
-    const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+    
   const [user, setUser] = useState(null);
     const router = useRouter()
     const [erreur, setErreur] = useState('');
@@ -26,60 +26,6 @@ export default function createadministrateur()
             ...AdminForm, [e.target.name]: value
           });
     }
-  // function setHeaders(cookie){
-  //   const headers = new Headers();
-  //   headers.append("Authorization", `Bearer ${cookie}`);
-  
-  //   const data = JSON.stringify({
-  //     "password":AdminForm.password,
-  //     "email": AdminForm.email,
-  //   "phone": AdminForm.phone,
-  //   "isActif": true
-  //   })
-  //   const options = {
-  //     method: 'post',
-  //     //body: JSON.stringify({"password": AdminForm.password, "email": AdminForm.email, "phone":AdminForm.phone, "isActif":true}),
-  //     mode: 'cors',
-  //     headers,
-  //     body:data
-  //   };
-
-    
-  //   return options;
-    
-  // }
-  
-  //  const dashboardCreateAdmin = async(e) => 
-  // {
-  //   e.preventDefault()
-  //   if(cookies.user)
-  //   {
-  //     setUser(cookies.user);
-  //     let continu;
-  //     let options = setHeaders(cookies.user[0]);
-  //     const res =  await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
-  //     if(res != null)
-  //     {
-  //       if (res.status == 403) {
-  //           let options = setHeaders(cookies.user[1]);
-    
-  //           const res2 = await fetch(`${process.env.NEXT_PUBLIC_URL}auth/token`, options);
-  //           if (res2.status == 400) {
-  //           } else {
-  //             continu = await res2.json();
-  //             // setCookie("user", [continu.token, cookies.user[1]], "/");
-  //             let options = setHeaders(continu.accessToken);
-    
-  //             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}users/admin`, options);
-  //             continu = await res.json();
-  //           }
-  //         } else {
-  //           continu = await res.json();
-  //         }
-  //     }
-  //   }
-  // }
-
     const ScriptFormAdmin = (e) =>
     {
             e.preventDefault()

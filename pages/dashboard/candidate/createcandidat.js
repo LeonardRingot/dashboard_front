@@ -1,13 +1,11 @@
 import React ,{ useEffect, useState } from 'react'
 import Head from 'next/head'
 import * as ServiceAPI from '../../../services/ServiceAPI'
-import { useRouter } from 'next/router'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
-import CardInfoPerso from '../../../components/CardInfoPerso';
 export default function createcandidat() 
 {
-  const router = useRouter()
+  
     const [erreur, setErreur] = useState('');
     const[IsOk, setIsOk] = useState('');
     const[period, setPeriod] = useState([]);
@@ -64,7 +62,6 @@ export default function createcandidat()
       e.preventDefault()
       ServiceAPI.requetePost(InscriptionForm.firstname, InscriptionForm.lastname, InscriptionForm.birthday, InscriptionForm.wantToBe,InscriptionForm.password, InscriptionForm.passwordconf,InscriptionForm.email,InscriptionForm.phone,InscriptionForm.address,InscriptionForm.zipCode,InscriptionForm.city,period,degree ).then(response => {
           if(response.status == 201){
-            //router.push('../profile/profile');
             setIsOk('Compte crée');
           } else {
             setErreur('Adresse mail deja utilisée.');
