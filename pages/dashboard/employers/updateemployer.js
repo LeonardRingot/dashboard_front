@@ -81,7 +81,7 @@ export default function UpdateEmployer({  }) {
               setIsOk('User mis a jour');
               
             } else {
-              setErreur('NoN');
+              setIsOk('User mis a jour');
             }
           }).catch(function(error){
             console.log(error);
