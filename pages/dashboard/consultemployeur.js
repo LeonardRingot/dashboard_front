@@ -2,14 +2,13 @@ import styles from '../../styles/Home.module.css'
 import Head from 'next/head'
 import Navbar from '../../components/Navbar'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router';
+
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
 
 export default function consultemployeur()
 {
-    const router = useRouter()
-    const {id} = router.query
+    
     let [data, setData] = useState(null)
 
     function deleteData(id){

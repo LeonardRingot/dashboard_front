@@ -7,7 +7,7 @@ import * as React from 'react'
 
 export default function connexion(setIsLogged) {
 
-  const router = useRouter()
+  const Router = useRouter()
   
   const [ConnexionForm, setConnexionform]= useState({
     email:'',
@@ -30,7 +30,7 @@ export default function connexion(setIsLogged) {
     ServiceAPI.requetePostConnexion(ConnexionForm.email, ConnexionForm.password).then(response => {
       
         if(response.status == 200){          
-          router.push({pathname: '../dashboard/dashboard/'});
+          Router.push({pathname: '../dashboard/dashboard/'});
           setCookie("user", [response.data.accessToken, response.data.refreshToken, ConnexionForm.email], "/");
           console.log("COOKIE CREATED");
         } else {
