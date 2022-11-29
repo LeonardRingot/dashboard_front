@@ -5,7 +5,7 @@ import * as ServiceAPI from '../services/ServiceAPI'
 import {useCookies} from 'react-cookie'
 import * as React from 'react'
 
-export default function connexion(setIsLogged) {
+export default function Connexion(setIsLogged) {
 
   const Router = useRouter()
   
