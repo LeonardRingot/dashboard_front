@@ -211,6 +211,8 @@ export function requeteUpdateEmployers(id, siret, structurename,password,passwor
   return axios(configUpdateEmployers);
 }
 
+
+
 // requete affichage employers
 export function requeteGetAllEmployeurs(siret, structurename, UserId) {
   
@@ -305,3 +307,20 @@ export default function GetMyTokenId()
   return axios(configAdminToken);
 }
 
+export function requeteVerifEmployeur(id, isActif ) {
+  var data = JSON.stringify({
+   
+    "users": {
+      "isActif": isActif
+    },
+  });
+  var configUpdateVerifsEmployers = {
+    method: 'put',
+    url: `${process.env.NEXT_PUBLIC_URL}employers/form/` + id,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+  return axios(configUpdateVerifsEmployers);
+}
