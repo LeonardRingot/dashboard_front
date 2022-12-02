@@ -7,7 +7,7 @@ import styles from '../../../styles/Home.module.css'
 export default function Verifemployers(){
     const router = useRouter()
 const {id} = router.query
-const[period, setPeriod] = useState([]);
+
 
 const [verifEmployers, setverifEmployers] = useState({
     siret: '',
@@ -21,7 +21,7 @@ const [verifEmployers, setverifEmployers] = useState({
       email: '',
       phone: ''
     },
-    periods:period,
+    periods:'',
 })
 // const handleChange = (e) => 
 //     {
@@ -97,11 +97,7 @@ const [verifEmployers, setverifEmployers] = useState({
         <li> Ville:{verifEmployers.User.Localisation.city}</li>
         <li> zipCode:{verifEmployers.User.Localisation.zipCode}</li>
         <li> Périodes:{verifEmployers.periods}</li>
-        {verifEmployers.periods.map((element,i) => {
-                      return(
-                       <h1 key={i}> {element.periods}</h1>
-                      )
-                    })}
+       
       </ul>
       {/* <form id="register_form"  onSubmit={ModifierStatutEmployeur} action='' method="post" >
       {/* <fieldset name='isActif'>
