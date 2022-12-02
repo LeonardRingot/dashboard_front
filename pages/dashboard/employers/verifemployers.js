@@ -75,8 +75,11 @@ const [verifEmployers, setverifEmployers] = useState({})
       <h1>Employeur récupérer:</h1>
       <ul>
         <li>
-            siret:{verifEmployers.siret}
+            siret: {verifEmployers.siret}
         </li>
+        <li> users:{verifEmployers.User.email}</li>
+        <li> phone:{verifEmployers.User.phone}</li>
+        
       </ul>
       {/* <form id="register_form"  onSubmit={ModifierStatutEmployeur} action='' method="post" >
       {/* <fieldset name='isActif'>
