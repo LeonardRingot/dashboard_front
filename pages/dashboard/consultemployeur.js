@@ -43,6 +43,19 @@ export default function Consultemployeur()
             }
         })
     }
+    function VerifEmpoyees(id){
+        ServiceAPI.requeteGetEmployerById(id).then(response =>{
+            if(response.status == 200)
+            {
+                response.push('./employers/verifemployers/' +id)
+                if(response.data.length > 0)
+            {
+                setData(response.data)
+                setLoading(false)
+            }
+            }
+        })
+    }
     let [isLoading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
@@ -67,7 +80,6 @@ export default function Consultemployeur()
        <Navbar>
                <div  > 
         <Link href="./employers/createemployer"><a class="btn btn-primary">Creer un employeur</a></Link>
-        <Link href="./administrateurs/verifemployers"><a class="btn btn-primary">Vérification employers</a></Link>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
@@ -82,6 +94,7 @@ export default function Consultemployeur()
                 <th>Activé/Désactivé</th>
                 <th>Modifier Profil</th>
                 <th>Supprimer</th>
+                <th>Vérfier un employeur</th>
             </tr>
         </thead>
         <tbody>
@@ -120,6 +133,9 @@ export default function Consultemployeur()
                 </td>
                 <td >
                     <h6 ><a class="btn btn-danger" onClick={() => deleteData(element.id)}>Supprimer</a></h6>
+                </td>
+                <td >
+                    <h6><a onClick = {() =>VerifEmpoyees(element.UserId)} class="btn btn-warning" href={`/dashboard/employers/verifemployers?id=${element.id}`}>Vérifier employeur</a></h6>
                 </td>
             </tr>)  
     })}
