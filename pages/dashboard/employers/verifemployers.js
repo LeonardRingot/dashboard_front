@@ -26,7 +26,7 @@ const [verifEmployers, setverifEmployers] = useState({
 })
  const handleChange = (e) => 
  {
-
+    const value = e.target.value;
  if(e.target.name == "isActif")
  {
    console.log(verifEmployers.User.isActif)
