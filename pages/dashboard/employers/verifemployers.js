@@ -10,21 +10,7 @@ const {id} = router.query
 const[period, setPeriod] = useState([]);
 const [isActif, setIsActif] = useState([]);
 
-const [verifEmployers, setverifEmployers] = useState({
-    siret: '',
-    structurename: '',
-    User:{
-      Localisation: {
-        address: '',
-        city: '',
-        zipCode: ''
-      },
-      email: '',
-      phone: '',
-      isActif:''
-    },
-    periods:period,
-})
+const [verifEmployers, setverifEmployers] = useState({})
 const handleChange = (e) => 
     {
       const value = e.target.value;
