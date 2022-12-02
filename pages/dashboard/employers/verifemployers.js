@@ -46,7 +46,7 @@ const [verifEmployers, setverifEmployers] = useState({})
           ServiceAPI.requeteGetEmployerById(id)
           .then(response => {
             if(response.status == 200){
-              setUpdateEmployer(response.data);
+                setverifEmployers(response.data);
             }
           })
           .catch(error => console.log(error))
@@ -54,19 +54,19 @@ const [verifEmployers, setverifEmployers] = useState({})
         fetchSomethingById()
       }, [id])
 
-      const ModifierStatutEmployeur = (e) => {
-        e.preventDefault()
-        ServiceAPI.requeteVerifEmployeur(id, isActif).then(response => {
-            if(response.status == 201){
-              setIsOk('User mis a jour');
+    //   const ModifierStatutEmployeur = (e) => {
+    //     e.preventDefault()
+    //     ServiceAPI.requeteVerifEmployeur(id, isActif).then(response => {
+    //         if(response.status == 201){
+    //           setIsOk('User mis a jour');
               
-            } else {
-              setIsOk('User mis a jour');
-            }
-          }).catch(function(error){
-            console.log(error);
-        }); 
-    }
+    //         } else {
+    //           setIsOk('User mis a jour');
+    //         }
+    //       }).catch(function(error){
+    //         console.log(error);
+    //     }); 
+    // }
     return (
     <>
     <Head>
