@@ -7,14 +7,21 @@ import styles from '../../../styles/Home.module.css'
 export default function Verifemployers(){
     const router = useRouter()
 const {id} = router.query
+const[period, setPeriod] = useState([]);
 
 const [verifEmployers, setverifEmployers] = useState({
     siret: '',
     structurename: '',
     User:{
+        Localisation: {
+              address: '',
+              city: '',
+              zipCode: ''
+        },
       email: '',
       phone: ''
-    }
+    },
+    periods:period,
 })
 // const handleChange = (e) => 
 //     {
@@ -84,8 +91,12 @@ const [verifEmployers, setverifEmployers] = useState({
         <li>
             siret: {verifEmployers.siret}
         </li>
-        <li> users:{verifEmployers.User.email}</li>
-        <li> phone:{verifEmployers.User.phone}</li>
+        <li> Adresse mail: {verifEmployers.User.email}</li>
+        <li> Numéro de téléphone:{verifEmployers.User.phone}</li>
+        <li> Adresse:{verifEmployers.User.Localisation.address}</li>
+        <li> Ville:{verifEmployers.User.Localisation.city}</li>
+        <li> zipCode:{verifEmployers.User.Localisation.zipCode}</li>
+        <li> Périodes:{verifEmployers.User.period}</li>
         
       </ul>
       {/* <form id="register_form"  onSubmit={ModifierStatutEmployeur} action='' method="post" >
