@@ -96,8 +96,8 @@ const [verifEmployers, setverifEmployers] = useState({
         <li> Adresse:{verifEmployers.User.Localisation.address}</li>
         <li> Ville:{verifEmployers.User.Localisation.city}</li>
         <li> zipCode:{verifEmployers.User.Localisation.zipCode}</li>
-        <li> Périodes:{verifEmployers.User.period}</li>
-        
+        <li> Périodes:{verifEmployers.periods}</li>
+       
       </ul>
       {/* <form id="register_form"  onSubmit={ModifierStatutEmployeur} action='' method="post" >
       {/* <fieldset name='isActif'>
