@@ -8,7 +8,14 @@ export default function Verifemployers(){
     const router = useRouter()
 const {id} = router.query
 
-const [verifEmployers, setverifEmployers] = useState({})
+const [verifEmployers, setverifEmployers] = useState({
+    siret: '',
+    structurename: '',
+    User:{
+      email: '',
+      phone: ''
+    }
+})
 // const handleChange = (e) => 
 //     {
 //       const value = e.target.value;
