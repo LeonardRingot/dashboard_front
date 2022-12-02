@@ -108,6 +108,7 @@ const handleChange = (e) =>
                 <label class="form-check-label" htmlFor="false">❌</label>
             </div>
             </fieldset>
+            <input  value="Envoyer" class="btn btn-success" type="submit"/> 
       </form>
     </>
     )

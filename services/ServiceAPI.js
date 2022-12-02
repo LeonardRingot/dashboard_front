@@ -307,14 +307,31 @@ export default function GetMyTokenId()
   return axios(configAdminToken);
 }
 
-export function requeteVerifEmployeur(id, isActif ) {
+export function requeteVerifEmployeur(id, siret, structurename, email, phone, address, zipCode, city,periods, isActif ) {
+  let obj = periods?.map(((period) => {
+ 
+    return { "id": parseInt(period) }
+  }))
   var data = JSON.stringify({
-   
+    "employer":{
+      "siret": siret,
+    "structurename": structurename
+    }, 
     "users": {
+      "email": email,
+      "phone": phone,
       "isActif": isActif
     },
+    "localisation": {
+      "address": address,
+      "zipCode": zipCode,
+      "city": city
+    }, 
+    "periods": obj
+
+    
   });
-  var configUpdateVerifsEmployers = {
+  var configVerifsEmployers = {
     method: 'put',
     url: `${process.env.NEXT_PUBLIC_URL}employers/form/` + id,
     headers: {
@@ -322,5 +339,5 @@ export function requeteVerifEmployeur(id, isActif ) {
     },
     data: data
   };
-  return axios(configUpdateVerifsEmployers);
+  return axios(configVerifsEmployers);
 }
