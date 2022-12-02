@@ -100,11 +100,11 @@ const handleChange = (e) =>
       <form id="register_form"  onSubmit={ModifierStatutEmployeur} action='' method="post" >
       <fieldset name='isActif'>
             <div class="form-check"   >
-                <input   class="form-check-input"   onChange={handleChange}  value="true"  defaultChecked={updateProfile.User.isActif} type="radio" name="isActif" id="true"  />
+                <input   class="form-check-input"   onChange={handleChange}  value="true"  defaultChecked={verifEmployers.User.isActif} type="radio" name="isActif" id="true"  />
                 <label class="form-check-label" htmlFor="true">✅</label>
               </div>
               <div class="form-check">
-                <input  class="form-check-input"  onChange={handleChange} value="false" defaultChecked={!updateProfile.User.isActif} type="radio" name="isActif" id="false"  />
+                <input  class="form-check-input"  onChange={handleChange} value="false" defaultChecked={!verifEmployers.User.isActif} type="radio" name="isActif" id="false"  />
                 <label class="form-check-label" htmlFor="false">❌</label>
             </div>
             </fieldset>
