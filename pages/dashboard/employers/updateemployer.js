@@ -78,7 +78,7 @@ export default function UpdateEmployer({  }) {
     }, [id])
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
-        ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.password , updateEmployer.User.passwordconf,updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city,period, isActif).then(response => {
+        ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.password , updateEmployer.User.passwordconf,updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.isActif , updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city,period, isActif).then(response => {
             if(response.status == 201){
               setIsOk('User mis a jour');
               
