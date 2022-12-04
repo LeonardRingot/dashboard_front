@@ -89,6 +89,16 @@ export default function UpdateEmployer({  }) {
             console.log(error);
         }); 
     }
+    if(isActif == false)
+    {
+      return (
+        <button>Passer en true</button>
+      )
+    }
+    else
+    {
+      <button>non</button>
+    }
     return (
       <>
       <Head>
@@ -162,6 +172,7 @@ export default function UpdateEmployer({  }) {
                 <label class="form-check-label" htmlFor="false">❌</label>
             </div>
             </fieldset>
+            
             <div class="row mb-4">
               <div class="col"> 
                   <div class="form-outline">
