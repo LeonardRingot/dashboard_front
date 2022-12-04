@@ -174,7 +174,7 @@ export function requeteUpdateProfil(id, firstname, lastname, password, passwordc
   return axios(configUpdateProfile);
 }
 // requete mis à jour employers
-export function requeteUpdateEmployers(id, siret, structurename,password,passwordconf, email, phone, address, zipCode, city,periods ) {
+export function requeteUpdateEmployers(id, siret, structurename,password,passwordconf, email, phone,isActif, address, zipCode, city,periods ) {
   let obj = periods?.map(((period) => {
  
     return { "id": parseInt(period) }
@@ -189,7 +189,7 @@ export function requeteUpdateEmployers(id, siret, structurename,password,passwor
       "passwordconf":passwordconf,
       "email": email,
       "phone": phone,
-      "isActif": false
+      "isActif": isActif
     },
     "localisation": {
       "address": address,

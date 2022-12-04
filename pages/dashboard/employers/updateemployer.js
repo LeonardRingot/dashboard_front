@@ -11,6 +11,7 @@ export default function UpdateEmployer({  }) {
     const router = useRouter()
     const {id} = router.query
     const[period, setPeriod] = useState([]);
+    const [isActif, setIsActif] = useState([]);
     
     const [updateEmployer, setUpdateEmployer] = useState({
         siret: '',
@@ -24,7 +25,8 @@ export default function UpdateEmployer({  }) {
           password:'',
           passwordconf:'',
           email: '',
-          phone: ''
+          phone: '',
+          isActif:''
         },
         periods:period,
     })
@@ -76,7 +78,7 @@ export default function UpdateEmployer({  }) {
     }, [id])
     const ModifierProfileSubmit = (e) => {
         e.preventDefault()
-        ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.password , updateEmployer.User.passwordconf,updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city,period).then(response => {
+        ServiceAPI.requeteUpdateEmployers(id, updateEmployer.siret, updateEmployer.structurename, updateEmployer.User.password , updateEmployer.User.passwordconf,updateEmployer.User.email, updateEmployer.User.phone, updateEmployer.User.Localisation.address, updateEmployer.User.Localisation.zipCode,updateEmployer.User.Localisation.city,period, isActif).then(response => {
             if(response.status == 201){
               setIsOk('User mis a jour');
               
@@ -150,6 +152,16 @@ export default function UpdateEmployer({  }) {
                   </div>
               </div>
             </div>
+            <fieldset name='isActif'>
+            <div class="form-check"   >
+                <input   class="form-check-input"   onChange={handleChange}  value="true"  defaultChecked={updateEmployer.User.isActif} type="radio" name="isActif" id="true"  />
+                <label class="form-check-label" htmlFor="true">✅</label>
+              </div>
+              <div class="form-check">
+                <input  class="form-check-input"  onChange={handleChange} value="false" defaultChecked={!updateEmployer.User.isActif} type="radio" name="isActif" id="false"  />
+                <label class="form-check-label" htmlFor="false">❌</label>
+            </div>
+            </fieldset>
             <div class="row mb-4">
               <div class="col"> 
                   <div class="form-outline">
