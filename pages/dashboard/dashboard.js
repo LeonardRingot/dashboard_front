@@ -54,6 +54,7 @@ function logout() {
      </Head>
      <Navbar   >
       </Navbar>
+      <h1>TEST FROM ACCUEIL Dashboard</h1>
       </>
     )
 }
