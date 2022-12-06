@@ -52,9 +52,11 @@ function logout() {
      <title> Dashboard CSE</title>
      
      </Head>
+     <h1>TEST FROM ACCUEIL Dashboard 1</h1>
      <Navbar   >
+     <h1>TEST FROM ACCUEIL Dashboard 2</h1>
       </Navbar>
-      <h1>TEST FROM ACCUEIL Dashboard</h1>
+      <h1>TEST FROM ACCUEIL Dashboard 3</h1>
       </>
     )
 }
