@@ -53,6 +53,7 @@ function logout() {
      <title> Dashboard CSE</title>
      
      </Head>
+     <h1>TEST FROM ACCUEIL Dashboard 1</h1>
      <Navbar   >
      <div className={styles.accueil}>
         
@@ -62,6 +63,7 @@ function logout() {
         <h2>Téléphone : 03 21 99 56 90</h2>
          </div>
       </Navbar>
+      
       </>
     )
 }
