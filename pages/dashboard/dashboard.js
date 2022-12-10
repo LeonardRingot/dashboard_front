@@ -53,7 +53,6 @@ function logout() {
      <title> Dashboard CSE</title>
      
      </Head>
-     <h1>TEST FROM ACCUEIL Dashboard 1</h1>
      <Navbar   >
      <div className={styles.accueil}>
         
