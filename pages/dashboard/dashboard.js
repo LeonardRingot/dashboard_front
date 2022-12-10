@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {  useState, useEffect } from 'react'
 import {useCookies} from 'react-cookie'
+import styles from '../../styles/Home.module.css'
 
 export default function Dashboard(logout){
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -53,6 +54,13 @@ function logout() {
      
      </Head>
      <Navbar   >
+     <div className={styles.accueil}>
+        
+        <img style={{width:'1500px'}} src='/accueil.jpg'/>
+        <h2>Centre Social Eclaté</h2>
+        <h2>Adresse : 6 Rés René Descartes, 62280 Saint-Martin-Boulogne</h2>
+        <h2>Téléphone : 03 21 99 56 90</h2>
+         </div>
       </Navbar>
       </>
     )
