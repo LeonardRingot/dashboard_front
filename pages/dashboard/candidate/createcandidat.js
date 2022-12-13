@@ -61,7 +61,7 @@ export default function Createcandidat()
     {
       e.preventDefault()
       ServiceAPI.requetePost(InscriptionForm.firstname, InscriptionForm.lastname, InscriptionForm.birthday, InscriptionForm.wantToBe,InscriptionForm.password, InscriptionForm.passwordconf,InscriptionForm.email,InscriptionForm.phone,InscriptionForm.address,InscriptionForm.zipCode,InscriptionForm.city,period,degree ).then(response => {
-          if(response.status == 200){
+          if(response.status == 201){
             setIsOk('Compte crée');
           } else {
             setErreur('Adresse mail deja utilisée.');
