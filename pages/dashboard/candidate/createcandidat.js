@@ -248,7 +248,8 @@ export default function Createcandidat()
     </div>
     </div>
 </section>
-        
+<p>{erreur}</p>
+         <p>{IsOk}</p>
        </div>
           </div>
           
