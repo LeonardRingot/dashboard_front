@@ -42,9 +42,9 @@ export default function Createemployer() {
     ServiceAPI.requetePostEmployers(InscriptionForm.siret, InscriptionForm.structurename, InscriptionForm.password,InscriptionForm.passwordconf, InscriptionForm.email, InscriptionForm.phone, InscriptionForm.address, InscriptionForm.zipCode, InscriptionForm.city, period).then(response => {
       if (response.status == 201) {
         
-        setIsOk('Compte crée');
+        setIsOk('Création réussie');
       } else {
-        setIsOk('Compte crée');
+        setIsOk('Création réussie');
       }
     }).catch(function (error) {
       console.log(error);
@@ -116,19 +116,19 @@ export default function Createemployer() {
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='address'>Adresse de l'entreprise:</label>
-          <input onChange={handleChange} type="text" class="form-control" name="address" /><br></br>
+          <input onChange={handleChange} type="text" class="form-control" name="address" maxLength={50} /><br></br>
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='zipCode'>Code postal de l'entreprise:</label>
-          <input onChange={handleChange} type="text" class="form-control" name="zipCode" /><br></br>
+          <input onChange={handleChange} type="text" class="form-control" name="zipCode" maxLength={5} /><br></br>
                   </div>
               </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='city'>Ville:</label>
-          <input onChange={handleChange} type="text" class="form-control" name="city" /><br></br>
+          <input onChange={handleChange} type="text" class="form-control" name="city" maxLength={50} /><br></br>
                   </div>
               </div>
             </div>

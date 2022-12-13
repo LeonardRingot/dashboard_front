@@ -79,7 +79,7 @@ export default function Consultcandidat()
                 <th >Nom</th>
                 <th >Prénom</th>
                 <th >Date de naissance</th>
-                <th >wantToBe</th>
+                <th >Poste</th>
                 <th >ID Utilisateur</th>
                 <th >Email</th>
                 <th >Numéro de téléphone</th>

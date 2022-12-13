@@ -155,13 +155,13 @@ export default function Createcandidat()
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='address'>Adresse:</label>
-                  <input  type="text" onChange={handleChange} class="form-control" name="address" />
+                  <input  type="text" onChange={handleChange} class="form-control" name="address" maxLength={50} />
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='city'>Ville:</label>
-                  <input type="text" onChange={handleChange} class="form-control" name="city" maxLength={20}/>
+                  <input type="text" onChange={handleChange} class="form-control" name="city" maxLength={50}/>
                   </div>
               </div>
               <div class="col">

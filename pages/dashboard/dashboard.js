@@ -57,9 +57,6 @@ function logout() {
      <div className={styles.accueil}>
         
         <img style={{width:'1500px'}} src='/accueil.jpg'/>
-        <h2>Centre Social Eclaté</h2>
-        <h2>Adresse : 6 Rés René Descartes, 62280 Saint-Martin-Boulogne</h2>
-        <h2>Téléphone : 03 21 99 56 90</h2>
          </div>
       </Navbar>
       

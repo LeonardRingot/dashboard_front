@@ -148,7 +148,7 @@ export default function UpdateEmployer({  }) {
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='phone'>Numéro de téléphone:</label>
-          <input defaultValue={updateEmployer.User.phone}  onChange={handleChange} class="form-control" type="tel"   name="phone" /><br></br>
+          <input defaultValue={updateEmployer.User.phone}  onChange={handleChange} class="form-control" type="tel"   name="phone" maxLength={9} /><br></br>
                   </div>
               </div>
             </div>
@@ -167,19 +167,19 @@ export default function UpdateEmployer({  }) {
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='address'>Adresse de l'entreprise:</label>
-          <input defaultValue={updateEmployer.User.Localisation.address}  onChange={handleChange} class="form-control" type="text"   name="address" /><br></br>
+          <input defaultValue={updateEmployer.User.Localisation.address}  onChange={handleChange} class="form-control" type="text"   name="address" maxLength={50} /><br></br>
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='city'>Ville:</label>
-          <input defaultValue={updateEmployer.User.Localisation.city}  onChange={handleChange} class="form-control" type="text"   name="city" /><br></br>
+          <input defaultValue={updateEmployer.User.Localisation.city}  onChange={handleChange} class="form-control" type="text"   name="city" maxLength={50}/><br></br>
                   </div>
               </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='zipCode'>Code postal de l'entreprise:</label>
-          <input defaultValue={updateEmployer.User.Localisation.zipCode}  onChange={handleChange} class="form-control" type="text"   name="zipCode" /><br></br>
+          <input defaultValue={updateEmployer.User.Localisation.zipCode}  onChange={handleChange} class="form-control" type="text"   name="zipCode" maxLength={5} /><br></br>
                   </div>
               </div>
             </div>

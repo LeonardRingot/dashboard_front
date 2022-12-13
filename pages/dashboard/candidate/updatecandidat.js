@@ -111,9 +111,9 @@ export default function Register() {
           updateProfile.User.Localisation.city,period,degree, isActif).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
-              setIsOk('User mis a jour');
+              setIsOk('Utilisateur mis a jour');
             } else {
-              setIsOk('User mis a jour');
+              setIsOk('Utilisateur mis a jour');
             }
           }).catch(function(error){
             console.log(error);
@@ -195,13 +195,13 @@ export default function Register() {
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='address'>Adresse:</label>
-                  <input  type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.address} class="form-control" name="address" />
+                  <input  type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.address} class="form-control" name="address" maxLength={50} />
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='city'>Ville:</label>
-                  <input type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.city} class="form-control" name="city" maxLength={20}/>
+                  <input type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.city} class="form-control" name="city" maxLength={50}/>
                   </div>
               </div>
               <div class="col">

@@ -94,7 +94,7 @@ export default function Consultemployeur()
                 <th>Activé/Désactivé</th>
                 <th>Modifier Profil</th>
                 <th>Supprimer</th>
-                <th>Vérfier un employeur</th>
+                <th>Vérifier un employeur</th>
             </tr>
         </thead>
         <tbody>
