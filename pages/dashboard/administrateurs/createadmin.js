@@ -62,7 +62,7 @@ export default function Createadministrateur()
               <div class="col">
               <div class="form-outline">
                         <label htmlFor='password'>Mot de passe:</label>
-                        <input onChange={handleChange} type="password"  class="form-control" name="password" />
+                        <input onChange={handleChange} type="password"  class="form-control" name="password" maxLength={30}/>
                       </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function Createadministrateur()
               <div class="col">
               <div class="form-outline">
                         <label htmlFor='password'>Email:</label>
-                        <input onChange={handleChange} type="email"  class="form-control" name="email" />
+                        <input onChange={handleChange} type="email"  class="form-control" name="email" maxLength={30} />
                       </div>
               </div>
               

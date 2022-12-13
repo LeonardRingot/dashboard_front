@@ -72,13 +72,13 @@ export default function Createemployer() {
               <div class="col">
                 <div class="form-outline">
                 <label htmlFor='siret'>Numéro de SIRET:</label>
-          <input onChange={handleChange} type="text" class="form-control" name="siret" /><br></br>
+          <input onChange={handleChange} type="text" class="form-control" name="siret" maxLength={14}/><br></br>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline">
                 <label htmlFor='structurename'>Nom de l'entreprise:</label>
-          <input onChange={handleChange} type="text" class="form-control" name="structurename" /><br></br>
+          <input onChange={handleChange} type="text" class="form-control" name="structurename" maxLength={20} /><br></br>
                 </div>
               </div>
         </div>
@@ -86,13 +86,13 @@ export default function Createemployer() {
                 <div class="col"> 
                       <div class="form-outline">
                         <label htmlFor='password'>Mot de passe:</label>
-                        <input onChange={handleChange} type="password"  class="form-control" name="password" />
+                        <input onChange={handleChange} type="password"  class="form-control" name="password" maxLength={30} />
                       </div>
                 </div>
                 <div class="col">
                       <div class="form-outline">
                           <label htmlFor='passwordconf'>Mot de passe conf:</label>
-                          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" />
+                          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" maxLength={30} />
                       </div>
                 </div>
           </div>  
@@ -102,7 +102,7 @@ export default function Createemployer() {
               <div class="col"> 
                   <div class="form-outline">
                     <label htmlFor='email'>Email:</label>
-                    <input  type="email" onChange={handleChange}  class="form-control" name="email" />
+                    <input  type="email" onChange={handleChange}  class="form-control" name="email" maxLength={30} />
                   </div>
                 </div>
               <div class="col">
