@@ -121,14 +121,14 @@ export default function Createemployer() {
                 </div>
               <div class="col">
                   <div class="form-outline">
-                  <label htmlFor='zipCode'>Code postal de l'entreprise:</label>
-          <input onChange={handleChange} type="text" class="form-control" name="zipCode" maxLength={5} /><br></br>
+                  <label htmlFor='city'>Ville:</label>
+          <input onChange={handleChange} type="text" class="form-control" name="city" maxLength={50} /><br></br>
                   </div>
               </div>
               <div class="col">
                   <div class="form-outline">
-                  <label htmlFor='city'>Ville:</label>
-          <input onChange={handleChange} type="text" class="form-control" name="city" maxLength={50} /><br></br>
+                  <label htmlFor='zipCode'>Code Postal:</label>
+          <input onChange={handleChange} type="text" class="form-control" name="zipCode" maxLength={5} /><br></br>
                   </div>
               </div>
             </div>
