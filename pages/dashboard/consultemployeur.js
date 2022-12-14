@@ -114,7 +114,7 @@ export default function Consultemployeur()
                     <h6>{element.User.email}</h6>
                 </td>
                 <td>
-                    <h6>{element.User.phone}</h6>
+                    <h6>0{element.User.phone}</h6>
                 </td>
                 <td>
                     <h6>{element.User.Localisation.address}</h6>
