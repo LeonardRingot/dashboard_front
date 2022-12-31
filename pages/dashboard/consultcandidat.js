@@ -6,11 +6,20 @@ import { useRouter } from 'next/router';
 // import { middleware } from "../../middleware"
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
-
+const getFilteredItems = (query, items) =>{
+    if(!query){
+        return items;
+    }
+    return items.filter(items =>items.User.email.includes(query))
+}
 export default function Consultcandidat()
 {
     const router = useRouter()
     let [data, setData] = useState(null)
+    let [query, setQuery]= useState(null);
+    let  tracks = data;
+    let items = tracks;
+    const filteredItems = getFilteredItems(query, items);
 
     function deleteData(id){
        if (confirm("Etes vous sure de  vouloir supprimer" ) == true)
@@ -72,7 +81,7 @@ export default function Consultcandidat()
        <Navbar  >
         <div  > 
         <Link href="./candidate/createcandidat"><a class="btn btn-primary">Creer un candidat</a></Link><br></br>
-        
+        <label>Rechercher par adresse mail:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
@@ -92,7 +101,7 @@ export default function Consultcandidat()
             </tr>
         </thead>
         <tbody> 
-        {data.map((element) => {
+        {filteredItems.map((element) => {
       return (
             <tr key={element.UserId}>
                 <td>

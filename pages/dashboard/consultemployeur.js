@@ -5,12 +5,20 @@ import React, { useEffect, useState } from 'react'
 
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
-
+const getFilteredItems = (query, items) =>{
+    if(!query){
+        return items;
+    }
+    return items.filter(items =>items.User.email.includes(query))
+}
 export default function Consultemployeur()
 {
     
     let [data, setData] = useState(null)
-
+    let [query, setQuery]= useState(null);
+    let  tracks = data;
+    let items = tracks;
+    const filteredItems = getFilteredItems(query, items);
     function deleteData(id){
         if(confirm("Etes vous sure de  vouloir supprimer" ) == true)
         {
@@ -80,6 +88,7 @@ export default function Consultemployeur()
        <Navbar>
                <div  > 
         <Link href="./employers/createemployer"><a class="btn btn-primary">Creer un employeur</a></Link>
+        <label>Rechercher par adresse mail:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
@@ -98,7 +107,7 @@ export default function Consultemployeur()
             </tr>
         </thead>
         <tbody>
-        {data.map((element) => {
+        {filteredItems.map((element) => {
       return (
             <tr key={element.UserId}>
                 <td>
