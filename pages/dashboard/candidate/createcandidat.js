@@ -61,7 +61,7 @@ export default function Createcandidat()
     {
       e.preventDefault()
       ServiceAPI.requetePost(InscriptionForm.firstname, InscriptionForm.lastname, InscriptionForm.birthday, InscriptionForm.wantToBe,InscriptionForm.password, InscriptionForm.passwordconf,InscriptionForm.email,InscriptionForm.phone,InscriptionForm.address,InscriptionForm.zipCode,InscriptionForm.city,period,degree ).then(response => {
-          if(response.status == 201){
+          if(response.status == 200){
             setIsOk('Compte crée');
           } else {
             setErreur('Adresse mail deja utilisée.');
@@ -92,13 +92,13 @@ export default function Createcandidat()
               <div class="col">
                 <div class="form-outline">
                 <label class="form-label" for="form6Example1">Prenom</label>
-                  <input type="text" onChange={handleChange} id="form6Example1" name="firstname" class="form-control" />
+                  <input type="text" onChange={handleChange} id="form6Example1" name="firstname" class="form-control" maxLength={20} />
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline">
                 <label class="form-label" for="form6Example2">Nom</label>
-                  <input type="text" onChange={handleChange} id="form6Example2" name="lastname" class="form-control" />
+                  <input type="text" onChange={handleChange} id="form6Example2" name="lastname" class="form-control" maxLength={20} />
                 </div>
               </div>
         </div>
@@ -125,13 +125,13 @@ export default function Createcandidat()
                 <div class="col"> 
                       <div class="form-outline">
                         <label htmlFor='password'>Mot de passe:</label>
-                        <input onChange={handleChange} type="password"  class="form-control" name="password" />
+                        <input onChange={handleChange} type="password"  class="form-control" name="password" maxLength={30} />
                       </div>
                 </div>
                 <div class="col">
                       <div class="form-outline">
                           <label htmlFor='passwordconf'>Mot de passe conf:</label>
-                          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" />
+                          <input onChange={handleChange} type="password"  class="form-control" name="passwordconf" maxLength={30} />
                       </div>
                 </div>
           </div>  
@@ -141,7 +141,7 @@ export default function Createcandidat()
               <div class="col"> 
                   <div class="form-outline">
                     <label htmlFor='email'>Email:</label>
-                    <input  type="email" onChange={handleChange}  class="form-control" name="email" />
+                    <input  type="email" onChange={handleChange}  class="form-control" name="email" maxLength={30} />
                   </div>
                 </div>
               <div class="col">
@@ -155,13 +155,13 @@ export default function Createcandidat()
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='address'>Adresse:</label>
-                  <input  type="text" onChange={handleChange} class="form-control" name="address" />
+                  <input  type="text" onChange={handleChange} class="form-control" name="address" maxLength={50} />
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='city'>Ville:</label>
-                  <input type="text" onChange={handleChange} class="form-control" name="city" maxLength={20}/>
+                  <input type="text" onChange={handleChange} class="form-control" name="city" maxLength={50}/>
                   </div>
               </div>
               <div class="col">
@@ -248,7 +248,8 @@ export default function Createcandidat()
     </div>
     </div>
 </section>
-        
+<p>{erreur}</p>
+         <p>{IsOk}</p>
        </div>
           </div>
           

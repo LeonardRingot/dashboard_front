@@ -103,7 +103,7 @@ export default function Consultemployeur()
                 <th>Activé/Désactivé</th>
                 <th>Modifier Profil</th>
                 <th>Supprimer</th>
-                <th>Vérfier un employeur</th>
+                <th>Vérifier un employeur</th>
             </tr>
         </thead>
         <tbody>
@@ -123,7 +123,7 @@ export default function Consultemployeur()
                     <h6>{element.User.email}</h6>
                 </td>
                 <td>
-                    <h6>{element.User.phone}</h6>
+                    <h6>0{element.User.phone}</h6>
                 </td>
                 <td>
                     <h6>{element.User.Localisation.address}</h6>

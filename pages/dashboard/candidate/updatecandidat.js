@@ -111,9 +111,9 @@ export default function Register() {
           updateProfile.User.Localisation.city,period,degree, isActif).then(response => {
             if(response.status == 201){
               //router.push('../profile/profile');
-              setIsOk('User mis a jour');
+              setIsOk('Utilisateur mis a jour');
             } else {
-              setIsOk('User mis a jour');
+              setIsOk('Utilisateur mis a jour');
             }
           }).catch(function(error){
             console.log(error);
@@ -141,13 +141,13 @@ export default function Register() {
               <div class="col">
                 <div class="form-outline">
                 <label class="form-label" for="form6Example1">Prenom</label>
-                  <input type="text" defaultValue={updateProfile.firstname} onChange={handleChange} id="form6Example1" name="firstname" class="form-control" />
+                  <input type="text" defaultValue={updateProfile.firstname} onChange={handleChange} id="form6Example1" name="firstname" class="form-control"maxLength={20} />
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline">
                 <label class="form-label" for="form6Example2">Nom</label>
-                  <input type="text" defaultValue={updateProfile.lastname} onChange={handleChange} id="form6Example2" name="lastname" class="form-control" />
+                  <input type="text" defaultValue={updateProfile.lastname} onChange={handleChange} id="form6Example2" name="lastname" class="form-control" maxLength={20} />
                 </div>
               </div>
         </div>
@@ -155,13 +155,13 @@ export default function Register() {
                 <div class="col"> 
                       <div class="form-outline">
                         <label htmlFor='password'>Mot de passe:</label>
-                        <input onChange={handleChange} defaultValue={updateProfile.User.password} type="password"  class="form-control" name="password" />
+                        <input onChange={handleChange} defaultValue={updateProfile.User.password} type="password"  class="form-control" name="password" maxLength={30} />
                       </div>
                 </div>
                 <div class="col">
                       <div class="form-outline">
                           <label htmlFor='passwordconf'>Mot de passe conf:</label>
-                          <input onChange={handleChange} defaultValue={updateProfile.User.passwordconf} type="password"  class="form-control" name="passwordconf" />
+                          <input onChange={handleChange} defaultValue={updateProfile.User.passwordconf} type="password"  class="form-control" name="passwordconf" maxLength={30} />
                       </div>
                 </div>
           </div>  
@@ -171,7 +171,7 @@ export default function Register() {
               <div class="col"> 
                   <div class="form-outline">
                     <label htmlFor='email'>Email:</label>
-                    <input  type="email" onChange={handleChange} defaultValue={updateProfile.User.email}  class="form-control" name="email" />
+                    <input  type="email" onChange={handleChange} defaultValue={updateProfile.User.email}  class="form-control" name="email" maxLength={30} />
                   </div>
                 </div>
               <div class="col">
@@ -195,13 +195,13 @@ export default function Register() {
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='address'>Adresse:</label>
-                  <input  type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.address} class="form-control" name="address" />
+                  <input  type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.address} class="form-control" name="address" maxLength={50} />
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='city'>Ville:</label>
-                  <input type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.city} class="form-control" name="city" maxLength={20}/>
+                  <input type="text" onChange={handleChange} defaultValue={updateProfile.User.Localisation.city} class="form-control" name="city" maxLength={50}/>
                   </div>
               </div>
               <div class="col">

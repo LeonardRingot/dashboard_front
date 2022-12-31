@@ -112,13 +112,13 @@ export default function UpdateEmployer({  }) {
               <div class="col">
                 <div class="form-outline">
                 <label htmlFor='siret'>Numéro de SIRET:</label>
-          <input  defaultValue={updateEmployer.siret} onChange={handleChange} class="form-control"  type="text"  name="siret" /><br></br>
+          <input  defaultValue={updateEmployer.siret} onChange={handleChange} class="form-control"  type="text"  name="siret" maxLength={14} /><br></br>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline">
                 <label htmlFor='structurename'>Nom de l'entreprise:</label>
-          <input defaultValue={updateEmployer.structurename}  onChange={handleChange} class="form-control" type="text"   name="structurename" /><br></br>
+          <input defaultValue={updateEmployer.structurename}  onChange={handleChange} class="form-control" type="text"   name="structurename" maxLength={20} /><br></br>
                 </div>
               </div>
         </div>
@@ -126,13 +126,13 @@ export default function UpdateEmployer({  }) {
                 <div class="col"> 
                       <div class="form-outline">
                       <label htmlFor='password'>Mot de passe:</label>
-          <input defaultValue={updateEmployer.User.password}  onChange={handleChange} type="password"  class="form-control" name="password" /><br></br>
+          <input defaultValue={updateEmployer.User.password}  onChange={handleChange} type="password"  class="form-control" name="password" maxLength={30} /><br></br>
                       </div>
                 </div>
                 <div class="col">
                       <div class="form-outline">
                       <label htmlFor='password'>Mot de passe:</label>
-          <input defaultValue={updateEmployer.User.passwordconf}  onChange={handleChange} type="password"  class="form-control" name="passwordconf" /><br></br>
+          <input defaultValue={updateEmployer.User.passwordconf}  onChange={handleChange} type="password"  class="form-control" name="passwordconf" maxLength={30} /><br></br>
                       </div>
                 </div>
           </div>  
@@ -142,13 +142,13 @@ export default function UpdateEmployer({  }) {
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='email'>Email:</label>
-          <input defaultValue={updateEmployer.User.email}  onChange={handleChange} class="form-control" type="email"   name="email" /><br></br>
+          <input defaultValue={updateEmployer.User.email}  onChange={handleChange} class="form-control" type="email"   name="email" maxLength={30} /><br></br>
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='phone'>Numéro de téléphone:</label>
-          <input defaultValue={updateEmployer.User.phone}  onChange={handleChange} class="form-control" type="tel"   name="phone" /><br></br>
+          <input defaultValue={updateEmployer.User.phone}  onChange={handleChange} class="form-control" type="tel"   name="phone" maxLength={9} /><br></br>
                   </div>
               </div>
             </div>
@@ -167,19 +167,19 @@ export default function UpdateEmployer({  }) {
               <div class="col"> 
                   <div class="form-outline">
                   <label htmlFor='address'>Adresse de l'entreprise:</label>
-          <input defaultValue={updateEmployer.User.Localisation.address}  onChange={handleChange} class="form-control" type="text"   name="address" /><br></br>
+          <input defaultValue={updateEmployer.User.Localisation.address}  onChange={handleChange} class="form-control" type="text"   name="address" maxLength={50} /><br></br>
                   </div>
                 </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='city'>Ville:</label>
-          <input defaultValue={updateEmployer.User.Localisation.city}  onChange={handleChange} class="form-control" type="text"   name="city" /><br></br>
+          <input defaultValue={updateEmployer.User.Localisation.city}  onChange={handleChange} class="form-control" type="text"   name="city" maxLength={50}/><br></br>
                   </div>
               </div>
               <div class="col">
                   <div class="form-outline">
                   <label htmlFor='zipCode'>Code postal de l'entreprise:</label>
-          <input defaultValue={updateEmployer.User.Localisation.zipCode}  onChange={handleChange} class="form-control" type="text"   name="zipCode" /><br></br>
+          <input defaultValue={updateEmployer.User.Localisation.zipCode}  onChange={handleChange} class="form-control" type="text"   name="zipCode" maxLength={5} /><br></br>
                   </div>
               </div>
             </div>
