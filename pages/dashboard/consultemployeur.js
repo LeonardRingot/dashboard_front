@@ -88,7 +88,7 @@ export default function Consultemployeur()
        <Navbar>
                <div  > 
         <Link href="./employers/createemployer"><a class="btn btn-primary">Creer un employeur</a></Link>
-        <label>Rechercher par adresse mail:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
+        <label>Rechercher par Code Postal:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
