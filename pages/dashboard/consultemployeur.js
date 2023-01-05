@@ -9,7 +9,7 @@ const getFilteredItems = (query, items) =>{
     if(!query){
         return items;
     }
-    return items.filter(items =>items.User.Localisation.zipCode.includes(query))
+    return items.filter(items =>items.User.email.includes(query))
 }
 export default function Consultemployeur()
 {
@@ -87,8 +87,8 @@ export default function Consultemployeur()
         </Head>
        <Navbar>
                <div  > 
-        <Link href="./employers/createemployer"><a class="btn btn-primary">Creer un employeur</a></Link>
-        <label>Rechercher par Code Postal:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
+        <Link href="./employers/createemployer"><a class="btn btn-primary">Creer un employeur</a></Link><br></br>
+        <label>Rechercher par Adresse Mail:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >

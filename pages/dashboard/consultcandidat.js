@@ -10,7 +10,7 @@ const getFilteredItems = (query, items) =>{
     if(!query){
         return items;
     }
-    return items.filter(items =>items.User.Localisation.zipCode.includes(query))
+    return items.filter(items =>items.User.email.includes(query))
 }
 export default function Consultcandidat()
 {
@@ -81,7 +81,7 @@ export default function Consultcandidat()
        <Navbar  >
         <div  > 
         <Link href="./candidate/createcandidat"><a class="btn btn-primary">Creer un candidat</a></Link><br></br>
-        <label>Rechercher par Code Postal:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
+        <label>Rechercher par Adresse Mail:</label> <input type="text" onChange={(e) => setQuery(e.target.value)}></input>
     <table class="table table-hover table-dark">
         <thead  >
             <tr >
