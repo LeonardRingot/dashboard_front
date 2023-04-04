@@ -51,6 +51,7 @@ export default function Consultadmin()
                 </thead>
                 <tbody> 
                 {data.map((element) => {
+                    console.log(element)
                      return (
                         <tr key={element.email}>
                             <td>
@@ -60,7 +61,7 @@ export default function Consultadmin()
                                 <h6>{element.phone}</h6>
                             </td>
                             <td >
-                                <h6>{element.Roles[0].role}</h6>
+                                <h6>{element.role}</h6>
                             </td>
                             <td >
                                 <h6>{element.isActif? "✅": "❌"}</h6>
