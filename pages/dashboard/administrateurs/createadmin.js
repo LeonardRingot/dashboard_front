@@ -4,6 +4,7 @@ import * as ServiceAPI from '../../../services/ServiceAPI'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
+import { toast } from 'react-toastify';
 
 
 export default function Createadministrateur()
@@ -31,12 +32,13 @@ export default function Createadministrateur()
             e.preventDefault()
             ServiceAPI.requetePostAdmin(AdminForm.password, AdminForm.email, AdminForm.phone ).then (response =>{
                 if(response.status == 200){
-                    
+                    toast.success("créer avec succes")
                     //router.push('../profile/profile');
                     setIsOk('Compte crée');
                     router.push({pathname:'../consultadmin/'})
                   } else {
                     setErreur('Adresse mail deja utilisée.');
+                    toast.error('e-mail existant')
                   }
             }).catch(function(error){
                 console.log(error);

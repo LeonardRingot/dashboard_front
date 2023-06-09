@@ -5,6 +5,7 @@ import React, { useState , useEffect } from 'react'
 import * as ServiceAPI from '../../../services/ServiceAPI'
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
+import { toast } from 'react-toastify';
 
 export default function Register() {
     const [erreur, setErreur] = useState('');
@@ -110,8 +111,10 @@ export default function Register() {
         ServiceAPI.requeteUpdateProfil(id, updateProfile.firstname, updateProfile.lastname,updateProfile.User.password,updateProfile.User.passwordconf,updateProfile.User.email,updateProfile.User.phone,updateProfile.User.isActif, updateProfile.User.Localisation.address,updateProfile.User.Localisation.zipCode,
           updateProfile.User.Localisation.city,period,degree, isActif).then(response => {
             if(response.status == 201){
+              toast.success("mis a jour avec succes")
               //router.push('../profile/profile');
               setIsOk('Utilisateur mis a jour');
+
             } else {
               setIsOk('Utilisateur mis a jour');
             }

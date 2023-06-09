@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 // import { middleware } from "../../middleware"
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 const getFilteredItems = (query, items) =>{
     if(!query){
         return items;
@@ -27,6 +28,7 @@ export default function Consultcandidat()
         ServiceAPI.deleteCandidate(id).then(response => {
           if(response.status == 200)
           {
+            toast.success('utilisateur supprimé')
             if(response.data.length > 0)
             {
                 
@@ -37,7 +39,7 @@ export default function Consultcandidat()
             }
           })
        } else
-       {
+       {toast.error('utilisateur non supprimé')
         event.preventDefault();
        }
         

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import * as  ServiceAPI  from '../../services/ServiceAPI'
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 export default function Consultadmin()
 {
@@ -14,6 +15,7 @@ export default function Consultadmin()
     let [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
+        
         setLoading(true)
         ServiceAPI.requeteGetAllAdmin()
         .then(response => {
